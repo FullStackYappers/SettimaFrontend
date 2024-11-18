@@ -61,10 +61,8 @@ const Navbar = () => {
                 className="drawer-overlay"
               ></label>
               <ul className="menu bg-base-100 text-primary rounded-r-custom min-h-full w-80 p-4">
-                <div className="mx-auto">
-                  <a href="index.html">
-                    <img src={logoName} width={150} alt="Settima" />
-                  </a>
+                <div className="flex-none mx-auto">
+                  <img src={logoName} width={150} alt="Settima" />
                 </div>
                 <div className="divider divider-accent"></div>
                 <li>
