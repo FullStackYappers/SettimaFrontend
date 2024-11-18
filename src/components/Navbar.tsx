@@ -97,7 +97,7 @@ const Navbar = () => {
                   </div>
                 </li>
                 <li>
-                  <div className="collapse collapse-arrow border-none rounded-custom hover:bg-accent focus:bg-accent">
+                  <div className="collapse collapse-arrow border-none rounded-custom hover:bg-accent focus:bg-accent pt-4">
                     <input type="checkbox" />
                     <div className="collapse-title text-xl font-medium">
                       The Arts
@@ -125,7 +125,7 @@ const Navbar = () => {
                   </div>
                 </li>
                 <li>
-                  <div className="collapse collapse-arrow border-none rounded-custom hover:bg-accent focus:bg-accent mb-20">
+                  <div className="collapse collapse-arrow border-none rounded-custom hover:bg-accent focus:bg-accent pt-4 mb-20">
                     <input type="checkbox" />
                     <div className="collapse-title text-xl font-medium text-left">
                       Your Favorites
