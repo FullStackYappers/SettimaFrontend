@@ -9,8 +9,15 @@ input[type="search"]::-webkit-search-results-decoration {
   -webkit-appearance: none;
 }
 
+.navbar-wrapper-stuck {
+  padding-top: 75px;
+}
+
 .stuck {
-  border-radius: 0px;
+  transition: 0.3s cubic-bezier(0.17, 0.67, 0.46, 1.02);
+}
+
+.not-stuck {
   transition: 0.5s cubic-bezier(0.17, 0.67, 0.46, 1.02);
 }
 

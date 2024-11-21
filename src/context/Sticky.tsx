@@ -18,7 +18,7 @@ const StickyProvider = ({ content }: StickyProviderProps) => {
 
   useEffect(() => {
     const makeSticky = () => {
-      setSticky(window.scrollY >= 20);
+      setSticky(window.scrollY >= 40);
     };
 
     window.addEventListener("scroll", makeSticky);

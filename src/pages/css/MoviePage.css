@@ -2,9 +2,9 @@
   display: grid;
   gap: 25px;
   grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: auto 50px 50px auto 225px auto;
+  grid-template-rows: auto 75px 50px auto 225px auto;
   grid-template-areas:
-    "trailerbtn trailerbtn trailerbtn"
+    ". trailerbtn ."
     "movieImg title title"
     "movieImg genres specificCast"
     ". description specificCast"
@@ -15,7 +15,6 @@
 
 .trailerbtn {
   grid-area: trailerbtn;
-  text-align: center;
 }
 
 .movieImg {
@@ -23,8 +22,8 @@
 }
 
 .movieImg img {
-  width: 350px;
-  height: 525px;
+  width: 100%;
+  height: auto;
   border-radius: 25px;
 }
 

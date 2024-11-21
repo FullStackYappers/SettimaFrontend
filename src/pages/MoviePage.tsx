@@ -7,39 +7,43 @@ const MoviePage = () => {
     <>
       <Navbar />
       <div className="grid-container mx-4 mt-4">
-        <div className="trailerbtn btn btn-ghost">
-          <button>Watch Trailer</button>
+        <div className="trailerbtn flex justify-center">
+          <button className="btn btn-secondary rounded-custom w-[250px] h-[100px] text-2xl">
+            Watch Trailer
+          </button>
         </div>
         <div className="movieImg">
           <img src={movieImg} alt="movieImg" />
         </div>
         <div className="title">
-          <h1 className="m0">Movie Title</h1>
+          <h1 className="m0 text-7xl font-semibold">Movie Title</h1>
         </div>
         <div className="genres">
-          <p>Genre 1</p>
-          <p>Genre 2</p>
+          <div className="rounded-custom bg-secondary w-full h-full flex justify-center items-center mx-2">
+            Genre 1
+          </div>
+          <div className="rounded-custom bg-secondary w-full h-full flex justify-center items-center mx-2">
+            Genre 2
+          </div>
         </div>
-        <div className="description">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
+        <div className="description m0">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
         </div>
         <div className="boxes">
           <div className="rating">Your Rating</div>
           <div className="where">Where to Watch?</div>
         </div>
         <div className="watched flex justify-evenly">
-          <div className="btn btn-ghost">
+          <div className="btn btn-secondary">
             <button>Watched?</button>
           </div>
-          <div className="btn btn-ghost">
+          <div className="btn btn-secondary">
             <button>Heart?</button>
           </div>
         </div>
