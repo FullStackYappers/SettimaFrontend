@@ -1,9 +1,9 @@
 import "./App.css";
-import Navbar from "./components/Navbar";
 import StickyProvider from "./context/Sticky";
+import MoviePage from "./pages/MoviePage";
 
 function App() {
-  return <StickyProvider content={<Navbar />}></StickyProvider>;
+  return <StickyProvider content={<MoviePage />}></StickyProvider>;
 }
 
 export default App;

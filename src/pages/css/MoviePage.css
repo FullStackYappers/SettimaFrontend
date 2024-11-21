@@ -1,0 +1,78 @@
+.grid-container {
+  display: grid;
+  gap: 25px;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: auto 50px 50px auto 225px auto;
+  grid-template-areas:
+    "trailerbtn trailerbtn trailerbtn"
+    "movieImg title title"
+    "movieImg genres specificCast"
+    ". description specificCast"
+    ". boxes specificCast"
+    "watched boxes specificCast"
+    "multipleDisplay1 multipleDisplay2 multipleDisplay2";
+}
+
+.trailerbtn {
+  grid-area: trailerbtn;
+  text-align: center;
+}
+
+.movieImg {
+  grid-area: movieImg;
+}
+
+.movieImg img {
+  width: 350px;
+  height: 525px;
+  border-radius: 25px;
+}
+
+.title {
+  font-family: Outfit, serif;
+  grid-area: title;
+}
+
+.title h1 {
+  margin: 0;
+}
+
+.genres {
+  grid-area: genres;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.description {
+  grid-area: description;
+}
+
+.specificCast {
+  grid-area: specificCast;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.watched {
+  grid-area: watched;
+}
+
+.boxes {
+  grid-area: boxes;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.multipleDisplay1 {
+  grid-area: multipleDisplay1;
+}
+
+.multipleDisplay1 h2,
+.multipleDisplay2 h2 {
+  margin: 0;
+}
+
+.multipleDisplay2 {
+  grid-area: multipleDisplay2;
+}
