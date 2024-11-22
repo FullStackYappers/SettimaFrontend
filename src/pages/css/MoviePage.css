@@ -10,7 +10,7 @@
     ". description specificCast"
     ". boxes specificCast"
     "watched boxes specificCast"
-    "multipleDisplay1 multipleDisplay2 multipleDisplay2";
+    "tabs-left tabs-right tabs-right";
 }
 
 .trailerbtn {
@@ -63,15 +63,19 @@
   justify-content: space-evenly;
 }
 
-.multipleDisplay1 {
-  grid-area: multipleDisplay1;
+.tab-section-left {
+  grid-area: tabs-left;
 }
 
-.multipleDisplay1 h2,
-.multipleDisplay2 h2 {
+.tab-section-left h2,
+.tab-section-right h2 {
   margin: 0;
 }
 
-.multipleDisplay2 {
-  grid-area: multipleDisplay2;
+.tab-section-right {
+  grid-area: tabs-right;
+}
+
+.cursor-inactive {
+  cursor: not-allowed;
 }
