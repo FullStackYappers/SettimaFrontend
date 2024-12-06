@@ -113,7 +113,7 @@ const Navbar = () => {
                           <a href="#">Ranked by Plot</a>
                         </li>
                         <li className="hover:text-accent2">
-                          <a href="#">Ranked by Music</a>
+                          <a href="#">Ranked by Music & Sound</a>
                         </li>
                         <li className="hover:text-accent2">
                           <a href="#">Ranked by Costume Design</a>
@@ -122,7 +122,7 @@ const Navbar = () => {
                           <a href="#">Ranked by Cinematography</a>
                         </li>
                         <li className="hover:text-accent2">
-                          <a href="#">Ranked by Sound Design</a>
+                          <a href="#">Ranked by Editing</a>
                         </li>
                       </ul>
                     </div>

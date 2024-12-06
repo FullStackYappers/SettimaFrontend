@@ -4,7 +4,8 @@ import "./css/MoviePage.css";
 import Navbar from "../components/Navbar";
 import TabLeft from "../components/TabLeft";
 import TabRight from "../components/TabRight";
-import WatchedLiked from "../components/WatchedLiked";
+import WatchedLikedContainer from "../components/Watched&Liked/WatchLikedContainer";
+import Boxes from "../components/Boxes/Boxes";
 
 const MoviePage = () => {
   return (
@@ -23,10 +24,10 @@ const MoviePage = () => {
           <h1 className="m0 text-7xl font-semibold">Movie Title</h1>
         </div>
         <div className="genres">
-          <div className="rounded-custom bg-secondary w-full h-full flex justify-center items-center mx-2">
+          <div className="rounded-custom bg-secondary font-semibold w-full h-full flex justify-center items-center mx-2">
             Genre 1
           </div>
-          <div className="rounded-custom bg-secondary w-full h-full flex justify-center items-center mx-2">
+          <div className="rounded-custom bg-secondary font-semibold w-full h-full flex justify-center items-center mx-2">
             Genre 2
           </div>
         </div>
@@ -39,11 +40,8 @@ const MoviePage = () => {
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum.
         </div>
-        <div className="boxes">
-          <div className="rating">Your Rating</div>
-          <div className="where">Where to Watch?</div>
-        </div>
-        <WatchedLiked />
+        <Boxes />
+        <WatchedLikedContainer />
         <div className="specificCast">
           <p>Directed by: Director</p>
           <p>Cinematography by: Cinematographer</p>

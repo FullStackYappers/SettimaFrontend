@@ -1,34 +1,12 @@
-import { useState } from "react";
+interface LikedProps {
+  watched: boolean;
+  liked: boolean;
+  handleLiked: () => void;
+}
 
-const WatchedLiked = () => {
-  const [watched, setWatched] = useState(false);
-  const [liked, setLiked] = useState(false);
-
-  const handleWatched = () => {
-    setWatched(!watched);
-    if (watched) {
-      setLiked(false); //if the user unclicks watched, the show becomes unliked
-    }
-  };
-
-  const handleLiked = () => {
-    if (watched) {
-      setLiked(!liked);
-    }
-  };
-
+const Liked = ({ watched, liked, handleLiked }: LikedProps) => {
   return (
     <div className="watched flex justify-evenly gap-2 mx-4">
-      <button
-        onClick={handleWatched}
-        className={`btn flex-grow max-w-[75%] rounded-custom text-xl ${
-          watched
-            ? "btn-primary text-secondary font-bold"
-            : "btn-secondary text-primary"
-        }`}
-      >
-        {watched ? "Watched" : "Watched?"}
-      </button>
       <button
         onClick={handleLiked}
         className={`btn btn-secondary rounded-custom ${
@@ -57,4 +35,4 @@ const WatchedLiked = () => {
   );
 };
 
-export default WatchedLiked;
+export default Liked;
