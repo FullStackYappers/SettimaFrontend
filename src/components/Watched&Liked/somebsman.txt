@@ -1,6 +1,0 @@
-className={`btn flex-grow max-w-[75%] rounded-custom text-xl ${
-          watched
-            ? "btn-primary text-secondary font-bold"
-            : "btn-secondary text-primary"
-        }`}
-im putting this here cause im going to make some changes and they might turn out to break some shit so just here incase.

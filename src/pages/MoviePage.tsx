@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import TabLeft from "../components/TabLeft";
 import TabRight from "../components/TabRight";
 import WatchedLikedContainer from "../components/Watched&Liked/WatchLikedContainer";
-import Boxes from "../components/Boxes/Boxes";
+import Boxes from "../components/Boxes";
 
 const MoviePage = () => {
   return (

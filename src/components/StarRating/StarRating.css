@@ -1,0 +1,69 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css);
+/*https://codepen.io/lrz3/pen/gEKdYw ref for this*/
+
+.rate {
+  display: inline-block;
+  border: 0;
+  color: #16171b;
+}
+
+.averagedRatings {
+  display: inline-block;
+  border: 0;
+  color: black;
+}
+
+.rate > input {
+  display: none;
+}
+
+.rate > label {
+  float: right;
+}
+
+.rate > label:before {
+  display: inline-block;
+  font-size: 3rem;
+  margin: 5px;
+  cursor: pointer;
+  font-family: FontAwesome;
+  content: "\f005";
+}
+
+.rate .half:before {
+  position: absolute;
+  padding-right: 0;
+}
+
+/* Half star trick */
+.rate .half:before {
+  content: "\f089 "; /* half star no outline */
+  position: absolute;
+  padding-right: 0;
+}
+
+/* Click + hover color */
+input:checked ~ label, /* color current and previous stars on checked */
+label:hover, label:hover ~ label {
+  color: #e7e7cf;
+}
+
+/* Hover highlights */
+input:checked + label:hover, input:checked ~ label:hover, /* highlight current and previous stars */
+input:checked ~ label:hover ~ label, /* highlight previous selected stars for new rating */
+label:hover ~ input:checked ~ label /* highlight previous selected stars */ {
+  color: #e7e7cf;
+}
+
+.averagedRatings input:checked ~ label,
+.averagedRatings label:hover,
+.averagedRatings label:hover ~ label {
+  color: inherit; /* Prevent color change when hovered or checked */
+}
+
+.averagedRatings input:checked + label:hover,
+.averagedRatings input:checked ~ label:hover,
+.averagedRatings input:checked ~ label:hover ~ label,
+.averagedRatings label:hover ~ input:checked ~ label {
+  color: inherit;
+}
