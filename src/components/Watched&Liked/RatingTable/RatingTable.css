@@ -3,4 +3,6 @@
   gap: 20px;
   grid-template-columns: repeat(3, auto);
   grid-template-rows: repeat(2, min-content);
+  max-height: calc(55vh - 120px); /* Limit height of the rating section */
+  overflow-y: auto;
 }

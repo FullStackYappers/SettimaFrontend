@@ -5,6 +5,7 @@
   display: inline-block;
   border: 0;
   color: #16171b;
+  position: relative;
 }
 
 .averagedRatings {

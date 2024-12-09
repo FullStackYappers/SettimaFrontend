@@ -27,8 +27,11 @@
   border-radius: 25px;
 }
 
-.title {
+.heading-font {
   font-family: Outfit, serif;
+}
+
+.title {
   grid-area: title;
 }
 
@@ -48,9 +51,6 @@
 
 .specificCast {
   grid-area: specificCast;
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
 }
 
 .watched {

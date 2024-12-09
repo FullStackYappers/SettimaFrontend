@@ -30,6 +30,14 @@ const TabRight = () => {
         >
           Discussion
         </button>
+        <button
+          className={`mt-3 p-2 rounded-custom text-lg font-semibold flex-grow hover:text-accent2 ${
+            activeTab === "tab4" ? "text-accent2" : ""
+          }`}
+          onClick={() => setActiveTab("tab4")}
+        >
+          Reviews
+        </button>
       </div>
 
       <div className="mt-4 font-semibold">
@@ -52,6 +60,12 @@ const TabRight = () => {
             <p>Location</p>
             <p>Release Date</p>
             <p>Language</p>
+          </div>
+        )}
+        {activeTab === "tab4" && (
+          <div id="tab4" className="tab-content block mb-4">
+            <p>Your Review</p>
+            <p>Other Reviews</p>
           </div>
         )}
       </div>

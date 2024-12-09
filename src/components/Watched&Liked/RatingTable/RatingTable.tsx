@@ -63,16 +63,19 @@ const RatingTable = () => {
             ? "btn-primary text-secondary font-bold"
             : "btn-secondary text-primary"
         }`}
-        onClick={handleModal}
+        onClick={() => {
+          handleModal();
+          setStep(1);
+        }}
       >
         {watched ? "Watched" : "Watched?"}
       </button>
 
       <dialog id="my_modal_3" className="modal rounded-custom">
-        <div className="modal-box w-[75vw] max-w-none h-[50vh] max-h-none bg-base-100 relative">
+        <div className="modal-box w-[75vw] max-w-none h-[60vh] max-h-none bg-base-100 relative">
           <form method="dialog">
             <button
-              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+              className="btn btn-sm btn-circle btn-ghost absolute right-3 top-3"
               onClick={() => {
                 setStep(1);
                 handleModal();
@@ -83,8 +86,11 @@ const RatingTable = () => {
           </form>
 
           {step === 1 && (
-            <>
-              <div className="rating-container w-full p-4">
+            <div className="flex flex-col h-full">
+              <h2 className="text-4xl font-semibold heading-font ml-4 mb-4">
+                Rate & Review
+              </h2>
+              <div className="rating-container flex-grow w-full p-4">
                 {ratingCategories.map((category) => (
                   <div key={category} className="text-center">
                     <h2 className="text-2xl font-semibold">{category}</h2>
@@ -96,49 +102,64 @@ const RatingTable = () => {
                   </div>
                 ))}
               </div>
-              {watched === true && (
+              <div className="flex justify-between">
+                {watched === true && (
+                  <button
+                    className="btn btn-ghost rounded-custom bottom-3 absolute"
+                    onClick={() => {
+                      setWatched(false);
+                      setRatings({
+                        Acting: 0,
+                        Plot: 0,
+                        Music: 0,
+                        "Costume Design": 0,
+                        Cinematography: 0,
+                        Editing: 0,
+                      });
+                    }}
+                  >
+                    Remove from list
+                  </button>
+                )}
                 <button
-                  className="btn btn-ghost rounded-custom left-2 bottom-3 absolute"
-                  onClick={() => setWatched(false)}
+                  className="btn btn-ghost rounded-custom bottom-3 absolute right-3"
+                  onClick={nextStep}
                 >
-                  Remove from list
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    className="inline-block h-6 w-6 stroke-current text-primary"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2.5"
+                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
                 </button>
-              )}
-              <button
-                className="btn btn-ghost rounded-custom right-2 bottom-3 absolute"
-                onClick={nextStep}
-              >
-                Next
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  className="inline-block h-6 w-6 stroke-current text-primary"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2.5"
-                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                  />
-                </svg>
-              </button>
-            </>
+              </div>
+            </div>
           )}
 
           {step === 2 && (
-            <div className="review-container">
-              <h2 className="text-2xl font-bold text-center mb-4">
-                Write Your Review
+            <div className="review-container flex flex-col h-full">
+              <h2 className="text-4xl font-semibold heading-font ml-4 mb-4">
+                Rate & Review
               </h2>
-              <textarea
-                className="textarea textarea-bordered w-full h-40"
-                placeholder="Enter your review here..."
-              />
-              <div className="flex justify-between mt-4">
+
+              <div className="flex-grow mb-4 mx-4">
+                <textarea
+                  className="textarea textarea-bordered w-full h-[90%] overflow-auto resize-none"
+                  placeholder="Enter your review here..."
+                />
+              </div>
+
+              <div className="flex justify-between">
                 <button
-                  className="btn btn-ghost rounded-custom left-2 bottom-3 absolute"
+                  className="btn btn-ghost rounded-custom bottom-3 absolute"
                   onClick={prevStep}
                 >
                   <svg
@@ -155,13 +176,12 @@ const RatingTable = () => {
                       d="M15.75 19.5 8.25 12l7.5-7.5"
                     />
                   </svg>
-                  Back
                 </button>
                 <button
-                  className="btn btn-ghost rounded-custom right-2 bottom-3 absolute"
+                  className="btn btn-ghost bottom-3 right-3 absolute rounded-custom"
                   onClick={() => {
-                    handleConfirm();
                     setStep(1);
+                    handleConfirm();
                   }}
                 >
                   Done

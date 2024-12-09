@@ -6,6 +6,7 @@ import TabLeft from "../components/TabLeft";
 import TabRight from "../components/TabRight";
 import WatchedLikedContainer from "../components/Watched&Liked/WatchLikedContainer";
 import Boxes from "../components/Boxes";
+import KeyStaff from "../components/KeyStaff";
 
 const MoviePage = () => {
   return (
@@ -20,7 +21,7 @@ const MoviePage = () => {
         <div className="movieImg">
           <img src={movieImg} alt="movieImg" />
         </div>
-        <div className="title">
+        <div className="title heading-font">
           <h1 className="m0 text-7xl font-semibold">Movie Title</h1>
         </div>
         <div className="genres">
@@ -42,14 +43,9 @@ const MoviePage = () => {
         </div>
         <Boxes />
         <WatchedLikedContainer />
-        <div className="specificCast">
-          <p>Directed by: Director</p>
-          <p>Cinematography by: Cinematographer</p>
-          <p>Music by: Composer</p>
-          <p>Costumes designed by: Designer 1 Designer 2</p>
-        </div>
         <TabLeft />
         <TabRight />
+        <KeyStaff />
       </div>
     </>
   );
