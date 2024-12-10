@@ -14,17 +14,31 @@ const StarRating: React.FC<StarRatingProps> = ({
   handleRating,
   ratings,
 }) => {
-  const openModal = () => {
-    const modal = document.getElementById("my_modal_3") as HTMLDialogElement;
-    if (modal) modal?.showModal();
-  };
+  const savedRatings = JSON.parse(localStorage.getItem("ratings") || "{}");
 
   const handleRatingChange = (value: number) => {
     handleRating?.(category, value);
-    const savedRatings = JSON.parse(localStorage.getItem("rating") || "{}");
     savedRatings[category] = value;
     localStorage.setItem("ratings", JSON.stringify(savedRatings));
   };
+
+  console.log("Loaded saved ratings:", localStorage.getItem("ratings"));
+
+  const calcAverage = () => {
+    const ratingValues = Object.values(savedRatings) as number[];
+
+    //need to log stuff to check how it's working
+    console.log("ALL SAVED RATINGS:", savedRatings);
+    console.log("Ratings for this category:", savedRatings[category]);
+    console.log("Rating values: ", ratingValues);
+
+    const average =
+      ratingValues.reduce((sum, rating) => sum + rating, 0) /
+      ratingValues.length;
+    return Math.round(average * 2) / 2;
+  };
+
+  console.log(calcAverage());
 
   return (
     <>
@@ -42,7 +56,6 @@ const StarRating: React.FC<StarRatingProps> = ({
                 value={value}
                 checked={ratings && ratings[category] === value}
                 onChange={() => {
-                  openModal();
                   handleRatingChange(value);
                 }}
               />

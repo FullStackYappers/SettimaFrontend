@@ -1,14 +1,18 @@
 interface LikedProps {
   watched: boolean;
   liked: boolean;
-  handleLiked: () => void;
+  setLiked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Liked = ({ watched, liked, handleLiked }: LikedProps) => {
+const Liked = ({ watched, liked, setLiked }: LikedProps) => {
   return (
     <div className="watched flex justify-evenly gap-2 mx-4">
       <button
-        onClick={handleLiked}
+        onClick={() => {
+          if (watched) {
+            setLiked(!liked);
+          }
+        }}
         className={`btn btn-secondary rounded-custom ${
           watched
             ? liked

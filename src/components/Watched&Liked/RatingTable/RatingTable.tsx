@@ -1,8 +1,13 @@
 import "./RatingTable.css";
-import StarRating from "../../StarRating/StarRating";
-import { useEffect, useState } from "react";
+import StarRating from "../../StarRating/SelfStarRating";
+import React, { useEffect, useState } from "react";
 
-const RatingTable = () => {
+interface WatchedProps {
+  watched: boolean;
+  setWatched: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const RatingTable = ({ watched, setWatched }: WatchedProps) => {
   const ratingCategories = [
     "Acting",
     "Plot",
@@ -11,6 +16,15 @@ const RatingTable = () => {
     "Cinematography",
     "Editing",
   ];
+
+  const resetRatings: Record<string, number> = {
+    Acting: 0,
+    Plot: 0,
+    Music: 0,
+    "Costume Design": 0,
+    Cinematography: 0,
+    Editing: 0,
+  };
 
   const [ratings, setRatings] = useState<Record<string, number>>({
     Acting: 0,
@@ -32,7 +46,6 @@ const RatingTable = () => {
   const nextStep = () => setStep(step + 1);
   const prevStep = () => setStep(step - 1);
 
-  const [watched, setWatched] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleModal = () => {
@@ -90,10 +103,10 @@ const RatingTable = () => {
               <h2 className="text-4xl font-semibold heading-font ml-4 mb-4">
                 Rate & Review
               </h2>
-              <div className="rating-container flex-grow w-full p-4">
+              <div className="rating-container w-full p-4">
                 {ratingCategories.map((category) => (
                   <div key={category} className="text-center">
-                    <h2 className="text-2xl font-semibold">{category}</h2>
+                    <h2 className="star-headers">{category}</h2>
                     <StarRating
                       category={category}
                       handleRating={handleRating}
@@ -102,27 +115,30 @@ const RatingTable = () => {
                   </div>
                 ))}
               </div>
-              <div className="flex justify-between">
-                {watched === true && (
-                  <button
-                    className="btn btn-ghost rounded-custom bottom-3 absolute"
-                    onClick={() => {
-                      setWatched(false);
-                      setRatings({
-                        Acting: 0,
-                        Plot: 0,
-                        Music: 0,
-                        "Costume Design": 0,
-                        Cinematography: 0,
-                        Editing: 0,
-                      });
-                    }}
-                  >
-                    Remove from list
-                  </button>
-                )}
+              <div>
                 <button
-                  className="btn btn-ghost rounded-custom bottom-3 absolute right-3"
+                  className="btn btn-ghost rounded-custom bottom-3 left-3 absolute"
+                  onClick={() => {
+                    if (!watched) {
+                      setRatings(resetRatings);
+                      localStorage.setItem(
+                        "ratings",
+                        JSON.stringify(resetRatings)
+                      );
+                    } else {
+                      setWatched(false);
+                      setRatings(resetRatings);
+                      localStorage.setItem(
+                        "ratings",
+                        JSON.stringify(resetRatings)
+                      );
+                    }
+                  }}
+                >
+                  {watched ? "Remove from list" : "Reset ratings"}
+                </button>
+                <button
+                  className="btn btn-ghost rounded-custom bottom-3 right-3 absolute"
                   onClick={nextStep}
                 >
                   <svg
@@ -152,8 +168,8 @@ const RatingTable = () => {
 
               <div className="flex-grow mb-4 mx-4">
                 <textarea
-                  className="textarea textarea-bordered w-full h-[90%] overflow-auto resize-none"
-                  placeholder="Enter your review here..."
+                  className="textarea placeholder-primary placeholder-opacity-50 bg-secondary w-full h-[90%] text-xl overflow-auto resize-none"
+                  placeholder="Write review (Optional)"
                 />
               </div>
 
@@ -180,8 +196,8 @@ const RatingTable = () => {
                 <button
                   className="btn btn-ghost bottom-3 right-3 absolute rounded-custom"
                   onClick={() => {
-                    setStep(1);
                     handleConfirm();
+                    setStep(1);
                   }}
                 >
                   Done

@@ -1,30 +1,23 @@
-import { useState } from "react";
-import Watched from "./Watched";
-import WatchedLiked from "./Liked";
+import { useEffect, useState } from "react";
+import Watched from "./RatingTable/RatingTable";
+import Liked from "./Liked";
 
-const WatchedContainer = () => {
+const Container = () => {
   const [watched, setWatched] = useState(false);
   const [liked, setLiked] = useState(false);
 
-  const handleWatched = () => {
-    setWatched((prev) => !prev);
-    if (watched) {
-      setLiked(false); // if the user unclicks watched, the show becomes unliked
+  useEffect(() => {
+    if (!watched) {
+      setLiked(false);
     }
-  };
-
-  const handleLiked = () => {
-    if (watched) {
-      setLiked((prev) => !prev);
-    }
-  };
+  }, [watched]);
 
   return (
     <div className=" watched flex items-center mx-2">
-      <Watched watched={watched} handleWatched={handleWatched} />
-      <WatchedLiked watched={watched} liked={liked} handleLiked={handleLiked} />
+      <Watched watched={watched} setWatched={setWatched} />
+      <Liked watched={watched} liked={liked} setLiked={setLiked} />
     </div>
   );
 };
 
-export default WatchedContainer;
+export default Container;

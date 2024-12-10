@@ -24,7 +24,7 @@
 
 .rate > label:before {
   display: inline-block;
-  font-size: 3rem;
+  font-size: 3.5vw;
   margin: 5px;
   cursor: pointer;
   font-family: FontAwesome;
@@ -49,22 +49,35 @@ label:hover, label:hover ~ label {
   color: #e7e7cf;
 }
 
-/* Hover highlights */
-input:checked + label:hover, input:checked ~ label:hover, /* highlight current and previous stars */
-input:checked ~ label:hover ~ label, /* highlight previous selected stars for new rating */
-label:hover ~ input:checked ~ label /* highlight previous selected stars */ {
-  color: #e7e7cf;
-}
-
+/* Prevent color change on hover or click for averaged ratings */
 .averagedRatings input:checked ~ label,
 .averagedRatings label:hover,
 .averagedRatings label:hover ~ label {
-  color: inherit; /* Prevent color change when hovered or checked */
+  color: inherit; /* Prevent color change on hover */
 }
 
-.averagedRatings input:checked + label:hover,
-.averagedRatings input:checked ~ label:hover,
-.averagedRatings input:checked ~ label:hover ~ label,
-.averagedRatings label:hover ~ input:checked ~ label {
-  color: inherit;
+/* Active state for stars based on average rating */
+.averagedRatings label.active {
+  color: #e7e7cf; /* Color the active stars */
+}
+
+/* Half star active state */
+.averagedRatings label.half.active {
+  color: #e7e7cf; /* Color the half stars */
+}
+
+/* Disabled stars based on the average rating */
+.averagedRatings input:disabled ~ label {
+  color: inherit; /* Do not color stars in this state */
+}
+
+/* Highlight stars based on average value */
+.averagedRatings input[disabled]:checked ~ label,
+.averagedRatings input[disabled]:checked ~ label ~ label {
+  color: #e7e7cf; /* Color stars up to the average value */
+}
+
+/* Highlight up to the calculated average */
+.averagedRatings input[disabled]:checked ~ label.active {
+  color: #e7e7cf; /* Apply the color to all stars up to the average */
 }
