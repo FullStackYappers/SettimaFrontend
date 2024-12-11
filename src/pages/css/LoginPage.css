@@ -1,0 +1,29 @@
+.grid-Container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows:
+        "logo backgroundLogin"
+        "usernameInput backgroundLogin"
+        "passwordInput backgroundLogin"
+        "login backgroundLogin";
+}
+
+.logo {
+    grid-area: logo;
+}
+
+.backgroundLogin {
+    grid-area: backgroundLogin;
+}
+
+.usernameInput {
+    grid-area: usernameInput;
+}
+
+.passwordInput {
+    grid-area: passwordInput;
+}
+
+.login {
+    grid-area: login;
+}
