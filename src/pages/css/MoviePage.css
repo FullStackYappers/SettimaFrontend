@@ -4,7 +4,7 @@
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: auto 75px 50px auto 1fr auto auto;
   grid-template-areas:
-    ". trailerbtn ."
+    "trailerbtn trailerbtn trailerbtn"
     "movieImg title title"
     "movieImg genres specificCast"
     "movieImg description specificCast"

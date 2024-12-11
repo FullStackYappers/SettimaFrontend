@@ -11,16 +11,15 @@ import WatchedLikedContainer from "../components/MoviePageComponents/Watched&Lik
 import Boxes from "../components/MoviePageComponents/Boxes";
 import KeyStaff from "../components/MoviePageComponents/KeyStaff";
 import Genres from "../components/MoviePageComponents/Genres";
+import TrailerBtn from "../components/MoviePageComponents/WatchTrailerBtn/WatchTrailerBtn";
 
 const MoviePage = () => {
   return (
     <>
       <Navbar />
       <div className="grid-container mx-4 mt-4 text-primary">
-        <div className="trailerbtn flex justify-center">
-          <button className="btn btn-secondary rounded-custom w-[250px] h-[100px] text-2xl">
-            Watch Trailer
-          </button>
+        <div className="trailerbtn">
+          <TrailerBtn />
         </div>
         <div className="movieImg">
           <img src={movieImg} alt="movieImg" />
