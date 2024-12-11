@@ -100,7 +100,7 @@ const RatingTable = ({ watched, setWatched }: WatchedProps) => {
 
           {step === 1 && (
             <div className="flex flex-col h-full">
-              <h2 className="text-4xl font-semibold heading-font ml-4 mb-4">
+              <h2 className="text-4xl font-semibold font-outfit ml-4 mb-4">
                 Rate & Review
               </h2>
               <div className="rating-container w-full p-4">

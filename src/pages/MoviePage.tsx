@@ -26,7 +26,7 @@ const MoviePage = () => {
           <img src={movieImg} alt="movieImg" />
         </div>
         <div className="title heading-font">
-          <h1 className="m0 text-7xl font-semibold">Movie Title</h1>
+          <h1 className="m0 font-outfit text-7xl font-semibold">Movie Title</h1>
         </div>
         <Genres />
         <div className="description m0">
