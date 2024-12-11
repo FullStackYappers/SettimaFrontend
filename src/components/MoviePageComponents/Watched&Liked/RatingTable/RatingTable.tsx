@@ -71,7 +71,7 @@ const RatingTable = ({ watched, setWatched }: WatchedProps) => {
   return (
     <>
       <button
-        className={`btn flex-grow max-w-[75%] rounded-custom text-xl ${
+        className={`btn watchedbtn flex-grow max-w-[75%] rounded-custom text-xl ${
           watched
             ? "btn-primary text-secondary font-bold"
             : "btn-secondary text-primary"

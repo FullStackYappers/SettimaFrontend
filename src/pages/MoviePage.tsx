@@ -1,12 +1,16 @@
+//Test image
 import movieImg from "../assets/movieImg.jpg";
+//Styles
 import "./css/MoviePage.css";
 
-import Navbar from "../components/Navbar";
-import TabLeft from "../components/TabLeft";
-import TabRight from "../components/TabRight";
-import WatchedLikedContainer from "../components/Watched&Liked/WatchLikedContainer";
-import Boxes from "../components/Boxes";
-import KeyStaff from "../components/KeyStaff";
+//Components
+import Navbar from "../components/Navbar/Navbar";
+import TabLeft from "../components/MoviePageComponents/TabLeft";
+import TabRight from "../components/MoviePageComponents/TabRight";
+import WatchedLikedContainer from "../components/MoviePageComponents/Watched&Liked/WatchLikedContainer";
+import Boxes from "../components/MoviePageComponents/Boxes";
+import KeyStaff from "../components/MoviePageComponents/KeyStaff";
+import Genres from "../components/MoviePageComponents/Genres";
 
 const MoviePage = () => {
   return (
@@ -24,14 +28,7 @@ const MoviePage = () => {
         <div className="title heading-font">
           <h1 className="m0 text-7xl font-semibold">Movie Title</h1>
         </div>
-        <div className="genres">
-          <div className="rounded-custom bg-secondary font-semibold w-full h-full flex justify-center items-center mx-2">
-            Genre 1
-          </div>
-          <div className="rounded-custom bg-secondary font-semibold w-full h-full flex justify-center items-center mx-2">
-            Genre 2
-          </div>
-        </div>
+        <Genres />
         <div className="description m0">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
