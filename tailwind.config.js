@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Kumbh Sans", 'sans-serif']
+        kumbh: ["Kumbh Sans", 'sans-serif']
       },
       colors: {
         "primary": "#E7E7CF",
