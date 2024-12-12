@@ -15,6 +15,7 @@
 
 .backgroundLogin {
     grid-area: backgroundLogin;
+    background-image: url("/home/ameleroparra/Settima/Settima-FrontEnd/src/assets/background.png");
 }
 
 .usernameInput {
