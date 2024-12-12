@@ -1,7 +1,8 @@
 .grid-Container {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    grid-template-rows:
+    grid-template-rows: auto;
+    grid-template-areas:
         "logo backgroundLogin"
         "usernameInput backgroundLogin"
         "passwordInput backgroundLogin"
