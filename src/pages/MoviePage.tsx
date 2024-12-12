@@ -28,7 +28,7 @@ const MoviePage = () => {
           <h1 className="m0 font-outfit text-7xl font-semibold">Movie Title</h1>
         </div>
         <Genres />
-        <div className="description m0">
+        <div className="description m0 text-lg">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut

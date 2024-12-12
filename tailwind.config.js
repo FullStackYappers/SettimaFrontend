@@ -25,6 +25,11 @@ export default {
       height: {
         "navbar-height": "75px",
       },
+      fontSize: {
+        "vp" : "3vh",
+        "sm-vp" : "1.2vw",
+        "smst-vp" : "1.1vw",
+      },
     },
   },
   plugins: [

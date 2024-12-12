@@ -58,7 +58,7 @@ const Navbar = () => {
                   </svg>
                 </label>
               </div>
-              <div className="drawer-side">
+              <div className="drawer-side z-10">
                 <label
                   htmlFor="my-drawer"
                   aria-label="close sidebar"
