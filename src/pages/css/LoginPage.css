@@ -1,4 +1,4 @@
-.grid-Container {
+.grid-container {
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-template-rows: auto;
@@ -16,6 +16,8 @@
 .backgroundLogin {
     grid-area: backgroundLogin;
     background-image: url("/home/ameleroparra/Settima/Settima-FrontEnd/src/assets/background.png");
+    background-size: cover;
+    background-position: center;
 }
 
 .usernameInput {
