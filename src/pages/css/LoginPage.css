@@ -1,4 +1,13 @@
+body {
+    margin: 0;
+    padding: 15px;
+
+}
+
+
 .grid-container {
+    margin: 0;
+    padding: 0;
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-template-rows: auto;
