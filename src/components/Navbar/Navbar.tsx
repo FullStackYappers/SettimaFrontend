@@ -2,6 +2,7 @@ import SearchButton from "../MoviePageComponents/SearchButton";
 import { useState } from "react";
 import logoName from "../../assets/nameWhite.svg";
 import { useSticky } from "../../context/Sticky";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -159,9 +160,11 @@ const Navbar = () => {
                 </ul>
                 <div className="fixed w-80 bottom-0 bg-gradient-to-t from-base-100 via-base-100 to-white-0 px-4">
                   <div className="mb-4 relative">
-                    <button className="text-xl bottom-4 h-navbar-height font-bold text-accent2 btn rounded-custom hover:bg-primary h-full w-full">
-                      Login / Signup
-                    </button>
+                    <Link to="/login">
+                      <button className="text-xl bottom-4 h-navbar-height font-bold text-accent2 btn rounded-custom hover:bg-primary h-full w-full">
+                        Login / Signup
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
