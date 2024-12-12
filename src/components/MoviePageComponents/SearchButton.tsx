@@ -1,4 +1,4 @@
-import { useSticky } from "../context/Sticky";
+import { useSticky } from "../../context/Sticky";
 
 interface SearchButtonProps {
   toggleSearch: () => void;

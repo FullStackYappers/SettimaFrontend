@@ -6,14 +6,14 @@ interface LikedProps {
 
 const Liked = ({ watched, liked, setLiked }: LikedProps) => {
   return (
-    <div className="watched flex justify-evenly gap-2 mx-4">
+    <div>
       <button
         onClick={() => {
           if (watched) {
             setLiked(!liked);
           }
         }}
-        className={`btn btn-secondary rounded-custom ${
+        className={`btn btn-secondary rounded-custom likedbtn ${
           watched
             ? liked
               ? "text-accent2"

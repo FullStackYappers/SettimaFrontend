@@ -4,7 +4,7 @@
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: auto 75px 50px auto 1fr auto auto;
   grid-template-areas:
-    ". trailerbtn ."
+    "trailerbtn trailerbtn trailerbtn"
     "movieImg title title"
     "movieImg genres specificCast"
     "movieImg description specificCast"
@@ -25,10 +25,6 @@
   width: 100%;
   height: auto;
   border-radius: 25px;
-}
-
-.heading-font {
-  font-family: Outfit, serif;
 }
 
 .title {
@@ -78,4 +74,37 @@
 
 .cursor-inactive {
   cursor: not-allowed;
+}
+
+@media (max-width: 1240px) {
+  /* When viewport is reduced, adjust the grid layout */
+  .grid-container {
+    grid-template-columns: 1fr 3fr 1fr; /* Make movieImg column take more space */
+    grid-template-areas:
+      ". trailerbtn ."
+      "movieImg title title"
+      "movieImg genres specificCast"
+      "movieImg description specificCast"
+      "watched boxes specificCast"
+      "tabs-left tabs-right tabs-right";
+  }
+
+  .watched {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column layout */
+    grid-template-rows: 1fr 1fr;
+    justify-items: stretch;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .watched .watchedbtn,
+  .watched .likedbtn {
+    max-width: unset;
+    width: 100%; /* Buttons take up full width */
+    height: 100%;
+  }
 }

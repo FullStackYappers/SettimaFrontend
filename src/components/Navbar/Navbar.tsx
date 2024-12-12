@@ -1,7 +1,8 @@
-import SearchButton from "../components/SearchButton";
+import SearchButton from "../MoviePageComponents/SearchButton";
 import { useState } from "react";
-import { useSticky } from "../context/Sticky";
-import logoName from "../assets/nameWhite.svg";
+import logoName from "../../assets/nameWhite.svg";
+import { useSticky } from "../../context/Sticky";
+import "./Navbar.css";
 
 const Navbar = () => {
   const [showSearchButton, setShowSearchButton] = useState(false);
@@ -57,7 +58,7 @@ const Navbar = () => {
                   </svg>
                 </label>
               </div>
-              <div className="drawer-side">
+              <div className="drawer-side z-10">
                 <label
                   htmlFor="my-drawer"
                   aria-label="close sidebar"

@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Kumbh Sans", 'sans-serif']
+        kumbh: ["Kumbh Sans", 'sans-serif'],
+        outfit: ["Outfit", 'sans-serif']
       },
       colors: {
         "primary": "#E7E7CF",
@@ -23,6 +24,11 @@ export default {
       },
       height: {
         "navbar-height": "75px",
+      },
+      fontSize: {
+        "vp" : "3vh",
+        "sm-vp" : "1.2vw",
+        "smst-vp" : "1.1vw",
       },
     },
   },

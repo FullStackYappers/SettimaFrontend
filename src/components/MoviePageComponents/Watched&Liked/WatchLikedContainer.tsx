@@ -13,7 +13,7 @@ const Container = () => {
   }, [watched]);
 
   return (
-    <div className=" watched flex items-center mx-2">
+    <div className="watched flex justify-center gap-3 items-center mx-2">
       <Watched watched={watched} setWatched={setWatched} />
       <Liked watched={watched} liked={liked} setLiked={setLiked} />
     </div>

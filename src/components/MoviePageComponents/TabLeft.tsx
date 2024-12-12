@@ -1,42 +1,34 @@
 import { useState } from "react";
 
-const TabRight = () => {
+const TabLeft = () => {
   const [activeTab, setActiveTab] = useState<string>("tab1");
 
   return (
-    <div className="tab-section-right overflow-visible bg-secondary rounded-custom w-full">
-      <div className="flex flex-wrap gap-1">
+    <div className="tab-section-left overflow-visible bg-secondary rounded-custom w-full">
+      <div className="flex flex-wrap gap-1  text-lg font-semibold">
         <button
-          className={`mt-3 p-2 rounded-custom text-lg font-semibold flex-grow hover:text-accent2 ${
+          className={`mt-3 p-2 rounded-custom flex-grow hover:text-accent2 ${
             activeTab === "tab1" ? "text-accent2" : ""
           }`}
           onClick={() => setActiveTab("tab1")}
         >
-          Average Ratings
+          Cast
         </button>
         <button
-          className={`mt-3 p-2 rounded-custom text-lg font-semibold flex-grow hover:text-accent2 ${
+          className={`mt-3 p-2 rounded-custom flex-grow hover:text-accent2 ${
             activeTab === "tab2" ? "text-accent2" : ""
           }`}
           onClick={() => setActiveTab("tab2")}
         >
-          Following
+          Crew
         </button>
         <button
-          className={`mt-3 p-2 rounded-custom text-lg font-semibold flex-grow hover:text-accent2 ${
+          className={`mt-3 p-2 rounded-custom flex-grow hover:text-accent2 ${
             activeTab === "tab3" ? "text-accent2" : ""
           }`}
           onClick={() => setActiveTab("tab3")}
         >
-          Discussion
-        </button>
-        <button
-          className={`mt-3 p-2 rounded-custom text-lg font-semibold flex-grow hover:text-accent2 ${
-            activeTab === "tab4" ? "text-accent2" : ""
-          }`}
-          onClick={() => setActiveTab("tab4")}
-        >
-          Reviews
+          Details
         </button>
       </div>
 
@@ -62,15 +54,9 @@ const TabRight = () => {
             <p>Language</p>
           </div>
         )}
-        {activeTab === "tab4" && (
-          <div id="tab4" className="tab-content block mb-4">
-            <p>Your Review</p>
-            <p>Other Reviews</p>
-          </div>
-        )}
       </div>
     </div>
   );
 };
 
-export default TabRight;
+export default TabLeft;

@@ -58,12 +58,10 @@ label:hover, label:hover ~ label {
 
 /* Active state for stars based on average rating */
 .averagedRatings label.active {
-  color: #e7e7cf; /* Color the active stars */
+  color: #e7e7cf;
 }
-
-/* Half star active state */
 .averagedRatings label.half.active {
-  color: #e7e7cf; /* Color the half stars */
+  color: #e7e7cf;
 }
 
 /* Disabled stars based on the average rating */
