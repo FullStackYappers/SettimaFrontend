@@ -206,6 +206,7 @@ const Navbar = () => {
                   <span>Settings</span>
                 </li>
                 <div className="divider divider-accent"></div>
+                {/*idea for this is that it can only appear if the user is a guest user*/}
                 <Link to="/login">
                   <li className="hover:text-accent2">
                     <span>Login / Signup</span>

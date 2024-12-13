@@ -17,7 +17,7 @@ const MoviePage = () => {
   return (
     <>
       <Navbar />
-      <div className="grid-container mx-4 mt-4 text-primary">
+      <div className="movie-grid-container mx-4 mt-4 text-primary">
         <div className="trailerbtn">
           <TrailerBtn />
         </div>
