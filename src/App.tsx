@@ -2,9 +2,10 @@ import "./App.css";
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import StickyProvider from "./context/Sticky";
+import HomePage from "./pages/HomePage";
 import MoviePage from "./pages/MoviePage";
 import LoginPage from "./pages/LoginPage";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   useEffect(() => {
@@ -19,7 +20,8 @@ function App() {
       <StickyProvider
         content={
           <Routes>
-            <Route path="/" element={<MoviePage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/movie" element={<MoviePage />} />
             <Route path="/login" element={<LoginPage />} />
           </Routes>
         }
@@ -28,6 +30,7 @@ function App() {
   );
 }
 
+//needed to take over the dom and render the elements as index.html has static content
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
