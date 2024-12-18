@@ -1,10 +1,14 @@
+
+
 .login-grid-container {
-  margin: 15px;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: auto;
-  grid-template-areas:
+    margin: 15px;
+    padding: 0;
+    height: 95vh;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto;
+    grid-template-areas:
     "logo backgroundLogin"
     "usernameInput backgroundLogin"
     "passwordInput backgroundLogin"
@@ -12,24 +16,26 @@
 }
 
 .logo {
-  grid-area: logo;
+    grid-area: logo;
 }
 
 .backgroundLogin {
-  grid-area: backgroundLogin;
-  background-image: url("/home/ameleroparra/Settima/Settima-FrontEnd/src/assets/background.png");
-  background-size: cover;
-  background-position: center;
+    grid-area: backgroundLogin;
+    background-image: url("/home/ameleroparra/Settima/Settima-FrontEnd/src/assets/background.png");
+    background-color: rgba(0, 0, 0, 0.7);
+    background-blend-mode: darken;
+    background-size: cover;
+    background-position: center;
 }
 
 .usernameInput {
-  grid-area: usernameInput;
+    grid-area: usernameInput;
 }
 
 .passwordInput {
-  grid-area: passwordInput;
+    grid-area: passwordInput;
 }
 
 .login {
-  grid-area: login;
+    grid-area: login;
 }
