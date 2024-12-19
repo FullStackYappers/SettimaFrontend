@@ -14,6 +14,7 @@ import HomePage from "./pages/HomePage";
 import MoviePage from "./pages/MoviePage";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
+import RegisterPage from "./pages/RegisterPage.tsx";
 
 //react-router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -35,6 +36,7 @@ function App() {
             <Route path="/movie" element={<MoviePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/user" element={<ProfilePage />}></Route>
+              <Route path={"/register"} element={<RegisterPage />}></Route>
           </Routes>
         }
       />
