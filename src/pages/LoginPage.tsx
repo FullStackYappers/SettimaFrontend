@@ -2,7 +2,6 @@ import "./css/LoginPage.css";
 import nameWhite from "../assets/nameWhite.svg";
 import { Link } from "react-router-dom";
 
-
 const LoginPage = () => {
   return (
     <div className="flex justify-center items-center w-screen h-screen">
@@ -38,14 +37,14 @@ const LoginPage = () => {
           </h1>
         </div>
 
-        <div className="login m-7 flex flex-col items-center">
+        <div className="login mx-7 flex flex-col items-center">
           <button className="w-full h-[60px] bg-accent2 rounded-custom text-primary font-bold text-2xl">
             Login
           </button>
           <Link to={"/register"}>
-          <h1 className="m0 font-outfit text-accent2 font-medium p-2">
-            Not registered? Create an account
-          </h1>
+            <h1 className="m0 font-outfit text-accent2 font-medium p-2">
+              Not registered? Create an account
+            </h1>
           </Link>
         </div>
 

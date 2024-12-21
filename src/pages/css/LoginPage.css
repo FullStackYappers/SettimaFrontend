@@ -1,10 +1,8 @@
 .login-grid-container {
-  margin: 0;
+  margin: auto;
   padding: 0;
-  max-height: 90vh;
-  max-width: 95vw;
-  height: 100%;
-  width: 100%;
+  height: 90vh;
+  width: 95vw;
   overflow-y: auto;
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -14,6 +12,11 @@
     "usernameInput backgroundLogin"
     "passwordInput backgroundLogin"
     "login backgroundLogin";
+}
+
+.login-grid-container,
+.login-grid-container > * {
+  outline: 1px solid red;
 }
 
 .logo {
