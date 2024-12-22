@@ -12,12 +12,6 @@
     "profileDisplay profileDisplay profileDisplay";
 }
 
-/*
-.profile-grid-container > div,
-.profileDisplay > div {
-  border: 1px solid blue;
-}*/
-
 .profilepic {
   grid-area: profilepic;
 }
@@ -29,6 +23,7 @@
 .about {
   grid-area: about;
   justify-content: flex-end;
+  margin-right: 20px;
 }
 
 .profilepic,

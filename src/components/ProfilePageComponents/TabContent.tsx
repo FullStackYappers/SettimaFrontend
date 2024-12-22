@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Personalized from "./Personalized";
+import ActivityTable from "./ActivityTable";
 
 const TabContent = () => {
   const [activeTab, setActiveTab] = useState<string>("tab1");
@@ -48,36 +50,33 @@ const TabContent = () => {
         </button>
       </div>
 
-      <div className="mt-4 font-semibold text-base mx-0">
+      <div className="mt-4 text-2xl">
         {activeTab === "tab1" && (
           <div id="tab1" className="tab-content block mb-4">
-            <p>Actor 1</p>
-            <p>Actor 2</p>
-            <p>Actor 3</p>
+            <Personalized />
+            <div className="activity mt-4 text-xl">
+              <ActivityTable />
+            </div>
           </div>
         )}
         {activeTab === "tab2" && (
           <div id="tab2" className="tab-content block mb-4">
-            <p>Crew Member 1</p>
-            <p>Crew Member 2</p>
-            <p>Crew Member 3</p>
+            Stuff will come / tba
           </div>
         )}
         {activeTab === "tab3" && (
           <div id="tab3" className="tab-content block mb-4">
-            <p>Location</p>
-            <p>Release Date</p>
-            <p>Language</p>
+            Stuff will come / tba
           </div>
         )}
         {activeTab === "tab4" && (
           <div id="tab4" className="tab-content block mb-4">
-            <p>Bruh</p>
+            Stuff will come / tba
           </div>
         )}
         {activeTab === "tab5" && (
           <div id="tab5" className="tab-content block mb-4">
-            <p>Bruh 2</p>
+            Stuff will come / tba
           </div>
         )}
       </div>
