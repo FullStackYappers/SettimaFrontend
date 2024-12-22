@@ -1,0 +1,43 @@
+.profile-grid-container {
+  margin: 0;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  grid-template-rows: auto 0.1fr auto;
+  width: 100%;
+  gap: 20px;
+  font-size: 3vh;
+  grid-template-areas:
+    "profilepic username about"
+    "profileDisplay profileDisplay profileDisplay";
+}
+
+/*
+.profile-grid-container > div,
+.profileDisplay > div {
+  border: 1px solid blue;
+}*/
+
+.profilepic {
+  grid-area: profilepic;
+}
+
+.username {
+  grid-area: username;
+}
+
+.about {
+  grid-area: about;
+  justify-content: flex-end;
+}
+
+.profilepic,
+.username,
+.about {
+  display: flex;
+  align-items: flex-end;
+}
+
+.profileDisplay {
+  grid-area: profileDisplay;
+}

@@ -14,11 +14,6 @@
     "login backgroundLogin";
 }
 
-.login-grid-container,
-.login-grid-container > * {
-  outline: 1px solid red;
-}
-
 .logo {
   grid-area: logo;
 }
