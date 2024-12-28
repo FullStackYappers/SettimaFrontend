@@ -25,7 +25,7 @@ const HomePage = () => {
   return (
     <>
       <Navbar />
-      <div className="home-grid-container mx-4 mt-8 text-primary">
+      <div className="home-grid-container grid grid-auto-rows mx-4 mt-8 text-primary">
         <div className="whats-new grid grid-auto-rows gap-4">
           <h2 className="font-outfit text-3xl">What's New</h2>
           <MovieCarousel />

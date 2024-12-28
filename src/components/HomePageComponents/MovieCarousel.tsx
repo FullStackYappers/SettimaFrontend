@@ -8,12 +8,16 @@ interface Movie {
   runtime: number;
   description: string;
   rate_avg: number;
-  imageUrl?: string;
+}
+
+interface Poster {
+  poster_url: string;
 }
 
 //dont ask me what any of this means, not for now atleast.
 const MovieCarousel = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [posters, setPosters] = useState<Record<number, string>>({});
 
   useEffect(() => {
     fetch("http://localhost:8000/api/movies")
@@ -31,15 +35,39 @@ const MovieCarousel = () => {
       });
   }, []);
 
+  useEffect(() => {
+    movies.forEach((movie) => {
+      fetch(`http://localhost:8000/api/movie-posters/${movie.id}`)
+        .then((response) => response.json())
+        .then((data: Poster) => {
+          if (data.poster_url) {
+            setPosters((prevPosters) => ({
+              ...prevPosters,
+              [movie.id]: data.poster_url,
+            }));
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching poster:", error.message);
+        });
+    });
+  }, [movies]);
+
   return (
     //daisyUI element. still need to implement arrows to navigate
     <div className="movieslist carousel carousel-center flex gap-8">
       {movies.map((movie) => (
-        <div className="carousel-item flex flex-col items-center justify-center">
-          <Link to={`/movie/${movie.id}`}>
-            <img src={movie.imageUrl} alt={movie.title} />
-          </Link>
-          <h3 className="movie-title">{movie.title}</h3>
+        <div className="carousel-item grid grid-auto-rows items-center justify-center">
+          <div className="image-container">
+            <Link to={`/movie/${movie.id}`}>
+              <img src={posters[movie.id]} alt={movie.title} />
+            </Link>
+          </div>
+          <div className="title-container">
+            <Link to={`/movie/${movie.id}`}>
+              <h3 className="movie-title">{movie.title}</h3>
+            </Link>
+          </div>
         </div>
       ))}
     </div>

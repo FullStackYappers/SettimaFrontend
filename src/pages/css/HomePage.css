@@ -3,7 +3,7 @@
   padding-left: 12px;
   grid-template-columns: 1fr;
   grid-auto-rows: 1fr;
-  gap: 40px;
+  gap: 15px;
 }
 
 .movieslist img {
@@ -14,13 +14,24 @@
 }
 
 .carousel-item {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr;
   justify-items: center;
-  align-items: center;
+  align-items: start;
+  gap: 16px;
 }
 
 .movie-title {
+  max-width: 12vw;
+  width: 100%;
   font-weight: 600;
-  margin-top: 16px;
+  text-align: center;
+  overflow-wrap: break-word;
+  white-space: normal;
+  padding-bottom: 20px;
+}
+
+.title-container {
+  display: flex;
+  justify-content: center;
 }
