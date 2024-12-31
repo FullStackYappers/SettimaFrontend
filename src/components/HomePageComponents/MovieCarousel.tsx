@@ -11,7 +11,6 @@ interface Movie {
 const MovieCarousel = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [imagesLoaded, setImagesLoaded] = useState(0);
-  const [fetched, setFetched] = useState(false);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -35,7 +34,7 @@ const MovieCarousel = () => {
     setImagesLoaded((prev) => prev + 1);
   };
 
-  const allImagesLoaded = imagesLoaded === 12;
+  const allImagesLoaded = imagesLoaded > 12;
 
   useEffect(() => {
     if (allImagesLoaded) {
