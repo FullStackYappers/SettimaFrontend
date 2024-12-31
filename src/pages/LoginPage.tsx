@@ -7,11 +7,15 @@ const LoginPage = () => {
     <div className="flex justify-center items-center w-screen h-screen">
       <div className="login-grid-container rounded-custom bg-accent">
         <div className="logo">
-          <img
+          <Link to={"/landing"}> {
+                                  //this is just here to see the landing page in process
+                                  }
+            <img
             src={nameWhite}
             alt="Settima Logo"
             className="w-40 h-auto ml-4 "
-          />
+            />
+          </Link>
         </div>
 
         <div className="usernameInput m-7">

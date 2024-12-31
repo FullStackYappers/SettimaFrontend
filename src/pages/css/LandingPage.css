@@ -1,0 +1,29 @@
+.landing-grid-container {
+    margin: 0;
+    padding: 0;
+    height: 80vh;
+    width: 98vw;
+    display: grid;
+    overflow-y: hidden;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+    "explanationText backgroundLanding"
+    "startButton backgroundLanding"
+    ;
+}
+
+.backgroundLanding {
+    grid-area: backgroundLanding;
+    background-image: url("src/assets/background.png"); /*this is just a placeholder*/
+    background-size: cover;
+    background-position: center;
+}
+
+.explanationText {
+    grid-area: explanationText;
+}
+
+.startButton {
+    grid-area: startButton;
+}
