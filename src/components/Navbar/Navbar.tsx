@@ -67,7 +67,9 @@ const Navbar = () => {
                 ></label>
                 <ul className="menu bg-base-100 text-primary rounded-r-custom min-h-full w-80 p-4">
                   <div className="flex-none mx-auto">
-                    <img src={logoName} width={150} alt="Settima" />
+                    <Link to="/">
+                      <img src={logoName} width={150} alt="Settima" />
+                    </Link>
                   </div>
                   <div className="divider divider-accent"></div>
                   <li>
@@ -171,7 +173,9 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex-1 pl-4">
-            <img src={logoName} width={150} alt="Settima" />
+            <Link to="/">
+              <img src={logoName} width={150} alt="Settima" />
+            </Link>
           </div>
           <div className="profilebtn flex-end mr-4">
             <div className="dropdown dropdown-hover dropdown-end">
