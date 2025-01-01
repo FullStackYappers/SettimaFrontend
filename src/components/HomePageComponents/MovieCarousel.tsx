@@ -25,7 +25,7 @@ const MovieCarousel = () => {
           */
         }
         try {
-          const response = await fetch("http://localhost:8002/api/movies");
+          const response = await fetch("http://localhost:8000/api/movies");
           if (!response.ok) {
             throw new Error("Network response was not ok");
           }
@@ -87,7 +87,7 @@ const MovieCarousel = () => {
             <div className="image-container">
               <Link to={`/movie/${movie.id}`}>
                 <img
-                  src={`http://localhost:8002/${movie.poster_path}`}
+                  src={`http://localhost:8000/${movie.poster_path}`}
                   alt={movie.title}
                   onLoad={handleImageLoad}
                 />
