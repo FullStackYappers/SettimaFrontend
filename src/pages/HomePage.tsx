@@ -2,9 +2,10 @@ import "./css/HomePage.css";
 
 import Navbar from "../components/Navbar/Navbar";
 import MovieCarousel from "../components/HomePageComponents/MovieCarousel";
+import GenreMovieCarousel from "../components/HomePageComponents/GenreMovieCarousel";
+import LatestMovieCarousel from "../components/HomePageComponents/LatestMovieCarousel";
 
 import { useEffect, useState } from "react";
-import GenreMovieCarousel from "../components/HomePageComponents/GenreMovieCarousel";
 
 const HomePage = () => {
   const randGenre = [
@@ -41,7 +42,7 @@ const HomePage = () => {
       <div className="home-grid-container grid grid-auto-rows mx-4 mt-8 text-primary">
         <div className="whats-new grid grid-auto-rows gap-4">
           <h2 className="font-outfit text-3xl">What's New</h2>
-          <MovieCarousel />
+          <LatestMovieCarousel />
         </div>
         <div className="top-picks grid grid-auto-rows gap-4">
           <h2 className="font-outfit text-3xl">Top Picks for you</h2>

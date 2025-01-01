@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 interface Movie {
   id: number;
   title: string;
+  release_year: number;
   poster_path: string;
 }
 
@@ -16,29 +17,20 @@ const MovieCarousel = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       if (!isMounted.current) {
-        {
-          /*
-          https://www.reddit.com/r/reactjs/comments/15s1p0q/comment/jwbsd7x/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
-          according to this comment it works but it doesnt really but i think this is just a dev thing, if you go apparently go to production, it's not an issue
-          so this is my temporary solution for now
-          also reminder that what's new needs to be sorted by newest movies, not random so i have to fix that :)
-          */
-        }
         try {
-          const response = await fetch(
-            "http://localhost:8000/api/movies/random"
-          );
+          const response = await fetch("http://localhost:8000/api/movies");
           if (!response.ok) {
             throw new Error("Network response was not ok");
           }
           const data: Movie[] = await response.json();
-          console.log("Setting movies:", data.slice(0, 12));
-          setMovies(data.slice(0, 12));
+          const sortedMovies = data
+            .sort((a, b) => b.release_year - a.release_year)
+            .slice(0, 12);
+          setMovies(sortedMovies);
         } catch (error: any) {
           console.error("Error fetching data:", error.message as Error);
         }
       }
-      console.log("Api called");
     };
 
     fetchMovies();
@@ -46,7 +38,6 @@ const MovieCarousel = () => {
   }, []);
 
   const handleImageLoad = () => {
-    console.log("image loaded");
     setImagesLoaded((prev) => prev + 1);
   };
 
