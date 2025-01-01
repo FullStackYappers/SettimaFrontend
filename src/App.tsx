@@ -34,7 +34,7 @@ function App() {
         content={
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/movie" element={<MoviePage />} />
+            <Route path="/movie/:movieId" element={<MoviePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/user" element={<ProfilePage />}></Route>
             <Route path={"/register"} element={<RegisterPage />}></Route>
