@@ -34,7 +34,6 @@ const AverageStarRating = () => {
   };
 
   const average = calcAverage();
-  console.log(average);
 
   return (
     <fieldset className="rate averagedRatings">
