@@ -1,4 +1,4 @@
-import SearchButton from "../MoviePageComponents/SearchButton";
+import Search from "./Search";
 import { useState } from "react";
 import logoName from "../../assets/nameWhite.svg";
 import { useSticky } from "../../context/Sticky";
@@ -15,7 +15,9 @@ const Navbar = () => {
 
   return (
     <header>
-      <div className={sticky ? "navbar-wrapper-stuck" : "navbar-wrapper"}>
+      <div
+        className={sticky ? "navbar-wrapper-stuck" : "navbar-wrapper w-full"}
+      >
         <nav
           className={
             sticky
@@ -30,9 +32,9 @@ const Navbar = () => {
                 : "right-20"
             }`}
           >
-            <SearchButton
-              toggleSearch={toggleSearch}
+            <Search
               showSearchButton={showSearchButton}
+              toggleSearch={toggleSearch}
             />
           </div>
           <div className="flex-none ml-4">

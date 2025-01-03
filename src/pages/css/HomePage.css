@@ -21,8 +21,16 @@
   gap: 16px;
 }
 
+.whats-new,
+.top-picks,
+.randgenre {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 16px;
+}
+
 .movie-title {
-  max-width: 12vw;
+  max-width: 150px;
   width: 100%;
   font-weight: 600;
   text-align: center;
@@ -34,4 +42,5 @@
 .title-container {
   display: flex;
   justify-content: center;
+  align-items: center;
 }

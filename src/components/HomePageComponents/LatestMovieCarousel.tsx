@@ -9,7 +9,7 @@ interface Movie {
 }
 
 //dont ask me what any of this means, not for now atleast.
-const MovieCarousel = () => {
+const LatestMovieCarousel = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [imagesLoaded, setImagesLoaded] = useState(0);
   const isMounted = useRef(false);
@@ -98,4 +98,4 @@ const MovieCarousel = () => {
   );
 };
 
-export default MovieCarousel;
+export default LatestMovieCarousel;
