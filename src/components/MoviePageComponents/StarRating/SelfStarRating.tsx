@@ -22,15 +22,15 @@ const StarRating: React.FC<StarRatingProps> = ({
     localStorage.setItem("ratings", JSON.stringify(savedRatings));
   };
 
-  console.log("Loaded saved ratings:", localStorage.getItem("ratings"));
+  //console.log("Loaded saved ratings:", localStorage.getItem("ratings"));
 
   const calcAverage = () => {
     const ratingValues = Object.values(savedRatings) as number[];
 
     //need to log stuff to check how it's working
-    console.log("ALL SAVED RATINGS:", savedRatings);
-    console.log("Ratings for this category:", savedRatings[category]);
-    console.log("Rating values: ", ratingValues);
+    //console.log("ALL SAVED RATINGS:", savedRatings);
+    //console.log("Ratings for this category:", savedRatings[category]);
+    //console.log("Rating values: ", ratingValues);
 
     const average =
       ratingValues.reduce((sum, rating) => sum + rating, 0) /
@@ -38,7 +38,7 @@ const StarRating: React.FC<StarRatingProps> = ({
     return Math.round(average * 2) / 2;
   };
 
-  console.log(calcAverage());
+  //console.log(calcAverage());
 
   return (
     <>
