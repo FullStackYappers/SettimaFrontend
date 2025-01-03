@@ -22,7 +22,7 @@ const SearchResults: React.FC<{ results: Movie[] }> = ({ results }) => {
       {results.map((movie, index) => (
         <a href={`/movie/${movie.id}`}>
           <div
-            className={`flex items-center flex-row pl-10 gap-4 ${
+            className={`flex items-center flex-row pl-10 gap-4 opacity-80 hover:opacity-100 ${
               index === 0 ? "pt-4" : 0
             } ${index === results.length - 1 ? "pb-4" : 0}`}
             key={movie.id}
