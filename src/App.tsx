@@ -16,6 +16,7 @@ import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
 import RegisterPage from "./pages/RegisterPage.tsx";
 import LandingPage from "./pages/LandingPage.tsx";
+//import ForumPage from "./pages/ForumPage.tsx";
 
 //react-router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -39,6 +40,7 @@ function App() {
             <Route path="/user" element={<ProfilePage />}></Route>
             <Route path={"/register"} element={<RegisterPage />}></Route>
             <Route path={"/landing"} element={<LandingPage />}></Route>
+            {/*<Route path="/forum" element={<ForumPage />}></Route>*/}
           </Routes>
         }
       />
