@@ -1,16 +1,23 @@
 import { useSticky } from "../../context/Sticky";
 
 interface SearchButtonProps {
-  toggleSearch: () => void;
+  input: string;
+  onChange: (value: string) => void;
   showSearchButton: boolean;
+  toggleSearch: () => void;
+  resetSearch: () => void;
+  onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const SearchButton: React.FC<SearchButtonProps> = ({
-  toggleSearch,
+  input,
+  onChange,
   showSearchButton,
+  toggleSearch,
+  resetSearch,
+  onKeyDown,
 }) => {
   const sticky = useSticky();
-
   return (
     <form
       action=""
@@ -22,16 +29,19 @@ const SearchButton: React.FC<SearchButtonProps> = ({
       <input
         type="search"
         placeholder="Search..."
+        value={input}
+        onChange={(e) => onChange(e.target.value)}
+        onKeyDown={onKeyDown}
         className={
           sticky
-            ? "search-input text-primary h-full w-full bg-accent p-2 pl-10 no-rounded opacity-0"
-            : "search-input text-primary h-full w-full bg-accent p-2 pl-10 rounded-custom opacity-0"
+            ? "search-input text-primary h-full w-full bg-accent p-2 pl-10 no-rounded opacity-0 relative outline-none"
+            : "search-input text-primary h-full w-full bg-accent p-2 pl-10 rounded-custom opacity-0 relative outline-none"
         }
       />
       <div
         className="search-button h-6 w-6 absolute top-0 bottom-0 right-2 m-auto cursor-pointer"
         id="search-button"
-        onClick={toggleSearch}
+        onClick={showSearchButton ? resetSearch : toggleSearch}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -65,5 +75,4 @@ const SearchButton: React.FC<SearchButtonProps> = ({
     </form>
   );
 };
-
 export default SearchButton;

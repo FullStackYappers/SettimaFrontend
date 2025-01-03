@@ -60,7 +60,7 @@ const MoviePage = () => {
         <div className="movieImg">
           <img
             src={`http://localhost:8000/${movie.poster_path}`}
-            alt="movieImg"
+            alt={movie.title}
           />
         </div>
         <div className="title heading-font">
