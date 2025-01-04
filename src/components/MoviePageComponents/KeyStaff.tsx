@@ -59,7 +59,7 @@ const KeyStaff = () => {
       </div>
       <div className="rounded-custom bg-secondary w-full flex flex-col flex-1 justify-center items-center">
         <span className="block">Music by:</span>
-        {getCrewByDepartment("Editor")}
+        {getCrewByDepartment("Composer")}
       </div>
       <div className="rounded-custom bg-secondary w-full flex flex-col flex-1 justify-center items-center">
         <span className="block">Costumes designed by:</span>
