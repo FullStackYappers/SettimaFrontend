@@ -1,47 +1,27 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
+import { fetchRandomMovies } from "../../services/api/MoviesApi.ts";
+import { Movie } from "../../types/Movie.ts";
 
-interface Movie {
-  id: number;
-  title: string;
-  poster_path: string;
-}
-
-//dont ask me what any of this means, not for now atleast.
 const MovieCarousel = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [imagesLoaded, setImagesLoaded] = useState(0);
   const isMounted = useRef(false);
 
   useEffect(() => {
-    const fetchMovies = async () => {
+    const loadMovies = async () => {
       if (!isMounted.current) {
-        {
-          /*
-          https://www.reddit.com/r/reactjs/comments/15s1p0q/comment/jwbsd7x/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
-          according to this comment it works but it doesnt really but i think this is just a dev thing, if you go apparently go to production, it's not an issue
-          so this is my temporary solution for now
-          also reminder that what's new needs to be sorted by newest movies, not random so i have to fix that :)
-          */
-        }
         try {
-          const response = await fetch(
-            "http://localhost:8000/api/movies/random"
-          );
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          const data: Movie[] = await response.json();
-          console.log("Setting movies:", data.slice(0, 12));
-          setMovies(data.slice(0, 12));
-        } catch (error: any) {
-          console.error("Error fetching data:", error.message as Error);
+          const data = await fetchRandomMovies(12);
+          console.log("Setting movies:", data);
+          setMovies(data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
         }
       }
-      console.log("Api called");
     };
 
-    fetchMovies();
+    loadMovies();
     isMounted.current = true;
   }, []);
 

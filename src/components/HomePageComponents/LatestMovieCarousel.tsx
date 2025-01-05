@@ -1,39 +1,22 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
+import { fetchLatestMovies } from "../../services/api/MoviesApi.ts";
+import { LatestMovie } from "../../types/Movie.ts";
 
-interface Movie {
-  id: number;
-  title: string;
-  release_year: number;
-  poster_path: string;
-}
-
-//dont ask me what any of this means, not for now atleast.
 const LatestMovieCarousel = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<LatestMovie[]>([]);
   const [imagesLoaded, setImagesLoaded] = useState(0);
   const isMounted = useRef(false);
 
   useEffect(() => {
-    const fetchMovies = async () => {
+    const loadMovies = async () => {
       if (!isMounted.current) {
-        try {
-          const response = await fetch("http://localhost:8000/api/movies");
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          const data: Movie[] = await response.json();
-          const sortedMovies = data
-            .sort((a, b) => b.release_year - a.release_year)
-            .slice(0, 12);
-          setMovies(sortedMovies);
-        } catch (error: any) {
-          console.error("Error fetching data:", error.message as Error);
-        }
+        const latestMovies = await fetchLatestMovies();
+        setMovies(latestMovies);
       }
     };
 
-    fetchMovies();
+    loadMovies();
     isMounted.current = true;
   }, []);
 
