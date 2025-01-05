@@ -1,11 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-
-interface Movie {
-  id: number;
-  title: string;
-  poster_path: string;
-}
+import { fetchMoviesByGenre  } from "../../services/api/MoviesApi.ts";
+import { Movie } from "../../types/Movie.ts";
 
 interface GenreMovieCarouselProps {
   genre: string;
@@ -15,25 +11,19 @@ const GenreMovieCarousel: React.FC<GenreMovieCarouselProps> = ({ genre }) => {
   const [movies, setMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
-    const fetchMovies = async () => {
+    const loadMovies = async () => {
       if (!genre) return;
 
       try {
-        console.log("Fetching movies for genre:", genre); // Log the genre
-        const response = await fetch(
-          `http://localhost:8000/api/genres/${genre}/movies`
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setMovies(data.movies.slice(0, 12));
-      } catch (error: any) {
-        console.error("Error fetching data:", error.message);
+        console.log("Fetching movies for genre:", genre);
+        const data = await fetchMoviesByGenre(genre);
+        setMovies(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
     };
 
-    fetchMovies();
+    loadMovies();
   }, [genre]);
 
   return (

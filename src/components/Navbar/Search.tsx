@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import SearchButton from "./SearchButton";
 import SearchResults from "./SearchResults";
 import { useNavigate } from "react-router-dom";
-import { searchMovies, Movie } from "../../services/api/searchApi";
+import { searchMovies } from "../../services/api/MoviesApi.ts";
+import { Movie } from "../../types/Movie.ts";
 
 const Search: React.FC<{
   showSearchButton: boolean;
