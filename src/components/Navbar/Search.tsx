@@ -2,12 +2,7 @@ import { useEffect, useState } from "react";
 import SearchButton from "./SearchButton";
 import SearchResults from "./SearchResults";
 import { useNavigate } from "react-router-dom";
-
-interface Movie {
-  id: number;
-  title: string;
-  poster_path: string;
-}
+import { searchMovies, Movie } from "../../services/api/searchApi";
 
 const Search: React.FC<{
   showSearchButton: boolean;
@@ -22,16 +17,20 @@ const Search: React.FC<{
     setResults([]);
   };
 
-  const fetchResults = (value: string) => {
+  const fetchResults = async (value: string) => {
     if (!value.trim()) {
+      setResults([]);
       return;
     }
 
-    fetch(
-      `http://localhost:8000/api/movies?search=${encodeURIComponent(value)}`
-    )
-      .then((response) => response.json())
-      .then((json) => setResults(json));
+    try {
+      const data = await searchMovies(value);
+      setResults(data);
+    } catch (error) {
+      console.error('Error fetching search results:', error);
+      setResults([]);
+      // we can add an error message for the user
+    }
   };
 
   const handleChange = (value: string) => {
