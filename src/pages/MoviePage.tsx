@@ -15,40 +15,38 @@ import TrailerBtn from "../components/MoviePageComponents/WatchTrailerBtn/WatchT
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-interface Movie {
-  id: number;
-  title: string;
-  release_year: number;
-  runtime: number;
-  description: string;
-  rate_avg: number;
-  poster_path: string;
-}
+import { fetchMovieById } from "../services/api/MoviesApi";
+import { MoviePageFields } from "../types/Movie";
 
 const MoviePage = () => {
   const { movieId } = useParams<{ movieId: string }>();
-  const [movie, setMovie] = useState<Movie>({} as Movie);
+  const [movie, setMovie] = useState<MoviePageFields>({} as MoviePageFields);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchMovieDetails = async () => {
+    const getMovieDetails = async () => {
+      if (!movieId) return;
+
       try {
-        const response = await fetch(
-          `http://localhost:8000/api/movies/${movieId}`
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch movie details");
-        }
-        const movieData = await response.json();
+        const movieData = await fetchMovieById(movieId);
         setMovie(movieData);
-      } catch (error) {
-        console.error("Error fetching movie details:", error);
+      } catch (err) {
+        console.error("Error fetching movie details:", err);
+        setError("Failed to load movie details. Please try again later.");
       }
     };
 
-    if (movieId) {
-      fetchMovieDetails();
-    }
+    getMovieDetails();
   }, [movieId]);
+
+  if (error) {
+    return <div className="error-message">{error}</div>;
+  }
+
+  if (!movie) {
+    return <div>Loading...</div>;
+  }
+
 
   return (
     <>
