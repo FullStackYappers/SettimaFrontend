@@ -1,7 +1,7 @@
-import { Movie, LatestMovie } from '../../types/Movie.ts';
+import { Movie, LatestMovie, MoviePageFields } from '../../types/Movie.ts';
 import axios from "axios";
 
-const API_BASE_URL = 'http://localhost:8000/api';
+const API_BASE_URL = '/api';
 
 export const searchMovies = async (query: string): Promise<Movie[]> => {
     try {
@@ -29,12 +29,29 @@ export const fetchRandomMovies = async (limit: number = 12): Promise<Movie[]> =>
 
 export const fetchMoviesByGenre = async (genre: string, limit: number = 12): Promise<Movie[]> => {
     try {
+        console.log(`Fetching movies for genre: ${genre}`);
         const response = await fetch(`${API_BASE_URL}/genres/${genre}/movies`);
-        if (!response.ok) {
-            throw new Error("Network response was not ok");
+        console.log('Response status:', response.status);
+
+        const contentType = response.headers.get("content-type");
+        console.log('Content-Type:', contentType);
+
+        const text = await response.text();
+        console.log('Response text:', text);
+
+        if (contentType && contentType.indexOf("application/json") !== -1) {
+            const data = JSON.parse(text);
+            console.log('Parsed JSON data:', data);
+
+            if (response.ok) {
+                return data.movies.slice(0, limit);
+            } else {
+                throw new Error(data.message || 'Unknown error occurred');
+            }
+        } else {
+            console.error('Received non-JSON response:', text);
+            throw new Error('Received non-JSON response from server');
         }
-        const data = await response.json();
-        return data.movies.slice(0, limit);
     } catch (error) {
         console.error("Error fetching movies by genre:", error);
         throw error;
@@ -54,5 +71,18 @@ export const fetchLatestMovies = async (): Promise<LatestMovie[]> => {
     } catch (error) {
         console.error("Error fetching latest movies:", error instanceof Error ? error.message : String(error));
         return [];
+    }
+};
+
+export const fetchMovieById = async (movieId: string): Promise<MoviePageFields> => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/movies/${movieId}`);
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching movie by ID:", error);
+        throw error;
     }
 };
