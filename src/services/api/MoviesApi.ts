@@ -29,19 +29,14 @@ export const fetchRandomMovies = async (limit: number = 12): Promise<Movie[]> =>
 
 export const fetchMoviesByGenre = async (genre: string, limit: number = 12): Promise<Movie[]> => {
     try {
-        console.log(`Fetching movies for genre: ${genre}`);
         const response = await fetch(`${API_BASE_URL}/genres/${genre}/movies`);
-        console.log('Response status:', response.status);
 
         const contentType = response.headers.get("content-type");
-        console.log('Content-Type:', contentType);
 
         const text = await response.text();
-        console.log('Response text:', text);
 
         if (contentType && contentType.indexOf("application/json") !== -1) {
             const data = JSON.parse(text);
-            console.log('Parsed JSON data:', data);
 
             if (response.ok) {
                 return data.movies.slice(0, limit);
