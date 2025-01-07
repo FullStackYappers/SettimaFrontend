@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface CrewMember {
-  person: { name: string };
+  person: { name: string; id: number };
   department: { name: string };
 }
 
@@ -15,7 +16,7 @@ const KeyStaff = () => {
       console.log("api called");
       try {
         const response = await fetch(
-          `http://localhost:8000/api/movies/${movieId}}/crew`
+          `http://localhost:8000/api/movies/${movieId}/crew`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -33,15 +34,17 @@ const KeyStaff = () => {
   const getCrewByDepartment = (department: string): JSX.Element[] => {
     const members = crew
       .filter((member) => member.department.name === department)
-      .map((member) => member.person.name);
+      .map((member) => member.person);
 
     if (members.length === 0) {
       return [<span className="block">N/A</span>];
     }
 
     //each name in a new line
-    return members.map((name) => (
-      <span className="block hover:text-accent2">{name}</span>
+    return members.map((person) => (
+      <Link to={`/person/${person.id}`}>
+        <span className="block hover:text-accent2">{person.name}</span>
+      </Link>
     ));
   };
 
