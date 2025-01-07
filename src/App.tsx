@@ -1,4 +1,5 @@
 import "./App.css";
+import { AuthProvider } from './context/AuthContext';
 
 //need useEffect to remove index.html content and reactDOM to give it control of the app
 //and tell it where to load the content (under .root)
@@ -30,21 +31,23 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <StickyProvider
-        content={
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/movie/:movieId" element={<MoviePage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/user" element={<ProfilePage />}></Route>
-            <Route path={"/register"} element={<RegisterPage />}></Route>
-            <Route path={"/landing"} element={<LandingPage />}></Route>
-            {/*<Route path="/forum" element={<ForumPage />}></Route>*/}
-          </Routes>
-        }
-      />
-    </Router>
+      <AuthProvider>
+        <Router>
+          <StickyProvider
+            content={
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/movie/:movieId" element={<MoviePage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/user" element={<ProfilePage />}></Route>
+                <Route path={"/register"} element={<RegisterPage />}></Route>
+                <Route path={"/landing"} element={<LandingPage />}></Route>
+                {/*<Route path="/forum" element={<ForumPage />}></Route>*/}
+              </Routes>
+            }
+          />
+        </Router>
+      </AuthProvider>
   );
 }
 
