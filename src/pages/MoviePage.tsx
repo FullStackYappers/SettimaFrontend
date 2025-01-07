@@ -44,9 +44,14 @@ const MoviePage = () => {
   }
 
   if (!movie) {
-    return <div>Loading...</div>;
+    return (
+      <div id="preloader">
+        <div className="image">
+          <img src="/combWhite.svg" alt="preloader" />
+        </div>
+      </div>
+    );
   }
-
 
   return (
     <>

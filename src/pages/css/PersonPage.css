@@ -1,0 +1,49 @@
+.person-grid-container {
+  display: grid;
+  gap: 25px;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: auto auto 1fr;
+  grid-template-areas:
+    "personImg personName"
+    "personImg personBio"
+    "personImg personBio";
+}
+
+.personImg {
+  grid-area: personImg;
+}
+
+.personImg img {
+  width: 100%;
+  height: auto;
+  border-radius: 25px;
+}
+
+.personName {
+  grid-area: personName;
+}
+
+.personName h2 {
+  line-height: 1.2;
+}
+
+.personBio {
+  grid-area: personBio;
+}
+
+.moviesContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.movieContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 15%;
+}
+
+.movieContainer img {
+  border-radius: 25px;
+}
