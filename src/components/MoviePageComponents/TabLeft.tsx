@@ -99,6 +99,16 @@ const TabLeft = () => {
       : [<p>No cast information available</p>];
   };
 
+  if (!cast || !crew) {
+    return (
+      <div id="preloader">
+        <div className="image">
+          <img src="/combWhite.svg" alt="preloader" />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="tab-section-left overflow-visible bg-secondary rounded-custom w-full">
       <div className="flex flex-wrap gap-1  text-lg font-semibold">
@@ -130,22 +140,24 @@ const TabLeft = () => {
 
       <div className="mt-4 font-semibold">
         {activeTab === "tab1" && (
-          <div id="tab1" className="tab-content block mb-4 grid gap-4">
-            {getCast()}
+          <div id="tab1" className="tab-content block mb-8">
+            <div className="grid gap-4 px-4">{getCast()}</div>
           </div>
         )}
         {activeTab === "tab2" && (
-          <div id="tab2" className="tab-content block mb-4 grid gap-4">
-            <p>{getCrewByDepartment("Director")}</p>
-            <p>{getCrewByDepartment("Writer")}</p>
-            <p>{getCrewByDepartment("Composer")}</p>
-            <p>{getCrewByDepartment("Editor")}</p>
-            <p>{getCrewByDepartment("Cinematographer")}</p>
-            <p>{getCrewByDepartment("Costume Designer")}</p>
+          <div id="tab2" className="tab-content block mb-8">
+            <div className="grid gap-4 px-4">
+              {getCrewByDepartment("Director")}
+              {getCrewByDepartment("Writer")}
+              {getCrewByDepartment("Composer")}
+              {getCrewByDepartment("Editor")}
+              {getCrewByDepartment("Cinematographer")}
+              {getCrewByDepartment("Costume Designer")}
+            </div>
           </div>
         )}
         {activeTab === "tab3" && (
-          <div id="tab3" className="tab-content block mb-4 grid gap-4">
+          <div id="tab3" className="tab-content block mb-8">
             <p>Location</p>
             <p>Release Date</p>
             <p>Language</p>
