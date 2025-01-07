@@ -22,7 +22,6 @@ interface Person {
 const PersonPage = () => {
   const { personId } = useParams();
   const [person, setPerson] = useState<Person | null>(null);
-  const [movies, setMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
     const fetchPersonData = async () => {
@@ -43,7 +42,34 @@ const PersonPage = () => {
         movies: [],
       });
 
-      setMovies(movies);
+      const movies: Movie[] = [];
+
+      if (data.cast && data.cast.length > 0) {
+        for (let movie of data.cast) {
+          const movieData = await fetchMovieById(movie.movie_id);
+          if (
+            !movies.some((existingMovie) => existingMovie.id === movie.movie_id)
+          ) {
+            movies.push(movieData);
+          }
+        }
+      }
+
+      if (data.crew && data.crew.length > 0) {
+        for (let movie of data.crew) {
+          const movieData = await fetchMovieById(movie.movie_id);
+          if (
+            !movies.some((existingMovie) => existingMovie.id === movie.movie_id)
+          ) {
+            movies.push(movieData);
+          }
+        }
+      }
+
+      setPerson((prevState) => ({
+        ...prevState!,
+        movies: movies,
+      }));
     };
 
     fetchPersonData();
@@ -84,7 +110,7 @@ const PersonPage = () => {
                 <img src={`http://localhost:8000/${movie.poster_path}`} />
               </Link>
               <Link to={`/movie/${movie.id}`}>
-                <p className="mt-4 font-semibold">{movie.title}</p>
+                <p className="mt-2 font-semibold">{movie.title}</p>
               </Link>
             </div>
           ))}
