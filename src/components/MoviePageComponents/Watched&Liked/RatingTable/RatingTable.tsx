@@ -5,9 +5,10 @@ import React, { useEffect, useState } from "react";
 interface WatchedProps {
   watched: boolean;
   setWatched: React.Dispatch<React.SetStateAction<boolean>>;
+  movieId: string;
 }
 
-const RatingTable = ({ watched, setWatched }: WatchedProps) => {
+const RatingTable = ({ watched, setWatched, movieId }: WatchedProps) => {
   const ratingCategories = [
     "Acting",
     "Plot",
@@ -111,6 +112,7 @@ const RatingTable = ({ watched, setWatched }: WatchedProps) => {
                       category={category}
                       handleRating={handleRating}
                       ratings={ratings}
+                      movieId={movieId}
                     />
                   </div>
                 ))}

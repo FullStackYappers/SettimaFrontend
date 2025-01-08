@@ -99,7 +99,7 @@ const TabLeft = () => {
       : [<p>No cast information available</p>];
   };
 
-  if (!cast || !crew) {
+  if (!cast && !crew) {
     return (
       <div id="preloader">
         <div className="image">

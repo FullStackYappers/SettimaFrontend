@@ -43,7 +43,7 @@ const MoviePage = () => {
     return <div className="error-message">{error}</div>;
   }
 
-  if (!movie) {
+  if (!movie || !movieId) {
     return (
       <div id="preloader">
         <div className="image">
@@ -74,7 +74,7 @@ const MoviePage = () => {
         <Genres />
         <div className="description m0 text-lg">{movie.description}</div>
         <Boxes />
-        <WatchedLikedContainer />
+        <WatchedLikedContainer movieId={movieId} />
         <TabLeft />
         <TabRight />
         <KeyStaff />

@@ -32,22 +32,15 @@
 }
 
 .moviesContainer {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
   gap: 16px;
-}
-
-.moviesContainer:not(:has(.movieContainer:nth-child(5n))) {
-  justify-content: flex-start; /*without exactly 5 items in a row, align to the start */
 }
 
 .movieContainer {
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 15%;
 }
 
 .movieContainer img {
