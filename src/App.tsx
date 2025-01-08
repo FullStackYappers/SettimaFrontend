@@ -18,7 +18,7 @@ import ProfilePage from "./pages/ProfilePage";
 import RegisterPage from "./pages/RegisterPage.tsx";
 import LandingPage from "./pages/LandingPage.tsx";
 import PersonPage from "./pages/PersonPage.tsx";
-//import ForumPage from "./pages/ForumPage.tsx";
+import ForumPage from "./pages/ForumPage.tsx";
 
 //react-router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -44,7 +44,7 @@ function App() {
               <Route path={"/register"} element={<RegisterPage />}></Route>
               <Route path={"/landing"} element={<LandingPage />}></Route>
               <Route path="/person/:personId" element={<PersonPage />} />
-              {/*<Route path="/forum" element={<ForumPage />}></Route>*/}
+              <Route path="/forum" element={<ForumPage />}></Route>
             </Routes>
           }
         />
