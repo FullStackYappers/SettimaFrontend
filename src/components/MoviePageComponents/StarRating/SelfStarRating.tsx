@@ -1,11 +1,13 @@
 import React from "react";
 import "./StarRating.css";
+import axios from "axios";
 
 interface StarRatingProps {
   className?: string;
   category: string;
   handleRating?: (category: string, value: number) => void;
   ratings?: Record<string, number>;
+  movieId: string;
 }
 
 const StarRating: React.FC<StarRatingProps> = ({
@@ -13,16 +15,25 @@ const StarRating: React.FC<StarRatingProps> = ({
   category,
   handleRating,
   ratings,
+  movieId,
 }) => {
   const savedRatings = JSON.parse(localStorage.getItem("ratings") || "{}");
 
-  const handleRatingChange = (value: number) => {
-    handleRating?.(category, value);
+  const handleRatingChange = async (value: number) => {
     savedRatings[category] = value;
     localStorage.setItem("ratings", JSON.stringify(savedRatings));
-  };
 
-  //console.log("Loaded saved ratings:", localStorage.getItem("ratings"));
+    handleRating?.(category, value);
+
+    try {
+      const payload = { [category]: value };
+
+      const response = await axios.post(`/api/movies/${movieId}/rate`, payload);
+      console.log(`Rating for ${category} saved successfully:`, response.data);
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+    }
+  };
 
   const calcAverage = () => {
     const ratingValues = Object.values(savedRatings) as number[];
