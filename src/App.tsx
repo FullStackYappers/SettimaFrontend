@@ -44,7 +44,10 @@ function App() {
               <Route path={"/register"} element={<RegisterPage />}></Route>
               <Route path={"/landing"} element={<LandingPage />}></Route>
               <Route path="/person/:personId" element={<PersonPage />} />
-              <Route path="/forum" element={<ForumPage />}></Route>
+              <Route
+                path="/forum/:discussionId"
+                element={<ForumPage />}
+              ></Route>
             </Routes>
           }
         />
