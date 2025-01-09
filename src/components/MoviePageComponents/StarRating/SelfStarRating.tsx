@@ -15,12 +15,14 @@ const StarRating: React.FC<StarRatingProps> = ({
   handleRating,
   movieId,
 }) => {
-  const [rating, setRating] = useState<number | null>(null);
+  const [rating, setRating] = useState(0);
 
   const backendCategory = category.toLowerCase().replace(/\s+/g, "_");
 
   useEffect(() => {
     const fetchRating = async () => {
+      const authToken = localStorage.getItem("auth_token");
+      if (!authToken) return;
       try {
         const response = await axios.get(
           `/api/movies/${movieId}/ratings/${backendCategory}`,
@@ -46,6 +48,8 @@ const StarRating: React.FC<StarRatingProps> = ({
   }, [category, movieId]);
 
   const handleRatingChange = async (value: number) => {
+    const authToken = localStorage.getItem("auth_token");
+    if (!authToken) return;
     try {
       const starValue = value / 2;
       const payload = { [backendCategory]: starValue };
@@ -77,7 +81,8 @@ const StarRating: React.FC<StarRatingProps> = ({
           const value = 10 - index;
           const title = value / 2;
           const isHalf = index % 2 !== 0 ? "half" : "";
-          const isChecked = rating !== null && value >= Math.floor(rating * 2);
+          const isChecked = rating !== 0 && value >= Math.floor(rating * 2);
+          console.log(isChecked);
           return (
             <React.Fragment key={value}>
               <input
