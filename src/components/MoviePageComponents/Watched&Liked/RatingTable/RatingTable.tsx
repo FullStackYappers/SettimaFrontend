@@ -111,7 +111,6 @@ const RatingTable = ({ watched, setWatched, movieId }: WatchedProps) => {
                     <StarRating
                       category={category}
                       handleRating={handleRating}
-                      ratings={ratings}
                       movieId={movieId}
                     />
                   </div>

@@ -3,12 +3,31 @@ import { useState } from "react";
 import logoName from "../../assets/nameWhite.svg";
 import { useSticky } from "../../context/Sticky";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import "./Navbar.css";
 
 const Navbar = () => {
   const [showSearchButton, setShowSearchButton] = useState(false);
   const toggleSearch = () => {
     setShowSearchButton(!showSearchButton);
+  };
+
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post("/api/logout", null, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+        },
+      });
+
+      localStorage.removeItem("auth_token");
+      localStorage.removeItem("user_id");
+
+      window.location.href = "/login";
+      console.log(response);
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
   };
 
   const sticky = useSticky();
@@ -222,6 +241,9 @@ const Navbar = () => {
                     <span>Login / Signup</span>
                   </li>
                 </Link>
+                <li className="hover:text-accent2">
+                  <span onClick={handleLogout}>Logout</span>
+                </li>
               </ul>
             </div>
           </div>
