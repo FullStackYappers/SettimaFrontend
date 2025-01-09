@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { fetchMoviesByGenre  } from "../../services/api/MoviesApi.ts";
+import { fetchMoviesByGenre } from "../../services/api/MoviesApi.ts";
 import { Movie } from "../../types/Movie.ts";
 
 interface GenreMovieCarouselProps {
