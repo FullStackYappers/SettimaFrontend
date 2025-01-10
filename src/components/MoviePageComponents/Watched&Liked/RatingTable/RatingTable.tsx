@@ -1,15 +1,21 @@
 import "./RatingTable.css";
 import StarRating from "../../StarRating/SelfStarRating";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 interface WatchedProps {
   watched: boolean;
-  setWatched: React.Dispatch<React.SetStateAction<boolean>>;
+  setWatched: () => void;
   movieId: string;
+  handleAverage: () => void;
 }
 
-const RatingTable = ({ watched, setWatched, movieId }: WatchedProps) => {
+const RatingTable = ({
+  watched,
+  setWatched,
+  movieId,
+  handleAverage,
+}: WatchedProps) => {
   const ratingCategories = [
     "Acting",
     "Plot",
@@ -73,7 +79,7 @@ const RatingTable = ({ watched, setWatched, movieId }: WatchedProps) => {
     const authToken = localStorage.getItem("auth_token");
     if (!authToken) return;
     try {
-      const response = await axios.post(
+      await axios.post(
         `/api/movies/${movieId}/watched`,
         {},
         {
@@ -82,7 +88,7 @@ const RatingTable = ({ watched, setWatched, movieId }: WatchedProps) => {
           },
         }
       );
-      setIsOpen(false);
+      setWatched();
     } catch (error) {
       console.error("Error marking movie as watched:", error);
     }
@@ -131,6 +137,7 @@ const RatingTable = ({ watched, setWatched, movieId }: WatchedProps) => {
                       category={category}
                       movieId={movieId}
                       resetStars={resetStars}
+                      handleAverage={handleAverage}
                     />
                   </div>
                 ))}
@@ -208,6 +215,7 @@ const RatingTable = ({ watched, setWatched, movieId }: WatchedProps) => {
                   className="btn btn-ghost bottom-3 right-3 absolute rounded-custom"
                   onClick={() => {
                     handleConfirm();
+                    setIsOpen(false);
                     setStep(1);
                   }}
                 >
