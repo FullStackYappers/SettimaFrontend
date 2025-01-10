@@ -5,17 +5,18 @@ import axios from "axios";
 interface StarRatingProps {
   className?: string;
   category: string;
-  handleRating?: (category: string, value: number) => void;
   movieId: string;
+  resetStars: boolean;
 }
 
 const StarRating: React.FC<StarRatingProps> = ({
   className,
   category,
-  handleRating,
   movieId,
+  resetStars,
 }) => {
   const [rating, setRating] = useState(0);
+  const [checked, setChecked] = useState(true);
 
   const backendCategory = category.toLowerCase().replace(/\s+/g, "_");
 
@@ -34,9 +35,6 @@ const StarRating: React.FC<StarRatingProps> = ({
         );
         if (response.data && response.data.rating !== undefined) {
           setRating(response.data.rating || 0);
-          console.log(backendCategory, "", rating);
-        } else {
-          setRating(0);
         }
       } catch (error) {
         console.error("Error fetching ratings:", error);
@@ -45,7 +43,7 @@ const StarRating: React.FC<StarRatingProps> = ({
     };
 
     fetchRating();
-  }, [category, movieId]);
+  }, [category, movieId, resetStars]);
 
   const handleRatingChange = async (value: number) => {
     const authToken = localStorage.getItem("auth_token");
@@ -65,10 +63,9 @@ const StarRating: React.FC<StarRatingProps> = ({
           withCredentials: true,
         }
       );
-
+      setRating(starValue);
+      setChecked(false);
       console.log(`Rating for ${category} saved successfully:`, response.data);
-
-      handleRating?.(category, value);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -81,8 +78,10 @@ const StarRating: React.FC<StarRatingProps> = ({
           const value = 10 - index;
           const title = value / 2;
           const isHalf = index % 2 !== 0 ? "half" : "";
-          const isChecked = rating !== 0 && value >= Math.floor(rating * 2);
-          console.log(isChecked);
+
+          const isActive = rating > 0 && rating * 2 <= value;
+          const isChecked = rating !== 0 && isActive;
+
           return (
             <React.Fragment key={value}>
               <input
@@ -91,8 +90,9 @@ const StarRating: React.FC<StarRatingProps> = ({
                 name={`${category}-rating`}
                 value={value}
                 checked={isChecked}
-                onChange={() => {
-                  handleRatingChange(value);
+                onClick={() => {
+                  handleRatingChange(value); //sends react error but this will not work with onChange!
+                  setChecked(!checked);
                 }}
               />
               <label
