@@ -7,6 +7,7 @@ interface StarRatingProps {
   category: string;
   movieId: string;
   resetStars: boolean;
+  handleAverage: () => void;
 }
 
 const StarRating: React.FC<StarRatingProps> = ({
@@ -14,6 +15,7 @@ const StarRating: React.FC<StarRatingProps> = ({
   category,
   movieId,
   resetStars,
+  handleAverage,
 }) => {
   const [rating, setRating] = useState(0);
   const [checked, setChecked] = useState(true);
@@ -93,6 +95,7 @@ const StarRating: React.FC<StarRatingProps> = ({
                 onClick={() => {
                   handleRatingChange(value); //sends react error but this will not work with onChange!
                   setChecked(!checked);
+                  handleAverage();
                 }}
               />
               <label

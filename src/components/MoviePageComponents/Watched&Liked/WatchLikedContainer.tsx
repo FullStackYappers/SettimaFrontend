@@ -5,9 +5,10 @@ import axios from "axios";
 
 interface ContainerProps {
   movieId: string;
+  handleAverage: () => void;
 }
 
-const Container: React.FC<ContainerProps> = ({ movieId }) => {
+const Container: React.FC<ContainerProps> = ({ movieId, handleAverage }) => {
   const [watched, setWatched] = useState(false);
   const [liked, setLiked] = useState(false);
 
@@ -34,6 +35,10 @@ const Container: React.FC<ContainerProps> = ({ movieId }) => {
     fetchWatchedStatus();
   }, [movieId, setWatched]);
 
+  const markAsWatched = () => {
+    setWatched(true);
+  };
+
   useEffect(() => {
     if (!watched) {
       setLiked(false);
@@ -46,7 +51,12 @@ const Container: React.FC<ContainerProps> = ({ movieId }) => {
 
   return (
     <div className="watched flex justify-center gap-3 items-center mx-2">
-      <Watched watched={watched} setWatched={setWatched} movieId={movieId} />
+      <Watched
+        watched={watched}
+        setWatched={markAsWatched}
+        movieId={movieId}
+        handleAverage={handleAverage}
+      />
       <Liked watched={watched} liked={liked} setLiked={setLiked} />
     </div>
   );

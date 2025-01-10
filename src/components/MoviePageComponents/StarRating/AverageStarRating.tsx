@@ -1,46 +1,23 @@
 import React, { useEffect, useState } from "react";
 import "./StarRating.css";
 
-const AverageStarRating = () => {
-  const [ratings, setRatings] = useState<Record<string, number>>({});
+interface AverageRatingProps {
+  average: number;
+}
 
-  {
-    /*  const openModal = () => {
-    const modal = document.getElementById("my_modal_3") as HTMLDialogElement;
-    if (modal) modal?.showModal();
-  };*/
-  }
-
-  const loadRatings = () => {
-    const savedRatings = JSON.parse(localStorage.getItem("ratings") || "{}");
-    setRatings(savedRatings);
-  };
+const AverageStarRating: React.FC<AverageRatingProps> = ({ average }) => {
+  const [avg, setAvg] = useState(average);
 
   useEffect(() => {
-    loadRatings();
-
-    const interval = setInterval(() => {
-      loadRatings();
-    }, 100);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const calcAverage = () => {
-    const ratingValues = Object.values(ratings) as number[];
-    const sum = ratingValues.reduce((sum, rating) => sum + rating, 0);
-    const average = sum / ratingValues.length;
-    return Math.round(average * 2) / 2;
-  };
-
-  const average = calcAverage();
+    setAvg(average);
+  }, [average]);
 
   return (
     <fieldset className="rate averagedRatings">
       {[...Array(10)].map((_, index) => {
         const value = 10 - index;
         const title = value / 2;
-        const isActive = average >= value;
+        const isActive = avg !== 0 && avg * 2 >= value;
         const isHalf = index % 2 !== 0 ? "half" : "";
 
         return (
