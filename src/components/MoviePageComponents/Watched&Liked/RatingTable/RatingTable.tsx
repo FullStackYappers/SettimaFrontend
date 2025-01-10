@@ -1,6 +1,7 @@
 import "./RatingTable.css";
 import StarRating from "../../StarRating/SelfStarRating";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 interface WatchedProps {
   watched: boolean;
@@ -18,31 +19,35 @@ const RatingTable = ({ watched, setWatched, movieId }: WatchedProps) => {
     "Editing",
   ];
 
-  const resetRatings: Record<string, number> = {
-    Acting: 0,
-    Plot: 0,
-    Music: 0,
-    "Costume Design": 0,
-    Cinematography: 0,
-    Editing: 0,
+  const resetRatingsData = {
+    acting: 0,
+    plot: 0,
+    music: 0,
+    costume_design: 0,
+    cinematography: 0,
+    editing: 0,
+  };
+  const [resetStars, setResetStars] = useState(false);
+
+  const resetRatings = async (movieId: string) => {
+    try {
+      const response = await axios.post(
+        `/api/movies/${movieId}/rate`,
+        resetRatingsData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+          },
+        }
+      );
+      setResetStars(true);
+      console.log("Ratings reset successfully:", response.data);
+    } catch (error) {
+      console.error("Error resetting ratings:", error);
+    }
   };
 
-  const [ratings, setRatings] = useState<Record<string, number>>({
-    Acting: 0,
-    Plot: 0,
-    Music: 0,
-    "Costume Design": 0,
-    Cinematography: 0,
-    Editing: 0,
-  });
-
-  const handleRating = (category: string, value: number) => {
-    setRatings((prevRatings) => ({
-      ...prevRatings,
-      [category]: value,
-    }));
-  };
-
+  //Modal stuff
   const [step, setStep] = useState(1);
   const nextStep = () => setStep(step + 1);
   const prevStep = () => setStep(step - 1);
@@ -64,9 +69,23 @@ const RatingTable = ({ watched, setWatched, movieId }: WatchedProps) => {
     }
   }, [isOpen]);
 
-  const handleConfirm = () => {
-    setWatched(true);
-    setIsOpen(false);
+  const handleConfirm = async () => {
+    const authToken = localStorage.getItem("auth_token");
+    if (!authToken) return;
+    try {
+      const response = await axios.post(
+        `/api/movies/${movieId}/watched`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+      setIsOpen(false);
+    } catch (error) {
+      console.error("Error marking movie as watched:", error);
+    }
   };
 
   return (
@@ -110,8 +129,8 @@ const RatingTable = ({ watched, setWatched, movieId }: WatchedProps) => {
                     <h2 className="star-headers">{category}</h2>
                     <StarRating
                       category={category}
-                      handleRating={handleRating}
                       movieId={movieId}
+                      resetStars={resetStars}
                     />
                   </div>
                 ))}
@@ -121,18 +140,9 @@ const RatingTable = ({ watched, setWatched, movieId }: WatchedProps) => {
                   className="btn btn-ghost rounded-custom bottom-3 left-3 absolute"
                   onClick={() => {
                     if (!watched) {
-                      setRatings(resetRatings);
-                      localStorage.setItem(
-                        "ratings",
-                        JSON.stringify(resetRatings)
-                      );
+                      resetRatings(movieId);
                     } else {
-                      setWatched(false);
-                      setRatings(resetRatings);
-                      localStorage.setItem(
-                        "ratings",
-                        JSON.stringify(resetRatings)
-                      );
+                      resetRatings(movieId);
                     }
                   }}
                 >
