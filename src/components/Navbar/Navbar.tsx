@@ -5,9 +5,11 @@ import { useSticky } from "../../context/Sticky";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Navbar.css";
+import { useAuth } from "../../context/AuthContext.tsx";
 
 const Navbar = () => {
   const [showSearchButton, setShowSearchButton] = useState(false);
+  const { logout } = useAuth();
   const toggleSearch = () => {
     setShowSearchButton(!showSearchButton);
   };
@@ -22,9 +24,9 @@ const Navbar = () => {
 
       localStorage.removeItem("auth_token");
       localStorage.removeItem("user_id");
-
-      window.location.href = "/login";
       console.log(response);
+      logout();
+      window.location.reload();
     } catch (error) {
       console.error("Error logging out:", error);
     }
