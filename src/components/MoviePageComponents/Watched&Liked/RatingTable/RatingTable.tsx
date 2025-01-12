@@ -148,8 +148,10 @@ const RatingTable = ({
                   onClick={() => {
                     if (!watched) {
                       resetRatings(movieId);
+                      handleAverage();
                     } else {
                       resetRatings(movieId);
+                      handleAverage();
                     }
                   }}
                 >

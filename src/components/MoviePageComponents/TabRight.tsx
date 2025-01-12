@@ -41,7 +41,7 @@ const TabRight = () => {
             key={index}
             className="discussion-item bg-base-100 p-4 gap-10 rounded-custom flex flex-row w-full items-center"
           >
-            <div className="grow">
+            <div className="grow text hover:text-accent2">
               <Link to={`/forum/${discussion.id}`}>
                 <p className="text-xl font-semibold flex-1 m-0 pl-10">
                   {discussion.title}
