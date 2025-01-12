@@ -8,6 +8,8 @@ interface WatchedProps {
   setWatched: () => void;
   movieId: string;
   handleAverage: () => void;
+  review: string;
+  setReview: (review: string) => void;
 }
 
 const RatingTable = ({
@@ -15,6 +17,8 @@ const RatingTable = ({
   setWatched,
   movieId,
   handleAverage,
+  review,
+  setReview,
 }: WatchedProps) => {
   const ratingCategories = [
     "Acting",
@@ -50,6 +54,38 @@ const RatingTable = ({
       console.log("Ratings reset successfully:", response.data);
     } catch (error) {
       console.error("Error resetting ratings:", error);
+    }
+  };
+
+  const submitReview = async (movieId: string, review: string) => {
+    const authToken = localStorage.getItem("auth_token");
+    if (!authToken) {
+      console.error("User not authenticated");
+      return;
+    }
+
+    const payload = { review };
+
+    try {
+      const response = await axios.post(
+        `/api/movies/${movieId}/rate`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+
+      console.log("Review submitted: ", response.data);
+    } catch (error) {
+      console.error("Error submitting review: ", error);
+    }
+  };
+
+  const handleReviewSubmission = () => {
+    if (review.trim()) {
+      submitReview(movieId, review);
     }
   };
 
@@ -190,6 +226,8 @@ const RatingTable = ({
                 <textarea
                   className="textarea placeholder-primary placeholder-opacity-50 bg-secondary w-full h-[90%] text-xl overflow-auto resize-none"
                   placeholder="Write review (Optional)"
+                  value={review}
+                  onChange={(e) => setReview(e.target.value)}
                 />
               </div>
 
@@ -217,6 +255,7 @@ const RatingTable = ({
                   className="btn btn-ghost bottom-3 right-3 absolute rounded-custom"
                   onClick={() => {
                     handleConfirm();
+                    handleReviewSubmission();
                     setIsOpen(false);
                     setStep(1);
                   }}
