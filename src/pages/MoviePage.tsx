@@ -24,6 +24,7 @@ const MoviePage = () => {
   const [movie, setMovie] = useState<MoviePageFields>({} as MoviePageFields);
   const [error, setError] = useState<string | null>(null);
   const [average, setAverage] = useState(0);
+  const [review, setReview] = useState("");
 
   const fetchRatings = async () => {
     try {
@@ -56,8 +57,13 @@ const MoviePage = () => {
         const avg = total / 6;
 
         setAverage(Math.round((avg * 2) / 2));
+
+        if (movieRatings.review) {
+          setReview(movieRatings.review);
+        }
       } else {
         setAverage(0);
+        setReview("");
       }
     } catch (error) {
       console.error("Error fetching user ratings:", error);
@@ -116,7 +122,12 @@ const MoviePage = () => {
         <Genres />
         <div className="description m0 text-lg">{movie.description}</div>
         <Boxes average={average} />
-        <WatchedLikedContainer movieId={movieId} handleAverage={fetchRatings} />
+        <WatchedLikedContainer
+          movieId={movieId}
+          handleAverage={fetchRatings}
+          review={review}
+          setReview={setReview}
+        />
         <TabLeft />
         <TabRight />
         <KeyStaff />

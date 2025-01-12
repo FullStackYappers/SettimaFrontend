@@ -6,9 +6,16 @@ import axios from "axios";
 interface ContainerProps {
   movieId: string;
   handleAverage: () => void;
+  review: string;
+  setReview: (review: string) => void;
 }
 
-const Container: React.FC<ContainerProps> = ({ movieId, handleAverage }) => {
+const Container: React.FC<ContainerProps> = ({
+  movieId,
+  handleAverage,
+  review,
+  setReview,
+}) => {
   const [watched, setWatched] = useState(false);
   const [liked, setLiked] = useState(false);
 
@@ -56,6 +63,8 @@ const Container: React.FC<ContainerProps> = ({ movieId, handleAverage }) => {
         setWatched={markAsWatched}
         movieId={movieId}
         handleAverage={handleAverage}
+        review={review}
+        setReview={setReview}
       />
       <Liked watched={watched} liked={liked} setLiked={setLiked} />
     </div>

@@ -1,7 +1,7 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-
 interface Discussion {
   id: number;
   title: string;
@@ -13,6 +13,7 @@ const TabRight = () => {
   const [activeTab, setActiveTab] = useState<string>("tab1");
   const { movieId } = useParams();
   const [discussions, setDiscussions] = useState<Discussion[]>([]);
+  const [review, setReview] = useState("");
 
   useEffect(() => {
     const fetchDiscussion = async () => {
@@ -31,7 +32,30 @@ const TabRight = () => {
       }
     };
 
+    const fetchReview = async () => {
+      try {
+        const response = await axios.get(`/api/user/ratings`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+          },
+        });
+
+        const ratings = response.data.data;
+
+        const movieRatings = ratings.find(
+          (rating: any) => rating.movie_id === Number(movieId)
+        );
+
+        if (movieRatings.review) {
+          setReview(movieRatings.review);
+        }
+      } catch (error) {
+        console.error("Error fetching user ratings:", error);
+      }
+    };
+
     fetchDiscussion();
+    fetchReview();
   }, [movieId]);
 
   const getDiscussions = (): JSX.Element[] => {
@@ -159,8 +183,24 @@ const TabRight = () => {
         )}
         {activeTab === "tab4" && (
           <div id="tab4" className="tab-content block mb-4">
-            <p>Your Review</p>
-            <p>Other Reviews</p>
+            <div className="grid gap-4">
+              <p className="text-2xl">Your Review</p>
+              <div className="py-4 bg-base-100 mx-8 rounded-custom">
+                <p>{review}</p>
+              </div>
+              <div className="grid gap-4">
+                <p className="text-2xl">Other Reviews</p>
+                <div className="py-4 bg-base-100 mx-8 rounded-custom">
+                  <p>Review 1</p>
+                </div>
+                <div className="py-4 bg-base-100 mx-8 rounded-custom">
+                  <p>Review 2</p>
+                </div>
+                <div className="py-4 bg-base-100 mx-8 rounded-custom">
+                  <p>Review 3</p>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>
