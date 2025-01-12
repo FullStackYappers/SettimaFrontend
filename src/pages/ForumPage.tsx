@@ -5,21 +5,17 @@ import "./css/ForumPage.css";
 import axios from "axios";
 import Navbar from "../components/Navbar/Navbar";
 import Discussion from "../components/ForumPageComponents/DiscussionBox";
+import DiscussionMidSection from "../components/ForumPageComponents/DiscussionMidSection";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-interface Discussion {
-  id: number;
-  movie_id: number;
-  user_id: number;
-  title: string;
-  content: string;
-  views: number;
-}
+import { discussionDetails } from "../types/Forum";
 
 const ForumPage = () => {
   const { discussionId } = useParams<{ discussionId: string }>();
-  const [discussion, setDiscussion] = useState<Discussion>({} as Discussion);
+  const [discussion, setDiscussion] = useState<discussionDetails>(
+    {} as discussionDetails
+  );
 
   useEffect(() => {
     const fetchDiscussionDetails = async () => {
@@ -45,7 +41,12 @@ const ForumPage = () => {
   return (
     <>
       <Navbar />
-      <Discussion discussion={discussion} />
+      <div className="forum-container w-full flex justify-center">
+        <div className="forum-box w-[90%] h-[1000px] bg-accent p-8 rounded-custom text-primary">
+          <Discussion discussionDetails={discussion} />
+          <DiscussionMidSection discussionDetails={discussion} />
+        </div>
+      </div>
     </>
   );
 };
