@@ -84,8 +84,8 @@ const RatingTable = ({
   };
 
   const handleReviewSubmission = () => {
-    if (review.trim()) {
-      submitReview(movieId, review);
+    if (review.trim() || review === "") {
+      submitReview(movieId, review.trim());
     }
   };
 
@@ -258,6 +258,7 @@ const RatingTable = ({
                     handleReviewSubmission();
                     setIsOpen(false);
                     setStep(1);
+                    window.location.reload();
                   }}
                 >
                   Done

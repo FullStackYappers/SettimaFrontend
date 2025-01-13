@@ -12,11 +12,18 @@ interface CastMember {
   character_name: string;
 }
 
+interface Details {
+  runtime: number;
+  release_year: number;
+  countries: string[];
+}
+
 const TabLeft = () => {
   const [activeTab, setActiveTab] = useState<string>("tab1");
   const { movieId } = useParams();
   const [crew, setCrew] = useState<CrewMember[]>([]);
   const [cast, setCast] = useState<CastMember[]>([]);
+  const [details, setDetails] = useState<Details>();
 
   useEffect(() => {
     const fetchCrew = async () => {
@@ -50,8 +57,24 @@ const TabLeft = () => {
       }
     };
 
+    const fetchDetails = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8000/api/movies/${movieId}/details`
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setDetails(data);
+      } catch (error: any) {
+        console.error("Error fetching data:", error.message as Error);
+      }
+    };
+
     fetchCrew();
     fetchCast();
+    fetchDetails();
   }, [movieId]);
 
   const getCrewByDepartment = (department: string): JSX.Element[] => {
@@ -71,7 +94,6 @@ const TabLeft = () => {
                 <span className="hover:text-accent2">
                   {member.person.name}
                   {index < members.length - 1 && ", "}
-                  {/* */}
                 </span>
               </Link>
             ))}
@@ -158,9 +180,31 @@ const TabLeft = () => {
         )}
         {activeTab === "tab3" && (
           <div id="tab3" className="tab-content block mb-8">
-            <p>Location</p>
-            <p>Release Date</p>
-            <p>Language</p>
+            <div className="grid gap-4 px-4">
+              {details?.runtime && (
+                <p>
+                  <span className="font-extrabold">Runtime:</span>{" "}
+                  {details.runtime} minutes
+                </p>
+              )}
+              {details?.release_year && (
+                <p>
+                  <span className="font-extrabold">Release Year</span>:{" "}
+                  {details.release_year}
+                </p>
+              )}
+              {details?.countries && (
+                <p>
+                  <span className="font-extrabold">Countries: </span>{" "}
+                  {details.countries.map((country, index) => (
+                    <>
+                      {country}
+                      {index < details.countries.length - 1 && ", "}
+                    </>
+                  ))}
+                </p>
+              )}
+            </div>
           </div>
         )}
       </div>

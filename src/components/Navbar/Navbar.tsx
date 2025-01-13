@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Navbar.css";
 import { useAuth } from "../../context/AuthContext.tsx";
+import DropDownGenre from "./DropdownGenre.tsx";
 
 const Navbar = () => {
   const [showSearchButton, setShowSearchButton] = useState(false);
@@ -95,37 +96,7 @@ const Navbar = () => {
                     </Link>
                   </div>
                   <div className="divider divider-accent"></div>
-                  <li>
-                    <div className="collapse collapse-arrow border-none rounded-custom hover:bg-accent focus:bg-accent pt-4">
-                      <input type="checkbox" />
-                      <div className="collapse-title text-xl font-medium">
-                        Genres
-                      </div>
-                      <ul className="collapse-content">
-                        <li className="hover:text-accent2">
-                          <a href="#">Action</a>
-                        </li>
-                        <li className="hover:text-accent2">
-                          <a href="#">Adventure</a>
-                        </li>
-                        <li className="hover:text-accent2">
-                          <a href="#">Drama</a>
-                        </li>
-                        <li className="hover:text-accent2">
-                          <a href="#">Fiction</a>
-                        </li>
-                        <li className="hover:text-accent2">
-                          <a href="#">Romance</a>
-                        </li>
-                        <li className="hover:text-accent2">
-                          <a href="#">Thriller</a>
-                        </li>
-                        <li className="hover:text-accent2">
-                          <a href="#">More...</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
+                  <DropDownGenre />
                   <li>
                     <div className="collapse collapse-arrow border-none rounded-custom hover:bg-accent focus:bg-accent pt-4">
                       <input type="checkbox" />
