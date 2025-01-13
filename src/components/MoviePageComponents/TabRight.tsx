@@ -184,10 +184,14 @@ const TabRight = () => {
         {activeTab === "tab4" && (
           <div id="tab4" className="tab-content block mb-4">
             <div className="grid gap-4">
-              <p className="text-2xl">Your Review</p>
-              <div className="py-4 bg-base-100 mx-8 rounded-custom">
-                <p>{review}</p>
-              </div>
+              {review && (
+                <>
+                  <p className="text-2xl">Your Review</p>
+                  <div className="py-4 bg-base-100 mx-8 rounded-custom">
+                    <p>{review}</p>
+                  </div>
+                </>
+              )}
               <div className="grid gap-4">
                 <p className="text-2xl">Other Reviews</p>
                 <div className="py-4 bg-base-100 mx-8 rounded-custom">
