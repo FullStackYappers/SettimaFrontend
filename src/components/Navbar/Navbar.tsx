@@ -3,34 +3,14 @@ import { useState } from "react";
 import logoName from "../../assets/nameWhite.svg";
 import { useSticky } from "../../context/Sticky";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import "./Navbar.css";
-import { useAuth } from "../../context/AuthContext.tsx";
 import DropDownGenre from "./DropdownGenre.tsx";
+import DropdownProfile from "./DropdownProfile.tsx";
+import "./Navbar.css";
 
 const Navbar = () => {
   const [showSearchButton, setShowSearchButton] = useState(false);
-  const { logout } = useAuth();
   const toggleSearch = () => {
     setShowSearchButton(!showSearchButton);
-  };
-
-  const handleLogout = async () => {
-    try {
-      const response = await axios.post("/api/logout", null, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
-        },
-      });
-
-      localStorage.removeItem("auth_token");
-      localStorage.removeItem("user_id");
-      console.log(response);
-      logout();
-      window.location.reload();
-    } catch (error) {
-      console.error("Error logging out:", error);
-    }
   };
 
   const sticky = useSticky();
@@ -195,29 +175,7 @@ const Navbar = () => {
                   </svg>
                 </div>
               </Link>
-              <ul
-                tabIndex={0}
-                className="dropdown-content menu bg-accent rounded-box z-[1] w-52 p-4 text-lg shadow text-primary"
-              >
-                <li className="hover:text-accent2">
-                  <Link to="/user">
-                    <span>Profile</span>
-                  </Link>
-                </li>
-                <li className="hover:text-accent2">
-                  <span>Settings</span>
-                </li>
-                <div className="divider divider-accent"></div>
-                {/*idea for this is that it can only appear if the user is a guest user*/}
-                <Link to="/login">
-                  <li className="hover:text-accent2">
-                    <span>Login / Signup</span>
-                  </li>
-                </Link>
-                <li className="hover:text-accent2">
-                  <span onClick={handleLogout}>Logout</span>
-                </li>
-              </ul>
+              <DropdownProfile />
             </div>
           </div>
         </nav>

@@ -1,18 +1,47 @@
+import axios from "axios";
+
 interface LikedProps {
   watched: boolean;
   liked: boolean;
   setLiked: React.Dispatch<React.SetStateAction<boolean>>;
+  movieId: string;
 }
 
-const Liked = ({ watched, liked, setLiked }: LikedProps) => {
+const Liked = ({ watched, liked, setLiked, movieId }: LikedProps) => {
+  const authToken = localStorage.getItem("auth_token");
+
+  const handleLikeToggle = async () => {
+    if (!watched) {
+      return;
+    }
+
+    try {
+      if (liked) {
+        await axios.delete(`/api/movies/${movieId}/favorite`, {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        });
+      } else {
+        await axios.post(`/api/movies/${movieId}/favorite`, null, {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        });
+      }
+
+      setLiked((prev) => !prev);
+    } catch (error) {
+      console.error("Error toggling like status:", error);
+    }
+  };
+
+  console.log(liked);
+
   return (
     <div>
       <button
-        onClick={() => {
-          if (watched) {
-            setLiked(!liked);
-          }
-        }}
+        onClick={handleLikeToggle}
         className={`btn btn-secondary rounded-custom likedbtn ${
           watched
             ? liked
