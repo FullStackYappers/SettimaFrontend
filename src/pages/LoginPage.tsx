@@ -83,7 +83,7 @@ const LoginPage: React.FC = () => {
           <div className="login mx-7 flex flex-col items-center">
             <button
               type="submit"
-              className="w-full h-[60px] btn btn-accent rounded-custom text-primary font-bold text-2xl"
+              className="w-full h-[60px] btn btn-accent rounded-custom text-primary font-outfit font-bold text-2xl"
             >
               Login
             </button>
