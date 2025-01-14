@@ -4,7 +4,7 @@ body {
 }
 
 .main-container {
-    height: 35vw;
+    height: 45vw;
     margin-bottom: 2vh;
 }
 
@@ -19,29 +19,45 @@ body {
     cursor: pointer;
 }
 
+.logo {
+    position: absolute;
+    width: ;
+}
+
 .informative-text {
     font-size: 2vw;
     padding: 1vw;
+    background-color: black;
+    text-shadow:
+            1px 1px 0 black,
+            -1px -1px 0 black,
+            1px -1px 0 black,
+            -1px 1px 0 black;
 }
 
 .first-slide {
     background-image: url("/home/ameleroparra/Settima/settima/src/assets/ratingSlide.png");
+    background-size: cover;
 }
 
 .second-slide {
     background-image: url("/home/ameleroparra/Settima/settima/src/assets/forumSlide.png");
+    background-size: cover;
 }
 
 .third-slide {
     background-image: url("/home/ameleroparra/Settima/settima/src/assets/watchedSlide.png");
+    background-size: cover;
 }
 
 .fourth-slide {
     background-image: url("/home/ameleroparra/Settima/settima/src/assets/followSlide.png");
+    background-size: cover;
 }
 
 .fifth-slide {
     background-image: url("/home/ameleroparra/Settima/settima/src/assets/userSlide.png");
+    background-size: cover;
 }
 
 
