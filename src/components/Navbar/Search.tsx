@@ -11,6 +11,7 @@ const Search: React.FC<{
 }> = ({ showSearchButton, toggleSearch }) => {
   const [input, setInput] = useState("");
   const [results, setResults] = useState<Movie[]>([]);
+  const [searchActive, setSearchActive] = useState(false);
 
   const resetSearch = () => {
     setInput("");
@@ -28,7 +29,7 @@ const Search: React.FC<{
       const data = await searchMovies(value);
       setResults(data);
     } catch (error) {
-      console.error('Error fetching search results:', error);
+      console.error("Error fetching search results:", error);
       setResults([]);
       // we can add an error message for the user
     }
@@ -46,12 +47,15 @@ const Search: React.FC<{
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    if (searchActive) {
+      window.addEventListener("keydown", handleKeyDown);
+      console.log(searchActive);
+    }
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown); // Cleanup listener
     };
-  }, [resetSearch]);
+  }, [searchActive]);
 
   const navigate = useNavigate();
 
@@ -72,6 +76,8 @@ const Search: React.FC<{
         toggleSearch={toggleSearch}
         resetSearch={resetSearch}
         onKeyDown={handleEnter}
+        searchActive={searchActive}
+        setSearchActive={setSearchActive}
       />
       <SearchResults results={results} />
     </div>

@@ -7,6 +7,8 @@ interface SearchButtonProps {
   toggleSearch: () => void;
   resetSearch: () => void;
   onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  searchActive: boolean;
+  setSearchActive: (value: boolean) => void;
 }
 
 const SearchButton: React.FC<SearchButtonProps> = ({
@@ -16,8 +18,21 @@ const SearchButton: React.FC<SearchButtonProps> = ({
   toggleSearch,
   resetSearch,
   onKeyDown,
+  searchActive,
+  setSearchActive,
 }) => {
   const sticky = useSticky();
+
+  const handleSearchButtonClick = () => {
+    if (searchActive) {
+      resetSearch();
+      setSearchActive(false);
+    } else {
+      toggleSearch();
+      setSearchActive(true);
+    }
+  };
+
   return (
     <form
       action=""
@@ -41,7 +56,7 @@ const SearchButton: React.FC<SearchButtonProps> = ({
       <div
         className="search-button h-6 w-6 absolute top-0 bottom-0 right-2 m-auto cursor-pointer"
         id="search-button"
-        onClick={showSearchButton ? resetSearch : toggleSearch}
+        onClick={handleSearchButtonClick}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
