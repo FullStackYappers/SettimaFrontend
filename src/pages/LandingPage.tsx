@@ -1,41 +1,54 @@
 import "./css/LandingPage.css";
-import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
+
 
 const LandingPage = () => {
     return (
         <>
             <Navbar/>
-            <div className="flex  w-full h-screen">
-                <div className={"landing-grid-container rounded-custom"}>
-                    <div className={"explanationText p-3"}>
-                        <h1 className={"text-accent2 font-bold text-3xl text-left"}>
-                            Why to choose Settima?
-                        </h1>
-                        <p className={"text-primary font-bold text-xl text-left"}>
-                            <ul className={"list-disc p-2"}>
-                                <li className={"mb-2"}>Do specified reviews</li>
-                                <li className={"mb-2"}>Discuss ideas and converse about your favourite films</li>
-                                <li className={"mb-2"}>Save and share what you have watched</li>
-                                <li className={"mb-2"}>Follow and learn from other people</li>
-                                <li className={"mb-2"}>Modify your profile and show off your expertise</li>
-                            </ul>
-                        </p>
-                    </div>
-                    <div className={"startButton flex flex-col justify-end p-2"}>
-                        <button className="w-full h-[60px] bg-accent2 rounded-custom text-primary font-bold text-2xl">
-                            Start now
-                        </button>
+            <div className="flex flex-col items-center max-h-screen w-full">
+                <div
+                    className="main-container relative flex justify-center w-90p bg-accent2 rounded-custom overflow-hidden">
+                    <button type="button"
+                            className="start-button btn bg-accent2 text-primary font-bold font-outfit">
+                        Start Now!
+                    </button>
 
+                    <div
+                        className="flex-1 bg-red-500 transition-all duration-500 hover:flex-[10] flex justify-center items-center group">
+                        <h1 className="informative-text group-hover:opacity-100 opacity-45 transition-opacity duration-1000 text-primary font-bold font-outfit">"More
+                            detailed ratings"</h1>
                     </div>
 
-                    <div className={"backgroundLanding flex items-center justify-center"}>
+                    <div
+                        className="flex-1 bg-green-500 transition-all duration-500 hover:flex-[10] flex justify-center items-center group">
+                        <h1 className="informative-text group-hover:opacity-100 opacity-45 transition-opacity duration-1000 text-primary font-bold font-outfit">"Discuss
+                            your ideas and find new theories"</h1>
                     </div>
 
+                    <div
+                        className="flex-1 bg-blue-500 transition-all duration-500 hover:flex-[10] flex justify-center items-center group">
+                        <h1 className="informative-text group-hover:opacity-100 opacity-45 transition-opacity duration-1000 text-primary font-bold font-outfit">"Organize
+                            all your viewed films"</h1>
+                    </div>
+
+                    <div
+                        className="flex-1 bg-yellow-500 transition-all duration-500 hover:flex-[10] flex justify-center items-center group">
+                        <h1 className="informative-text group-hover:opacity-100 opacity-45 transition-opacity duration-1000 text-primary font-bold font-outfit">"Follow
+                            others and find what they are watching"</h1>
+                    </div>
+
+                    <div
+                        className="flex-1 bg-purple-500 transition-all duration-500 hover:flex-[10] flex justify-center items-center group">
+                        <h1 className="informative-text group-hover:opacity-100 opacity-45 transition-opacity duration-1000 text-primary font-bold font-outfit">"Customize
+                            your profile and show off"</h1>
+                    </div>
                 </div>
-            </div>
-            </>
-            )
-            }
 
-            export default LandingPage;
+
+            </div>
+        </>
+    )
+}
+
+export default LandingPage;
