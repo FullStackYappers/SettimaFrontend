@@ -1,4 +1,4 @@
-export interface fetchUser {
+export interface User {
   id: number;
   name: string;
   username: string;
@@ -11,19 +11,7 @@ export interface fetchUser {
   is_admin: boolean;
 }
 
-export interface fetchComment {
-  id: number;
-  discussion_id: number;
-  user_id: number;
-  content: string;
-  created_at: string;
-  updated_at: string;
-  user: fetchUser;
-  replies: fetchComment[];
-  likes: { id: number; user_id: number; likeable_type: string; likeable_id: number; created_at: string; updated_at: string }[];
-}
-
-export interface discussionDetails {
+export interface DiscussionDetails {
   id: number;
   movie_id: number;
   user_id: number;
@@ -33,13 +21,49 @@ export interface discussionDetails {
   created_at: string;
   updated_at: string;
   comments_count: number;
+  likes: Likes[];
   likes_count: number;
-  comments: fetchComment[];
-  user: fetchUser;
-  tags: tags[];
+  comments: DiscussionComment[];
+  user: User;
+  tags: Tags[];
 }
 
-export interface tags {
+export interface DiscussionComment {
+  id: number;
+  discussion_id: number;
+  user_id: number;
+  content: string;
+  created_at: string;
+  updated_at: string;
+  user: User;
+  replies: CommentReply[];
+  likes: Likes[];
+  likes_count: number;
+  replies_count: number;
+}
+
+export interface CommentReply {
+  id: number;
+  comment_id: number;
+  user_id: number;
+  content: string;
+  created_at: string;
+  updated_at: string;
+  user: User;
+  likes: Likes[];
+  likes_count: number;
+}
+
+export interface Likes {
+  id: number;
+  user_id: number;
+  likeable_type: string;
+  likeable_id: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Tags {
 id: number; 
 name: string; 
 created_at: string; 

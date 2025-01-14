@@ -2,22 +2,24 @@
 import "./css/ForumPage.css";
 
 //Componenets
-import axios from "axios";
 import Navbar from "../components/Navbar/Navbar";
 import Discussion from "../components/ForumPageComponents/DiscussionBox";
 import DiscussionMidSection from "../components/ForumPageComponents/DiscussionMidSection";
+import DiscussionComments from "../components/ForumPageComponents/DiscussionComments";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { discussionDetails } from "../types/Forum";
+import { DiscussionDetails } from "../types/Forum";
 
 const ForumPage = () => {
   const { discussionId } = useParams<{ discussionId: string }>();
-  const [discussion, setDiscussion] = useState<discussionDetails>(
-    {} as discussionDetails
+  const [discussion, setDiscussion] = useState<DiscussionDetails>(
+    {} as DiscussionDetails
   );
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     const fetchDiscussionDetails = async () => {
       try {
         const response = await fetch(
@@ -42,9 +44,10 @@ const ForumPage = () => {
     <>
       <Navbar />
       <div className="forum-container w-full flex justify-center">
-        <div className="forum-box w-[90%] h-[1000px] bg-accent p-8 rounded-custom text-primary">
+        <div className="forum-box w-[90%] h-max-none bg-accent p-8 rounded-custom text-primary">
           <Discussion discussionDetails={discussion} />
           <DiscussionMidSection discussionDetails={discussion} />
+          <DiscussionComments discussionDetails={discussion} />
         </div>
       </div>
     </>
