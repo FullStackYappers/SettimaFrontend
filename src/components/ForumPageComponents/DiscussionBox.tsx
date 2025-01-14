@@ -1,9 +1,7 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import { GoDiscussionClosed } from "react-icons/go";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { discussionDetails, tags } from "../../types/Forum";
+import { Tags } from "../../types/Forum";
 
 const Discussion = ({ discussionDetails }: { discussionDetails: any }) => {
   const [liked, setLiked] = useState(false);
@@ -25,7 +23,7 @@ const Discussion = ({ discussionDetails }: { discussionDetails: any }) => {
 
   const getTags = (): JSX.Element[] => {
     return discussionDetails.tags.length > 0
-      ? discussionDetails.tags.map((tag: tags, index: number) => (
+      ? discussionDetails.tags.map((tag: Tags, index: number) => (
           <div
             key={index}
             className="tag text-base mx-4 rounded-custom bg-accent2 p-2 w-[12%] flex justify-center align-center"
@@ -37,7 +35,7 @@ const Discussion = ({ discussionDetails }: { discussionDetails: any }) => {
   };
 
   return (
-    <div>
+    <div className="forum-discussion-container">
       <div className="back-button">
         <button
           className="btn btn-ghost rounded-custom bottom-3 text-lg mb-4"

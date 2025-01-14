@@ -11,10 +11,11 @@ const DiscussionMidSection = ({
 }) => {
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const { isLoggedIn, login } = useAuth();
+  const { isLoggedIn, login, user } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const username = user?.username;
 
   const handleModal = () => {
     if (isLoggedIn) {
@@ -82,9 +83,9 @@ const DiscussionMidSection = ({
   }
 
   return (
-    <div className="forum-container w-full flex justify-center">
-      <div className="discussion-mid-section">
-        <div className="add-comment-button">
+    <div className="forum-mid-container w-full flex justify-left px-8">
+      <div className="discussion-mid-section w-[90%]">
+        <div className="add-comment-button flex justify-center">
           <button
             className="btn btn-ghost rounded-custom bottom-3 text-lg mb-4"
             onClick={handleModal}
@@ -135,7 +136,7 @@ const DiscussionMidSection = ({
           </form>
           <div className="flex flex-col h-full">
             <h2 className="text-4xl font-semibold font-outfit ml-4 mb-4">
-              Add Comment
+              Add Comment as {username}
             </h2>
 
             <div className="flex-grow mb-4 mx-4">
