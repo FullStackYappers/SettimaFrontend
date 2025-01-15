@@ -35,6 +35,8 @@ const Container: React.FC<ContainerProps> = ({
           const isWatched = response.data.data.some(
             (entry: any) => entry.movie.id === Number(movieId)
           );
+
+          console.log(isWatched);
           setWatched(isWatched);
         } catch (error) {
           console.error("Error fetching watched status:", error);

@@ -114,10 +114,6 @@ const RatingTable = ({
     }
   };
 
-  const closeModal = () => {
-    setModalState("none");
-  };
-
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -146,17 +142,36 @@ const RatingTable = ({
       "main_modal"
     ) as HTMLDialogElement;
 
-    if (loginModal && modalState == "login") {
-      loginModal.showModal();
-    } else if (loginModal) {
-      loginModal.close();
+    const handleClose = () => {
+      setModalState("none");
+    };
+
+    if (loginModal) {
+      if (modalState === "login") {
+        loginModal.showModal();
+      } else {
+        loginModal.close();
+      }
+      loginModal.addEventListener("close", handleClose);
     }
 
-    if (mainModal && modalState == "main") {
-      mainModal.showModal();
-    } else if (mainModal) {
-      mainModal.close();
+    if (mainModal) {
+      if (modalState === "main") {
+        mainModal.showModal();
+      } else {
+        mainModal.close();
+      }
+      mainModal.addEventListener("close", handleClose);
     }
+
+    return () => {
+      if (loginModal) {
+        loginModal.removeEventListener("close", handleClose);
+      }
+      if (mainModal) {
+        mainModal.removeEventListener("close", handleClose);
+      }
+    };
   }, [modalState]);
 
   const handleConfirm = async () => {
@@ -204,7 +219,20 @@ const RatingTable = ({
                 handleModal();
               }}
             >
-              ✕
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 text-primary"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2.5"
+                  d="M6 18 18 6M6 6l12 12"
+                />
+              </svg>
             </button>
           </form>
 
@@ -304,7 +332,6 @@ const RatingTable = ({
                   onClick={() => {
                     handleConfirm();
                     handleReviewSubmission();
-                    setStep(1);
                     window.location.reload();
                   }}
                 >

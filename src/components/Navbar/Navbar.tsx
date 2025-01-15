@@ -6,12 +6,16 @@ import { Link } from "react-router-dom";
 import DropDownGenre from "./DropdownGenre.tsx";
 import DropdownProfile from "./DropdownProfile.tsx";
 import "./Navbar.css";
+import { useAuth } from "../../context/AuthContext.tsx";
 
 const Navbar = () => {
   const [showSearchButton, setShowSearchButton] = useState(false);
   const toggleSearch = () => {
     setShowSearchButton(!showSearchButton);
   };
+
+  const { user } = useAuth();
+  const authToken = localStorage.getItem("auth_token");
 
   const sticky = useSticky();
 
@@ -153,7 +157,7 @@ const Navbar = () => {
           </div>
           <div className="profilebtn flex-end mr-4">
             <div className="dropdown dropdown-hover dropdown-end">
-              <Link to="/user">
+              <Link to={authToken ? `/user/${user?.username}` : "/login"}>
                 <div
                   tabIndex={0}
                   role="button"

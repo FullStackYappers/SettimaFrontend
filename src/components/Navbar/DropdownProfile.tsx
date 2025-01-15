@@ -3,7 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
 
 const DropdownProfile = () => {
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
   const authToken = localStorage.getItem("auth_token");
 
   const handleLogout = async () => {
@@ -29,17 +29,17 @@ const DropdownProfile = () => {
       tabIndex={0}
       className="dropdown-content menu bg-accent rounded-box z-[1] w-52 p-4 text-lg shadow text-primary"
     >
-      <li className="hover:text-accent2">
-        <Link to="/user">
-          <span>Profile</span>
-        </Link>
-      </li>
-      <li className="hover:text-accent2 ">
-        <span>Settings</span>
-      </li>
-      <div className="divider divider-accent m-2"></div>
       {authToken ? (
         <>
+          <li className="hover:text-accent2">
+            <Link to={`/user/${user?.username || ""}`}>
+              <span>Profile</span>
+            </Link>
+          </li>
+          <li className="hover:text-accent2 ">
+            <span>Settings</span>
+          </li>
+          <div className="divider divider-accent m-2"></div>
           <li className="hover:text-accent2">
             <span onClick={handleLogout}>Logout</span>
           </li>
