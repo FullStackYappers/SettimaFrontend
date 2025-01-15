@@ -6,7 +6,7 @@
   overflow-y: auto;
   display: grid;
   grid-template-columns: 1fr 2fr;
-  grid-template-rows: auto;
+  grid-template-rows: 10vh auto;
   grid-template-areas:
     "logo backgroundLogin"
     "usernameInput backgroundLogin"
@@ -14,8 +14,15 @@
     "login backgroundLogin";
 }
 
+.login-form {
+  display: contents;
+}
+
 .logo {
   grid-area: logo;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .backgroundLogin {
@@ -29,12 +36,39 @@
 
 .usernameInput {
   grid-area: usernameInput;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .passwordInput {
   grid-area: passwordInput;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .login {
   grid-area: login;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.input-field {
+  width: 28vw;
+  height: 8vh;
+  margin: 1vh;
+}
+
+.text-giant {
+  font-size: 5vh;
+}
+
+.text-big {
+  font-size: 3vh;
+}
+
+.text-small {
+  font-size: 2vh;
 }
