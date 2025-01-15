@@ -1,70 +1,71 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import "./css/ProfilePage.css";
 import Navbar from "../components/Navbar/Navbar";
 import ProfileDisplay from "../components/ProfilePageComponents/ProfileDisplay";
 
 const ProfilePage: React.FC = () => {
+  const { username } = useParams<{ username: string }>();
   const { user, isLoading, isLoggedIn } = useAuth();
-  const [shouldRedirect, setShouldRedirect] = useState(false);
 
   useEffect(() => {
-    console.log("ProfilePage mounted");
-    console.log("User in ProfilePage:", user);
-    console.log("Is logged in:", isLoggedIn);
-    console.log("Is loading:", isLoading);
+    if (!username) {
+      return;
+    }
 
-    // Add this new API call
-    const token = localStorage.getItem('token');
-    console.log("Token from localStorage:", token);
+    const authToken = localStorage.getItem("auth_token");
 
-    if (token) {
-      fetch('/api/user', {
+    if (authToken) {
+      fetch(`/api/user/${username}`, {
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Accept': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+          Accept: "application/json",
         },
       })
-          .then(response => response.json())
-          .then(data => {
-            console.log("User data from API:", data);
-            if (!data || !data.id) {
-              console.log("Invalid user data, setting shouldRedirect to true");
-              setShouldRedirect(true);
-            }
-          })
-          .catch(error => {
-            console.error("Error fetching user data:", error);
-            setShouldRedirect(true);
-          });
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("User data from API:", data);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+        });
     } else {
       console.log("No token found, setting shouldRedirect to true");
-      setShouldRedirect(true);
     }
   }, [user, isLoading, isLoggedIn]);
 
   if (isLoading) {
-    console.log("Still loading, showing loading message");
-    return <div>Loading...</div>;
+    return (
+      <div id="preloader">
+        <div className="image">
+          <img src="/combWhite.svg" alt="preloader" />
+        </div>
+      </div>
+    );
   }
 
-  if (!isLoggedIn || !user || shouldRedirect) {
-    console.log('Not logged in, no user, or shouldRedirect is true. Redirecting to login');
-    console.log('isLoggedIn:', isLoggedIn);
-    console.log('user:', user);
-    console.log('shouldRedirect:', shouldRedirect);
+  if (!isLoggedIn || !user) {
+    console.log(
+      "Not logged in, no user, or shouldRedirect is true. Redirecting to login"
+    );
+    console.log("isLoggedIn:", isLoggedIn);
+    console.log("user:", user);
     return <Navigate to="/login" />;
   }
 
-  console.log('Rendering ProfilePage with user:', user);
+  console.log("Rendering ProfilePage with user:", user);
   return (
     <>
       <Navbar />
       <div className="profile-grid-container text-primary">
         <div className="profilepic">
           {user.profile_picture ? (
-              <img src={user.profile_picture} alt="Profile" className="h-36 w-36 rounded-full" />
+            <img
+              src={user.profile_picture}
+              alt="Profile"
+              className="h-36 w-36 rounded-full"
+            />
           ) : (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -83,11 +84,9 @@ const ProfilePage: React.FC = () => {
           )}
         </div>
         <div className="username font-semibold">{user.username}</div>
-        <div className="name">{user.name}</div>
-        <div className="email">{user.email}</div>
-        <div className="about">{user.about || 'No bio available'}</div>
+        <div className="about">{user.about || "No bio available"}</div>
         <div className="profileDisplay">
-          <ProfileDisplay/>
+          <ProfileDisplay />
         </div>
       </div>
     </>
