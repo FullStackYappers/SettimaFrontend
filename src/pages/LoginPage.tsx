@@ -20,7 +20,7 @@ const LoginPage: React.FC = () => {
       if (loginResponse.token) {
         const userData = await fetchUserData(loginResponse.token);
         login(userData, loginResponse.token);
-        navigate("/"); // Redirection to Home Page after successful login
+        navigate("/");
       } else {
         console.error("Invalid login response:", loginResponse);
         throw new Error("Invalid login response");
