@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Navigate, useParams } from "react-router-dom";
 import "./css/ProfilePage.css";
@@ -17,7 +17,7 @@ const ProfilePage: React.FC = () => {
     const authToken = localStorage.getItem("auth_token");
 
     if (authToken) {
-      fetch(`/api/user/${username}`, {
+      fetch(`/api/user`, {
         headers: {
           Authorization: `Bearer ${authToken}`,
           Accept: "application/json",

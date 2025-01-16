@@ -4,7 +4,7 @@ const API_BASE_URL = '/api';
 
 export const fetchUserData = async (token: string) => {
     try {
-        const response = await axios.get(`${API_BASE_URL}/user`, {
+        const response = await axios.get(`${API_BASE_URL}/user/profile`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
