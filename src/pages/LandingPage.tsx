@@ -18,7 +18,7 @@ const LandingPage = () => {
                     <img src={nameWhite} alt="Settima Logo" className="logo transition-opacity duration-1000 opacity-100 group-hover:opacity-0 group-hover:invisible"/>
 
 
-                    <Link to={"/login"} className="link-form">
+                    <Link to={"/register"} className="link-form">
                         {
                             //this is just here to see the landing page in process
                         }
