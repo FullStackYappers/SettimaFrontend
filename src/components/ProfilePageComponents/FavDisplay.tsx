@@ -28,7 +28,6 @@ const FavDisplay = () => {
         });
         const movies = response.data.data || [];
         setLikedMovies(movies);
-        console.log(movies);
       } catch (error) {
         console.error("Error fetching watched status:", error);
       }

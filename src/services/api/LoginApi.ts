@@ -14,10 +14,6 @@ export const loginUser = async (userData: LoginData) => {
 
         // Perform login
         const response = await axios.post(`${API_BASE_URL}/login`, userData, { withCredentials: true });
-
-        if(response.data?.token){
-            localStorage.setItem("auth_token", response.data.token);
-        }
         
         return response.data;
     } catch (error) {
