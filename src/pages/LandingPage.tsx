@@ -3,6 +3,8 @@ import Navbar from "../components/Navbar/Navbar";
 
 import LatestMovieCarousel from "../components/HomePageComponents/LatestMovieCarousel.tsx";
 import nameWhite from "../assets/nameWhite.svg";
+import {Link} from "react-router-dom";
+import React from "react";
 
 
 const LandingPage = () => {
@@ -16,10 +18,15 @@ const LandingPage = () => {
                     <img src={nameWhite} alt="Settima Logo" className="logo transition-opacity duration-1000 opacity-100 group-hover:opacity-0 group-hover:invisible"/>
 
 
-                    <button type="button"
-                            className="start-button btn bg-accent2 text-primary font-bold font-outfit">
-                        Start Now!
-                    </button>
+                    <Link to={"/login"} className="link-form">
+                        {
+                            //this is just here to see the landing page in process
+                        }
+                        <button type="button"
+                                className="start-button btn bg-accent2 text-primary font-bold font-outfit">
+                            Start Now!
+                        </button>
+                    </Link>
 
 
                     <div

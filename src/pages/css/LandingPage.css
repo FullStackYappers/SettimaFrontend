@@ -8,6 +8,10 @@ body {
     margin-bottom: 2vh;
 }
 
+.link-form {
+    display: contents;
+}
+
 .start-button {
     position: absolute;
     bottom: 20px;
