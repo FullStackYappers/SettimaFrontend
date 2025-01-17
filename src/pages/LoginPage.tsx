@@ -40,7 +40,6 @@ const LoginPage: React.FC = () => {
       <div className="login-grid-container rounded-custom bg-accent">
         <div className="logo">
           <Link to={"/landing"}>
-            {" "}
             {
               //this is just here to see the landing page in process
             }
