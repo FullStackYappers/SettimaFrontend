@@ -27,9 +27,20 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   useEffect(() => {
     const preloader = document.getElementById("preloader");
+
     if (preloader) {
       preloader.style.display = "none";
     }
+
+    const handleBeforeUnload = () => {
+      localStorage.removeItem("user");
+      localStorage.removeItem("auth_token");
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
   }, []);
 
   return (

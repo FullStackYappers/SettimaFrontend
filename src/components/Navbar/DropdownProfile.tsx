@@ -8,15 +8,11 @@ const DropdownProfile = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post("/api/logout", null, {
+      await axios.post("/api/logout", null, {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },
       });
-
-      localStorage.removeItem("auth_token");
-      localStorage.removeItem("user_id");
-      console.log(response);
       logout();
       window.location.reload();
     } catch (error) {

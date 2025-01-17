@@ -32,7 +32,6 @@ const ActivityTable = () => {
             },
           });
           setWatchedMovies(response.data.data);
-          console.log(response.data.data);
         } catch (error) {
           console.error("Error fetching watched status:", error);
         }
@@ -47,7 +46,7 @@ const ActivityTable = () => {
       <div className="my-4">
         <span className="text-sm font-semibold">Activity</span>
       </div>
-      <div className="grid grid-cols-4 gap-8">
+      <div className="grid grid-cols-3 xl:grid-cols-4 gap-8 w-full">
         {watchedMovies.length > 0 ? (
           watchedMovies.map((history) => (
             <div className="bg-accent rounded-[10px] relative">
@@ -70,8 +69,14 @@ const ActivityTable = () => {
             </div>
           ))
         ) : (
-          <div className="col-span-4 text-center">
-            <p>No activity yet. Start watching movies!</p>
+          <div className="col-span-3 xl:col-span-4">
+            <Link to="/">
+              <button className="btn btn-secondary w-full col-span-3 h-[150px] flex items-center justify-center rounded-custom">
+                <span className="font-semibold text-2xl">
+                  Add your watched movies!
+                </span>
+              </button>
+            </Link>
           </div>
         )}
       </div>
