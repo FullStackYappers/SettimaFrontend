@@ -5,10 +5,14 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 interface WatchedMovies {
+  id: number;
   movie: Movie;
+  created_at: string;
 }
 
-interface FavoriteMovie {
+interface FavoriteMovies {
+  id: number;
+  movie_id: number;
   movie: Movie;
 }
 
@@ -22,7 +26,7 @@ const TabContent = () => {
   const authToken = localStorage.getItem("auth_token");
   const [activeTab, setActiveTab] = useState<string>("tab1");
   const [watchedMovies, setWatchedMovies] = useState<WatchedMovies[]>([]);
-  const [likedMovies, setLikedMovies] = useState<FavoriteMovie[]>([]);
+  const [likedMovies, setLikedMovies] = useState<FavoriteMovies[]>([]);
 
   useEffect(() => {
     if (authToken) {
@@ -35,7 +39,6 @@ const TabContent = () => {
           });
           const watchedMovies = response.data.data;
           setWatchedMovies(watchedMovies);
-          console.log(watchedMovies);
         } catch (error) {
           console.error("Error fetching watched status:", error);
         }
@@ -108,17 +111,21 @@ const TabContent = () => {
       <div className="mt-4 text-2xl">
         {activeTab === "tab1" && (
           <div id="tab1" className="tab-content block mb-4">
-            <Personalized />
+            <Personalized
+              setActiveTab={setActiveTab}
+              watchedMoviesLength={watchedMovies.length}
+              likedMovies={likedMovies}
+            />
             <div className="activity mt-4 text-xl">
-              <ActivityTable />
+              <ActivityTable watchedMovies={watchedMovies} />
             </div>
           </div>
         )}
         {activeTab === "tab2" && (
           <div id="tab2" className="tab-content block mb-4 flex justify-center">
             <div className="container mt-4 grid grid-cols-6 gap-8">
-              {watchedMovies.map((movie) => (
-                <div className="movieContainer text-primary">
+              {watchedMovies.map((movie, index) => (
+                <div key={index} className="movieContainer text-primary">
                   <Link to={`/movie/${movie.movie.id}`}>
                     <img
                       src={`http://localhost:8000/${movie.movie.poster_path}`}

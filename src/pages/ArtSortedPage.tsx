@@ -1,7 +1,8 @@
 import Navbar from "../components/Navbar/Navbar";
-import { useEffect, useState } from "react";
-import { fetchMoviesByGenre } from "../services/api/MoviesApi";
+
 import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 interface Movie {
   id: number;
@@ -9,8 +10,8 @@ interface Movie {
   poster_path: string;
 }
 
-const MovieGenrePage = () => {
-  const { genre } = useParams();
+const ArtSortedPage = () => {
+  const { art } = useParams();
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
   const [imagesLoaded, setImagesLoaded] = useState(0);
@@ -18,9 +19,9 @@ const MovieGenrePage = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        if (genre) {
-          const response = await fetchMoviesByGenre(genre);
-          setMovies(response);
+        if (art) {
+          const response = await axios.get(`/api/movies/sorted/${art}`);
+          setMovies(response.data.data);
         }
       } catch (error) {
         console.error("Error fetching latest movies:", error);
@@ -31,11 +32,16 @@ const MovieGenrePage = () => {
     };
 
     fetchMovies();
-  }, [genre]);
+  }, [art]);
 
   const capitalizeFirstLowercaseRest = (str: string | undefined) => {
     if (str) {
-      return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+      return str
+        .split("_")
+        .map(
+          (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+        )
+        .join(" ");
     }
   };
 
@@ -64,11 +70,11 @@ const MovieGenrePage = () => {
       <Navbar />
       <div className="moviesList text-primary mx-4 mt-8 px-3">
         <h2 className="font-outfit text-3xl">
-          {capitalizeFirstLowercaseRest(genre)}
+          {capitalizeFirstLowercaseRest(art)}
         </h2>
         <div className="moviesContainer mt-4">
-          {movies.map((movie) => (
-            <div className="movieContainer text-primary">
+          {movies.map((movie, index) => (
+            <div key={index} className="movieContainer text-primary">
               <Link to={`/movie/${movie.id}`}>
                 <img
                   src={`http://localhost:8000/${movie.poster_path}`}
@@ -87,4 +93,4 @@ const MovieGenrePage = () => {
   );
 };
 
-export default MovieGenrePage;
+export default ArtSortedPage;

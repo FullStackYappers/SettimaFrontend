@@ -3,8 +3,10 @@ import { useState } from "react";
 import logoName from "../../assets/nameWhite.svg";
 import { useSticky } from "../../context/Sticky";
 import { Link } from "react-router-dom";
-import DropDownGenre from "./DropdownGenre.tsx";
+import DropdownGenre from "./DropdownGenre.tsx";
 import DropdownProfile from "./DropdownProfile.tsx";
+import DropdownArts from "./DropdownArts.tsx";
+import DropdownFavorites from "./DropdownFavorites.tsx";
 import "./Navbar.css";
 import { useAuth } from "../../context/AuthContext.tsx";
 
@@ -80,63 +82,9 @@ const Navbar = () => {
                     </Link>
                   </div>
                   <div className="divider divider-accent"></div>
-                  <DropDownGenre />
-                  <li>
-                    <div className="collapse collapse-arrow border-none rounded-custom hover:bg-accent focus:bg-accent pt-4">
-                      <input type="checkbox" />
-                      <div className="collapse-title text-xl font-medium">
-                        The Arts
-                      </div>
-                      <ul className="collapse-content">
-                        <li className="hover:text-accent2">
-                          <a href="#">Ranked by Acting</a>
-                        </li>
-                        <li className="hover:text-accent2">
-                          <a href="#">Ranked by Plot</a>
-                        </li>
-                        <li className="hover:text-accent2">
-                          <a href="#">Ranked by Music & Sound</a>
-                        </li>
-                        <li className="hover:text-accent2">
-                          <a href="#">Ranked by Costume Design</a>
-                        </li>
-                        <li className="hover:text-accent2">
-                          <a href="#">Ranked by Cinematography</a>
-                        </li>
-                        <li className="hover:text-accent2">
-                          <a href="#">Ranked by Editing</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="collapse collapse-arrow border-none rounded-custom hover:bg-accent focus:bg-accent pt-4 mb-20">
-                      <input type="checkbox" />
-                      <div className="collapse-title text-xl font-medium text-left">
-                        Your Favorites
-                      </div>
-                      <ul className="collapse-content">
-                        <li className="hover:text-accent2">
-                          <a href="#">Favorite Movies</a>
-                        </li>
-                        <li className="hover:text-accent2">
-                          <a href="#">Favorite TV Series</a>
-                        </li>
-                        <li className="hover:text-accent2">
-                          <a href="#">Favorite Actors</a>
-                        </li>
-                        <li className="hover:text-accent2">
-                          <a href="#">Favorite Directors</a>
-                        </li>
-                        <li className="hover:text-accent2">
-                          <a href="#">Favorite Composers</a>
-                        </li>
-                        <li className="hover:text-accent2">
-                          <a href="#">More...</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
+                  <DropdownGenre />
+                  <DropdownArts />
+                  {authToken && <DropdownFavorites />}
                 </ul>
                 <div className="fixed w-80 bottom-0 bg-gradient-to-t from-base-100 via-base-100 to-white-0 px-4">
                   <div className="mb-4 relative">

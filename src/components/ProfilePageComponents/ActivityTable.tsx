@@ -1,7 +1,6 @@
-import axios from "axios";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 dayjs.extend(relativeTime);
@@ -12,35 +11,17 @@ interface Movie {
   poster_path: string;
 }
 
-interface WatchHistory {
+interface WatchedMovies {
   id: number;
   movie: Movie;
   created_at: string;
 }
 
-const ActivityTable = () => {
-  const authToken = localStorage.getItem("auth_token");
-  const [watchedMovies, setWatchedMovies] = useState<WatchHistory[]>([]);
+interface ActivityTableProps {
+  watchedMovies: WatchedMovies[];
+}
 
-  useEffect(() => {
-    if (authToken) {
-      const fetchWatchedMovies = async () => {
-        try {
-          const response = await axios.get(`/api/user/watch-history`, {
-            headers: {
-              Authorization: `Bearer ${authToken}`,
-            },
-          });
-          setWatchedMovies(response.data.data);
-        } catch (error) {
-          console.error("Error fetching watched status:", error);
-        }
-      };
-
-      fetchWatchedMovies();
-    }
-  }, []);
-
+const ActivityTable: React.FC<ActivityTableProps> = ({ watchedMovies }) => {
   return (
     <div>
       <div className="my-4">

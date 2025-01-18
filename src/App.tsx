@@ -23,6 +23,7 @@ import MovieGenrePage from "./pages/MovieGenrePage.tsx";
 
 //react-router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ArtSortedPage from "./pages/ArtSortedPage.tsx";
 
 function App() {
   useEffect(() => {
@@ -32,7 +33,8 @@ function App() {
       preloader.style.display = "none";
     }
 
-    const handleBeforeUnload = () => {
+    //auth is a bit weird so this forces you to become a guest user
+    /*const handleBeforeUnload = () => {
       localStorage.removeItem("user");
       localStorage.removeItem("auth_token");
     };
@@ -40,7 +42,7 @@ function App() {
     window.addEventListener("beforeunload", handleBeforeUnload);
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
+    };*/
   }, []);
 
   return (
@@ -56,7 +58,11 @@ function App() {
               <Route path={"/register"} element={<RegisterPage />}></Route>
               <Route path={"/landing"} element={<LandingPage />}></Route>
               <Route path="/person/:personId" element={<PersonPage />} />
-              <Route path="/movies/genre/:genre" element={<MovieGenrePage />} />
+              <Route
+                path="/movies/genres/:genre"
+                element={<MovieGenrePage />}
+              />
+              <Route path="/movies/arts/:art" element={<ArtSortedPage />} />
               <Route
                 path="/forum/:discussionId"
                 element={<ForumPage />}

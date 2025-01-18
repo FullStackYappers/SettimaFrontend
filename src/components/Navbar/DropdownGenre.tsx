@@ -19,7 +19,7 @@ const DropDownGenre = () => {
         <ul className="collapse-content">
           {genres.map((genre) => (
             <li className="hover:text-accent2">
-              <Link to={`/movies/genre/${genre.toLowerCase()}`}>{genre}</Link>
+              <Link to={`/movies/genres/${genre.toLowerCase()}`}>{genre}</Link>
             </li>
           ))}
         </ul>

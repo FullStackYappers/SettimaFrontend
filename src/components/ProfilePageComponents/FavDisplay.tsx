@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
-interface FavoriteMovie {
+interface FavoriteMovies {
   id: number;
   movie_id: number;
   movie: Movie;
@@ -14,27 +12,26 @@ interface Movie {
   poster_path: string;
 }
 
-const FavDisplay = () => {
-  const [likedMovies, setLikedMovies] = useState<FavoriteMovie[]>([]);
-  const authToken = localStorage.getItem("auth_token");
+interface FavDisplayProps {
+  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
+  watchedMoviesLength: number;
+  likedMovies: FavoriteMovies[];
+}
 
-  useEffect(() => {
-    const fetchLikedMovies = async () => {
-      try {
-        const response = await axios.get(`/api/user/favorites`, {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        });
-        const movies = response.data.data || [];
-        setLikedMovies(movies);
-      } catch (error) {
-        console.error("Error fetching watched status:", error);
-      }
-    };
+const FavDisplay: React.FC<FavDisplayProps> = ({
+  setActiveTab,
+  watchedMoviesLength,
+  likedMovies,
+}) => {
+  const navigate = useNavigate();
 
-    fetchLikedMovies();
-  }, []);
+  const handleButtonClick = () => {
+    if (watchedMoviesLength > 0) {
+      setActiveTab("tab2");
+    } else {
+      navigate("/");
+    }
+  };
 
   return (
     <div className="fav-container grid grid-rows-auto">
@@ -53,13 +50,14 @@ const FavDisplay = () => {
             ))
           ) : (
             <div className="w-full">
-              <Link to="/">
-                <button className="btn btn-secondary w-full h-[200px] flex items-center justify-center rounded-custom">
-                  <span className="font-semibold text-2xl">
-                    Add your favorite movies!
-                  </span>
-                </button>
-              </Link>
+              <button
+                onClick={handleButtonClick}
+                className="btn btn-secondary w-full h-[200px] flex items-center justify-center rounded-custom"
+              >
+                <span className="font-semibold text-2xl">
+                  Add your favorite movies!
+                </span>
+              </button>
             </div>
           )}
         </div>
