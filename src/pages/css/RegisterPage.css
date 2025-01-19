@@ -16,6 +16,10 @@
     "register backgroundLogin";
 }
 
+.register-form {
+    display: contents;
+}
+
 .logo {
     grid-area: logo;
 }
