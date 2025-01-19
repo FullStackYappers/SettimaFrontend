@@ -22,7 +22,7 @@
 
 .backgroundLogin {
     grid-area: backgroundLogin;
-    background-image: url("src/assets/background.png");
+    background-image: url("../../../src/assets/background.png");
     background-color: rgba(0, 0, 0, 0.7);
     background-blend-mode: darken;
     background-size: cover;
