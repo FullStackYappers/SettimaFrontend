@@ -4,7 +4,6 @@ import Navbar from "../components/Navbar/Navbar";
 import LatestMovieCarousel from "../components/HomePageComponents/LatestMovieCarousel.tsx";
 import nameWhite from "../assets/nameWhite.svg";
 import {Link} from "react-router-dom";
-import React from "react";
 
 
 const LandingPage = () => {
