@@ -8,8 +8,14 @@ import DiscussionMidSection from "../components/ForumPageComponents/DiscussionMi
 import DiscussionComments from "../components/ForumPageComponents/DiscussionComments";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
+import { getAuthToken } from "../services/api/ForumApi.ts";
 
 import { DiscussionDetails } from "../types/Forum";
+import {
+  fetchDiscussionDetails,
+  fetchDiscussionLoggedIn,
+} from "../services/api/ForumApi.ts";
 
 const ForumPage = () => {
   const { discussionId } = useParams<{ discussionId: string }>();
@@ -20,24 +26,27 @@ const ForumPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    const fetchDiscussionDetails = async () => {
+    const getDiscussionDetails = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:8000/api/discussions/${discussionId}`
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch discussion details");
+        if (discussionId) {
+          const token = getAuthToken();
+
+          let discussionData;
+
+          if (token) {
+            discussionData = await fetchDiscussionLoggedIn(discussionId);
+          } else {
+            discussionData = await fetchDiscussionDetails(discussionId);
+          }
+
+          setDiscussion(discussionData);
         }
-        const discussionData = await response.json();
-        setDiscussion(discussionData);
       } catch (error) {
         console.error("Error fetching discussion details:", error);
       }
     };
 
-    if (discussionId) {
-      fetchDiscussionDetails();
-    }
+    getDiscussionDetails();
   }, [discussionId]);
 
   return (

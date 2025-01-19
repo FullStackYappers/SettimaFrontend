@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext.tsx";
-import { loginUser } from "../../services/api/LoginApi.ts";
-import { fetchUserData } from "../../services/api/UserApi.ts";
-import { Link } from "react-router-dom";
+import LoginModal from "./LoginModal.tsx";
+import axios from "axios";
 
 const DiscussionMidSection = ({
   discussionDetails,
@@ -11,17 +10,47 @@ const DiscussionMidSection = ({
 }) => {
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const { isLoggedIn, login, user } = useAuth();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const { isLoggedIn, user } = useAuth();
   const username = user?.username;
+  const [comment, setComment] = useState("");
 
   const handleModal = () => {
     if (isLoggedIn) {
       setIsCommentModalOpen(!isCommentModalOpen);
     } else {
       setIsLoginModalOpen(!isLoginModalOpen);
+    }
+  };
+
+  const addComment = async (content: string) => {
+    const authToken = localStorage.getItem("auth_token");
+    if (!authToken) {
+      console.error("User not authenticated");
+      return;
+    }
+
+    const payload = { content };
+
+    try {
+      const response = await axios.post(
+        `/api/discussions/${discussionDetails.id}/comments`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+
+      console.log("Comment Added: ", response.data);
+    } catch (error) {
+      console.error("Error adding comment: ", error);
+    }
+  };
+
+  const handleCommentSubmission = () => {
+    if (comment.trim() || comment === "") {
+      addComment(comment.trim());
     }
   };
 
@@ -51,27 +80,6 @@ const DiscussionMidSection = ({
     }
   }, [isCommentModalOpen, isLoginModalOpen]);
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const loginResponse = await loginUser({ email, password });
-      if (loginResponse.token) {
-        const userData = await fetchUserData(loginResponse.token);
-        login(userData, loginResponse.token);
-        setIsLoginModalOpen(false);
-        setIsCommentModalOpen(true);
-      } else {
-        throw new Error("Invalid login response");
-      }
-    } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Login failed. Please check your credentials."
-      );
-    }
-  };
-
   if (!discussionDetails || !discussionDetails.user) {
     return (
       <div id="preloader">
@@ -83,8 +91,10 @@ const DiscussionMidSection = ({
   }
 
   return (
-    <div className="forum-mid-container w-full flex justify-left px-8">
-      <div className="discussion-mid-section w-[90%]">
+    <div className="forum-mid-container w-full flex px-8">
+      {/* forum-mid-container w-full flex justify-left px-8 */}
+      <div className="discussion-mid-section w-full">
+        {/*discussion-mid-section w-[90%]*/}
         <div className="add-comment-button flex justify-center">
           <button
             className="btn btn-ghost rounded-custom bottom-3 text-lg mb-4"
@@ -108,7 +118,6 @@ const DiscussionMidSection = ({
           </button>
         </div>
       </div>
-
       <dialog id="comment_modal" className="modal rounded-custom">
         <div className="modal-box w-[75vw] max-w-none h-[60vh] max-h-none bg-base-100 relative">
           <form method="dialog">
@@ -143,13 +152,18 @@ const DiscussionMidSection = ({
               <textarea
                 className="textarea placeholder-primary placeholder-opacity-50 bg-secondary w-full h-[90%] text-xl overflow-auto resize-none"
                 placeholder="Write your comment here..."
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
               />
             </div>
 
             <div className="flex justify-end">
               <button
                 className="btn btn-ghost bottom-3 right-3 absolute rounded-custom"
-                onClick={handleModal}
+                onClick={() => {
+                  handleCommentSubmission();
+                  window.location.reload();
+                }}
               >
                 {" "}
                 Submit{" "}
@@ -159,70 +173,11 @@ const DiscussionMidSection = ({
         </div>
       </dialog>
 
-      <dialog id="login_modal" className="modal">
-        <div className="modal-box w-[30vw] max-w-none h-[60vh] max-h-none bg-base-100 relative rounded-custom">
-          <form method="dialog">
-            <button
-              className="btn btn-sm btn-circle btn-ghost absolute right-3 top-3"
-              onClick={handleModal}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-primary absolute search-close"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2.5"
-                  d="M6 18 18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </form>
-
-          <div className="flex flex-col h-full justify-center items-center">
-            <h2 className="text-2xl font-semibold font-outfit mb-4">
-              Login to Comment
-            </h2>
-
-            <form className="w-full px-4" onSubmit={handleLogin}>
-              <input
-                type="email"
-                placeholder="Email"
-                className="input w-full my-4 bg-accent rounded-custom"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                className="input w-full my-4 bg-accent rounded-custom"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <button
-                type="submit"
-                className="btn btn-accent rounded-custom text-primary font-bold text-2xl w-full mt-4"
-              >
-                Login
-              </button>
-              <Link to={"/register"}>
-                <h1 className="m0 font-outfit text-accent2 font-medium p-2 flex items-center justify-center">
-                  Not registered? Create an account
-                </h1>
-              </Link>
-            </form>
-            {error && (
-              <p className="text-red-500 text-center mt-4"> {error} </p>
-            )}
-          </div>
-        </div>
-      </dialog>
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+        context={"Comment"}
+      />
     </div>
   );
 };

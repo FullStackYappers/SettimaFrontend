@@ -1,14 +1,49 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useAuth } from "../../context/AuthContext.tsx";
 import { Tags } from "../../types/Forum";
+import LoginModal from "./LoginModal.tsx";
+import { likeItem, unlikeItem } from "../../services/api/LikeApi.ts";
 
 const Discussion = ({ discussionDetails }: { discussionDetails: any }) => {
   const [liked, setLiked] = useState(false);
-  const navigate = useNavigate(); // Use React Router's navigation hook
+  const [likesCount, setLikesCount] = useState(0);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (discussionDetails) {
+      setLiked(discussionDetails.user_liked);
+      setLikesCount(discussionDetails.likes_count);
+    }
+  }, [discussionDetails]);
 
   const handleClick = () => {
     navigate(`/movie/${discussionDetails.movie_id}`);
+  };
+
+  const handleLikeToggle = async () => {
+    if (!isLoggedIn) {
+      setIsLoginModalOpen(true);
+      return;
+    }
+
+    const newLikedState = !liked;
+    setLiked(newLikedState);
+
+    try {
+      if (newLikedState) {
+        await likeItem("App\\Models\\Discussion", discussionDetails.id);
+        setLikesCount((prevCount) => prevCount + 1);
+      } else {
+        await unlikeItem("App\\Models\\Discussion", discussionDetails.id);
+        setLikesCount((prevCount) => Math.max(prevCount - 1, 0));
+      }
+    } catch (error) {
+      setLiked(!newLikedState);
+      console.error("Error updating discussion like: ", error);
+    }
   };
 
   if (!discussionDetails || !discussionDetails.user) {
@@ -67,8 +102,8 @@ const Discussion = ({ discussionDetails }: { discussionDetails: any }) => {
             </h2>
           </div>
 
-          <div className="Views and Comments mr-16 flex items-center">
-            <div className="pr-20 flex flex-row gap-2 items-end text-xl">
+          <div className="Views and Comments flex items-center pr-10">
+            <div className="flex flex-row gap-2 items-end text-xl">
               <div className="flex items-center gap-1 mr-10">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +126,6 @@ const Discussion = ({ discussionDetails }: { discussionDetails: any }) => {
                 </svg>
                 <span className="block">{discussionDetails.views}</span>
               </div>
-
               <div className="flex items-center gap-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -114,18 +148,16 @@ const Discussion = ({ discussionDetails }: { discussionDetails: any }) => {
         </div>
 
         <div className="discussion-post-content w-full flex justify-left p-8">
-          <div className="box bg-base-100 rounded-custom w-[90%] p-4">
+          <div className="box bg-base-100 rounded-custom p-4 w-[90%]">
             <div className="flex flex-row">
               <div className="user-name grow">
                 <div className="name text-xl ml-10 h-full flex items-center">
-                  {discussionDetails.user.name}
+                  {discussionDetails.user.username}
                 </div>
               </div>
               <div className="like-button mr-4">
                 <button
-                  onClick={() => {
-                    setLiked(!liked);
-                  }}
+                  onClick={() => handleLikeToggle()}
                   className={`btn btn-secondary rounded-custom likedbtn ${
                     liked ? "text-accent2" : "text-primary"
                   }`}
@@ -143,7 +175,7 @@ const Discussion = ({ discussionDetails }: { discussionDetails: any }) => {
                       d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
                     />
                   </svg>
-                  <span className="block">{discussionDetails.likes_count}</span>
+                  <span className="block">{likesCount}</span>
                 </button>
               </div>
             </div>
@@ -158,6 +190,11 @@ const Discussion = ({ discussionDetails }: { discussionDetails: any }) => {
           </div>
         </div>
       </div>
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+        context={"Like"}
+      />
     </div>
   );
 };
