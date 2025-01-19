@@ -39,27 +39,27 @@ body {
 }
 
 .first-slide {
-    background-image: url("/home/ameleroparra/Settima/settima/src/assets/ratingSlide.png");
+    background-image: url("../../../src/assets/ratingSlide.png");
     background-size: cover;
 }
 
 .second-slide {
-    background-image: url("/home/ameleroparra/Settima/settima/src/assets/forumSlide.png");
+    background-image: url("../../../src/assets/forumSlide.png");
     background-size: cover;
 }
 
 .third-slide {
-    background-image: url("/home/ameleroparra/Settima/settima/src/assets/watchedSlide.png");
+    background-image: url("../../../src/assets/watchedSlide.png");
     background-size: cover;
 }
 
 .fourth-slide {
-    background-image: url("/home/ameleroparra/Settima/settima/src/assets/followSlide.png");
+    background-image: url("../../../src/assets/followSlide.png");
     background-size: cover;
 }
 
 .fifth-slide {
-    background-image: url("/home/ameleroparra/Settima/settima/src/assets/userSlide.png");
+    background-image: url("../../../src/assets/userSlide.png");
     background-size: cover;
 }
 
