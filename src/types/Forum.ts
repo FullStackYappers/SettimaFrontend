@@ -40,6 +40,7 @@ export interface DiscussionComment {
   likes: Likes[];
   likes_count: number;
   replies_count: number;
+  user_liked: boolean;
 }
 
 export interface CommentReply {
@@ -52,6 +53,7 @@ export interface CommentReply {
   user: User;
   likes: Likes[];
   likes_count: number;
+  user_liked: boolean;
 }
 
 export interface Likes {
