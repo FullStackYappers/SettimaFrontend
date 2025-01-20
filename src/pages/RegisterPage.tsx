@@ -63,7 +63,7 @@ const RegisterPage = () => {
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
-                            className="input-field bg-bgcolor rounded-custom p-4"/>
+                            className="input-field bg-bgcolor rounded-custom p-4 font-outfit text-big"/>
                     </div>
                     <div className="usernameInput flex flex-col items-center">
                         <h1 className="text-big m0 font-outfit text-primary font-medium ml-20 w-full text-left">
@@ -74,7 +74,7 @@ const RegisterPage = () => {
                             name="username"
                             value={formData.username}
                             onChange={handleChange}
-                            className="input-field bg-bgcolor rounded-custom p-4"
+                            className="input-field bg-bgcolor rounded-custom p-4 font-outfit text-big"
                         />
                     </div>
 
@@ -87,7 +87,7 @@ const RegisterPage = () => {
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
-                            className="input-field bg-bgcolor rounded-custom p-4"
+                            className="input-field bg-bgcolor rounded-custom p-4 font-outfit text-big"
                         />
                     </div>
 
@@ -100,7 +100,7 @@ const RegisterPage = () => {
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
-                            className="input-field w-full h-[60px] bg-bgcolor rounded-custom p-4"
+                            className="input-field w-full h-[60px] bg-bgcolor rounded-custom p-4 font-outfit text-big"
                         />
                     </div>
 
@@ -113,7 +113,7 @@ const RegisterPage = () => {
                             name="password_confirmation"
                             value={formData.password_confirmation}
                             onChange={handleChange}
-                            className="input-field w-full h-[60px] bg-bgcolor rounded-custom p-4"
+                            className="input-field w-full h-[60px] bg-bgcolor rounded-custom p-4 font-outfit text-big"
                         />
                     </div>
 

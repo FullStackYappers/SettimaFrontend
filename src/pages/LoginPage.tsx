@@ -60,7 +60,7 @@ const LoginPage: React.FC = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="input-field w-full h-20 bg-bgcolor rounded-custom p-2"
+              className="input-field w-full h-20 bg-bgcolor rounded-custom p-2 font-outfit text-big"
             />
           </div>
 
@@ -72,7 +72,7 @@ const LoginPage: React.FC = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="input-field w-full h-20 bg-bgcolor rounded-custom p-2"
+              className="input-field w-full h-20 bg-bgcolor rounded-custom p-2 font-outfit text-big"
             />
             <h1 className="text-small m0 font-outfit text-primary font-medium text-right p-2">
               Forgot password?
