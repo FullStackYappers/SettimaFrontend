@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import "./css/RegisterPage.css";
 import nameWhite from "../assets/nameWhite.svg";
 import { registerUser } from '../services/api/RegisterApi';
+import {useNavigate} from "react-router-dom";
 
 
 const RegisterPage = () => {
     const [formData, setFormData] = useState({
+        name: '',
         username: '',
         email: '',
         password: '',
@@ -14,6 +16,7 @@ const RegisterPage = () => {
 
     const [error, setError] = useState<string | null>(null);
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
@@ -30,8 +33,10 @@ const RegisterPage = () => {
         try {
             await registerUser(formData);
             setSuccessMessage("Registration successful!");
+            navigate("/login");
             // Optionally clear the form
             setFormData({
+                name: '',
                 username: '',
                 email: '',
                 password: '',
@@ -51,9 +56,18 @@ const RegisterPage = () => {
             <div className="register-grid-container rounded-custom bg-accent">
 
                 <form onSubmit={handleSubmit} className="register-form">
-                    <div className="usernameInput">
-                        <h1 className="text-big m0 font-outfit text-primary font-medium">
-                            Username
+                    <div className="fullName flex flex-col items-center">
+                        <h1 className="text-big text-primary font-bold font-outfit ml-20 w-full text-left mt-2">Name</h1>
+                        <input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            className="input-field bg-bgcolor rounded-custom p-4"/>
+                    </div>
+                    <div className="usernameInput flex flex-col items-center">
+                        <h1 className="text-big m0 font-outfit text-primary font-medium ml-20 w-full text-left">
+                            Username *
                         </h1>
                         <input
                             type="text"
@@ -64,9 +78,9 @@ const RegisterPage = () => {
                         />
                     </div>
 
-                    <div className="emailInput">
-                        <h1 className="text-big m0 font-outfit text-primary font-medium">
-                            Email
+                    <div className="emailInput flex flex-col items-center">
+                        <h1 className="text-big m0 font-outfit text-primary font-medium ml-20 w-full text-left">
+                            Email *
                         </h1>
                         <input
                             type="email"
@@ -77,9 +91,9 @@ const RegisterPage = () => {
                         />
                     </div>
 
-                    <div className="passwordInput">
-                        <h1 className="text-big m0 font-outfit text-primary font-medium">
-                            Password
+                    <div className="passwordInput flex flex-col items-center">
+                        <h1 className="text-big m0 font-outfit text-primary font-medium ml-20 w-full text-left">
+                            Password *
                         </h1>
                         <input
                             type="password"
@@ -90,9 +104,9 @@ const RegisterPage = () => {
                         />
                     </div>
 
-                    <div className="passwordConfirmInput">
-                        <h1 className="text-big m0 font-outfit text-primary font-medium">
-                            Confirm Password
+                    <div className="passwordConfirmInput flex flex-col items-center">
+                        <h1 className="text-big m0 font-outfit text-primary font-medium ml-20 w-full text-left">
+                            Confirm Password *
                         </h1>
                         <input
                             type="password"
@@ -124,11 +138,6 @@ const RegisterPage = () => {
                         Start to share your favourite moments <br/>
                         <u> one scene at a time.</u>
                     </h1>
-                    <div className="bg-accent w-11/12 h-[60]">
-                        <h1 className="text-big text-primary font-bold font-outfit">Tell us about yourself</h1>
-                        <input className="input-field bg-bgcolor rounded-custom p-4"/>
-
-                    </div>
                 </div>
             </div>
         </div>
