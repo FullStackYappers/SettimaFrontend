@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Personalized from "./Personalized";
 import ActivityTable from "./ActivityTable";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 interface WatchedMovies {
@@ -22,11 +22,18 @@ interface Movie {
   poster_path: string;
 }
 
+interface Review {
+  movie: Movie;
+  review: string;
+}
+
 const TabContent = () => {
   const authToken = localStorage.getItem("auth_token");
   const [activeTab, setActiveTab] = useState<string>("tab1");
   const [watchedMovies, setWatchedMovies] = useState<WatchedMovies[]>([]);
   const [likedMovies, setLikedMovies] = useState<FavoriteMovies[]>([]);
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (authToken) {
@@ -58,14 +65,33 @@ const TabContent = () => {
         }
       };
 
+      const fetchReview = async () => {
+        try {
+          const response = await axios.get(`/api/user/ratings`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+            },
+          });
+
+          const reviews = response.data.data;
+
+          console.log(reviews);
+
+          setReviews(reviews);
+        } catch (error) {
+          console.error("Error fetching user ratings:", error);
+        }
+      };
+
       fetchWatchedMovies();
       fetchLikedMovies();
+      fetchReview();
     }
   }, []);
 
   return (
     <div className="tab-section-left overflow-visible rounded-custom w-full">
-      <div className="flex justify-between gap-1 font-semibold">
+      <div className="flex justify-evenly w-full font-semibold">
         <button
           className={`rounded-custom hover:text-accent2 text-2xl ${
             activeTab === "tab1" ? "text-accent2" : ""
@@ -170,7 +196,38 @@ const TabContent = () => {
         )}
         {activeTab === "tab5" && (
           <div id="tab5" className="tab-content block mb-4">
-            Stuff will come / tba
+            <div className="grid gap-4 mt-4">
+              {reviews.map((review, index) => (
+                <div
+                  key={index}
+                  className="p-8 bg-secondary mx-8 rounded-custom"
+                >
+                  <div className="flex flex-row">
+                    <img
+                      src={`http://localhost:8000/${review.movie.poster_path}`}
+                      alt={review.movie.title}
+                      className="h-[150px] rounded-[10px]"
+                      onClick={() => navigate(`/movie/${review.movie.id}`)}
+                    />
+                    <div className="mx-8">
+                      <Link to={`/movie/${review.movie.id}`}>
+                        <h2 className="m-0 font-semibold text-2xl text-accent2">
+                          {review.movie.title}
+                        </h2>
+                      </Link>
+                      <p className="py-4 text-base m-0 w-full">
+                        {review.review.split("\n").map((line, index) => (
+                          <React.Fragment key={index}>
+                            {line}
+                            <br />
+                          </React.Fragment>
+                        ))}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
