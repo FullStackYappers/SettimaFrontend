@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../../../context/AuthContext";
 import { fetchUserData } from "../../../../services/api/UserApi";
 import { loginUser } from "../../../../services/api/LoginApi";
+import LoginModal from "../../../ForumPageComponents/LoginModal";
 
 interface WatchedProps {
   watched: boolean;
@@ -343,71 +344,11 @@ const RatingTable = ({
         </div>
       </dialog>
 
-      <dialog id="login_modal" className="modal">
-        <div className="modal-box w-[30vw] max-w-none h-[60vh] max-h-none bg-base-100 relative rounded-custom">
-          <form method="dialog">
-            <button
-              className="btn btn-sm btn-circle btn-ghost absolute right-3 top-3"
-              onClick={handleModal}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-primary absolute search-close"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2.5"
-                  d="M6 18 18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </form>
-
-          <div className="flex flex-col h-full justify-center items-center">
-            <h2 className="text-4xl font-semibold font-outfit mb-4">
-              Login to Rate
-            </h2>
-
-            <form className="w-full px-4" onSubmit={handleLogin}>
-              <input
-                type="email"
-                placeholder="Email"
-                className="input w-full my-4 bg-accent rounded-custom"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                className="input w-full my-4 bg-accent rounded-custom"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <button
-                type="submit"
-                className="btn btn-accent rounded-custom text-primary font-bold text-2xl w-full mt-4"
-                onClick={window.location.reload}
-              >
-                Login
-              </button>
-              <Link to={"/register"}>
-                <h1 className="m0 font-outfit text-accent2 font-medium p-2 flex items-center justify-center">
-                  Not registered? Create an account
-                </h1>
-              </Link>
-            </form>
-            {error && (
-              <p className="text-red-500 text-center mt-4"> {error} </p>
-            )}
-          </div>
-        </div>
-      </dialog>
+      <LoginModal
+        isOpen={modalState === "login"}
+        onClose={() => setModalState("none")}
+        context={"Rate"}
+      />
     </>
   );
 };

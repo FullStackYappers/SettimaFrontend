@@ -40,7 +40,7 @@ const LoginModal = ({
 
   return (
     <dialog open={isOpen} className="modal">
-      <div className="modal-box w-[30vw] max-w-none h-[60vh] max-h-none bg-base-100 relative rounded-custom">
+      <div className="modal-box w-[30vw] max-w-none h-[75vh] max-h-none bg-base-100 relative rounded-custom">
         <button
           className="btn btn-sm btn-circle btn-ghost absolute right-6 top-6"
           onClick={onClose}

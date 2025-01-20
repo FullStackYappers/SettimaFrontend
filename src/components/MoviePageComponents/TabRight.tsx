@@ -2,6 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import LoginModal from "../ForumPageComponents/LoginModal";
+import { useAuth } from "../../context/AuthContext.tsx";
+
 interface Discussion {
   id: number;
   title: string;
@@ -14,6 +17,52 @@ const TabRight = () => {
   const { movieId } = useParams();
   const [discussions, setDiscussions] = useState<Discussion[]>([]);
   const [review, setReview] = useState("");
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const { isLoggedIn, user } = useAuth();
+  const username = user?.username;
+  const [isDiscussionModalOpen, setIsDiscussionModalOpen] = useState(false);
+  const [discussion, setDiscussion] = useState("");
+  const [title, setTitle] = useState("");
+
+  const handleModal = () => {
+    if (isLoggedIn) {
+      setIsDiscussionModalOpen(!isDiscussionModalOpen);
+    } else {
+      setIsLoginModalOpen(!isLoginModalOpen);
+    }
+  };
+
+  const addDiscussion = async (content: string) => {
+    const authToken = localStorage.getItem("auth_token");
+    if (!authToken) {
+      console.error("User not authenticated");
+      return;
+    }
+
+    const payload = { content };
+
+    try {
+      const response = await axios.post(
+        `/api/movies/${movieId}/discussions`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+
+      console.log("Discussion Added: ", response.data);
+    } catch (error) {
+      console.error("Error adding discussion: ", error);
+    }
+  };
+
+  const handleDiscussionSubmission = () => {
+    if (discussion.trim() || discussion === "") {
+      addDiscussion(discussion.trim());
+    }
+  };
 
   useEffect(() => {
     const fetchDiscussion = async () => {
@@ -58,64 +107,92 @@ const TabRight = () => {
     fetchReview();
   }, [movieId]);
 
+  useEffect(() => {
+    const discussionModal = document.getElementById(
+      "discussion_modal"
+    ) as HTMLDialogElement;
+
+    const loginModal = document.getElementById(
+      "login_modal"
+    ) as HTMLDialogElement;
+
+    if (discussionModal) {
+      if (isDiscussionModalOpen) {
+        discussionModal.showModal();
+      } else {
+        discussionModal.close();
+      }
+    }
+
+    if (loginModal) {
+      if (isLoginModalOpen) {
+        loginModal.showModal();
+      } else {
+        loginModal.close();
+      }
+    }
+  }, [isDiscussionModalOpen, isLoginModalOpen]);
+
   const getDiscussions = (): JSX.Element[] => {
     return discussions.length > 0
       ? discussions.map((discussion, index) => (
-          <div
-            key={index}
-            className="discussion-item bg-base-100 p-4 gap-10 rounded-custom flex flex-row w-full items-center"
-          >
-            <div className="grow text hover:text-accent2">
-              <Link to={`/forum/${discussion.id}`}>
-                <p className="text-xl font-semibold flex-1 m-0 pl-10">
-                  {discussion.title}
-                </p>
-              </Link>
-            </div>
-
-            <div className="pr-20 flex flex-col gap-2 items-end">
-              <div className="flex items-center gap-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                  />
-                </svg>
-                <span className="block">{discussion.views}</span>
+          <>
+            <div
+              key={index}
+              className="discussion-item bg-base-100 p-4 gap-10 rounded-custom flex flex-row w-full items-center"
+            >
+              <div className="grow text hover:text-accent2">
+                <Link to={`/forum/${discussion.id}`}>
+                  <p className="text-xl font-semibold flex-1 m-0 pl-10">
+                    {discussion.title}
+                  </p>
+                </Link>
               </div>
 
-              <div className="flex items-center gap-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.068.157 2.148.279 3.238.364.466.037.893.281 1.153.671L12 21l2.652-3.978c.26-.39.687-.634 1.153-.67 1.09-.086 2.17-.208 3.238-.365 1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"
-                  />
-                </svg>
-                <span>{discussion.comments_count}</span>
+              <div className="pr-20 flex flex-col gap-2 items-end">
+                <div className="flex items-center gap-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                    />
+                  </svg>
+                  <span className="block">{discussion.views}</span>
+                </div>
+
+                <div className="flex items-center gap-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    className="size-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.068.157 2.148.279 3.238.364.466.037.893.281 1.153.671L12 21l2.652-3.978c.26-.39.687-.634 1.153-.67 1.09-.086 2.17-.208 3.238-.365 1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"
+                    />
+                  </svg>
+                  <span>{discussion.comments_count}</span>
+                </div>
               </div>
             </div>
-          </div>
+          </>
         ))
       : [<p key="no-discussions">No discussions available</p>];
   };
@@ -176,7 +253,97 @@ const TabRight = () => {
           <div id="tab3" className="tab-content block mb-4">
             <div className=" flex justify-center items-center">
               <div className="discussions-container w-[90%] flex flex-col justify-center gap-4">
+                <div className="add-Discussion-btn flex justify-center">
+                  <button
+                    className="btn btn-primary rounded-custom bottom-3 text-lg mb-4"
+                    onClick={handleModal}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      className="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 4.5v15m7.5-7.5h-15"
+                      />
+                    </svg>
+                    Create Discussion
+                  </button>
+                </div>
                 {getDiscussions()}
+                <LoginModal
+                  isOpen={isLoginModalOpen}
+                  onClose={() => setIsLoginModalOpen(false)}
+                  context={"Create Discussion"}
+                />
+                <dialog id="discussion_modal" className="modal rounded-custom">
+                  <div className="modal-box w-[75vw] max-w-none h-[75vh] max-h-none bg-base-100 relative">
+                    <form method="dialog">
+                      <div>
+                        <button
+                          className="btn btn-sm btn-circle btn-ghost absolute right-3 top-3"
+                          onClick={handleModal}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6 text-primary absolute search-close"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2.5"
+                              d="M6 18 18 6M6 6l12 12"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    </form>
+                    <div className="flex flex-col h-full">
+                      <h2 className="text-4xl font-semibold font-outfit ml-4 mb-4">
+                        Add Discussion as {username}
+                      </h2>
+                      <div className="add-title-textarea mb-2 mx-4 mt-4">
+                        <span> Title </span>
+                        <textarea
+                          className="textarea placeholder-primary placeholder-opacity-50 bg-secondary w-full h-[10%] text-xl overflow-auto resize-none"
+                          placeholder="Write your discussion title here..."
+                          value={title}
+                          onChange={(e) => setTitle(e.target.value)}
+                        />
+                      </div>
+                      <div className="flex-grow mb-4 mx-4">
+                        <span>Content</span>
+                        <textarea
+                          className="textarea placeholder-primary placeholder-opacity-50 bg-secondary w-full h-[80%] text-xl overflow-auto resize-none"
+                          placeholder="Write your discussion content here..."
+                          value={discussion}
+                          onChange={(e) => setDiscussion(e.target.value)}
+                        />
+                      </div>
+
+                      <div className="flex justify-end">
+                        <button
+                          className="btn btn-ghost bottom-3 right-3 absolute rounded-custom"
+                          onClick={() => {
+                            handleDiscussionSubmission();
+                            window.location.reload();
+                          }}
+                        >
+                          {" "}
+                          Submit{" "}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </dialog>
               </div>
             </div>
           </div>
