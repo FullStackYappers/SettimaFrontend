@@ -24,6 +24,7 @@ import MovieGenrePage from "./pages/MovieGenrePage.tsx";
 //react-router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ArtSortedPage from "./pages/ArtSortedPage.tsx";
+import ReviewPage from "./pages/ReviewPage.tsx";
 
 function App() {
   useEffect(() => {
@@ -53,6 +54,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/movie/:movieId" element={<MoviePage />} />
+              <Route path="/movies/:movieId/reviews" element={<ReviewPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/user/:username" element={<ProfilePage />}></Route>
               <Route path={"/register"} element={<RegisterPage />}></Route>

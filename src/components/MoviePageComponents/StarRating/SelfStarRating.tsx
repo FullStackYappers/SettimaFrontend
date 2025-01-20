@@ -36,7 +36,8 @@ const StarRating: React.FC<StarRatingProps> = ({
           }
         );
         if (response.data && response.data.rating !== undefined) {
-          setRating(response.data.rating || 0);
+          setRating(response.data.rating / 2 || 0);
+          console.log(rating);
         }
       } catch (error) {
         console.error("Error fetching ratings:", error);
@@ -51,7 +52,7 @@ const StarRating: React.FC<StarRatingProps> = ({
     const authToken = localStorage.getItem("auth_token");
     if (!authToken) return;
     try {
-      const starValue = value / 2;
+      const starValue = value;
       const payload = { [backendCategory]: starValue };
       console.log(payload);
 
@@ -65,7 +66,7 @@ const StarRating: React.FC<StarRatingProps> = ({
           withCredentials: true,
         }
       );
-      setRating(starValue);
+      setRating(starValue / 2);
       setChecked(false);
       console.log(`Rating for ${category} saved successfully:`, response.data);
     } catch (error) {

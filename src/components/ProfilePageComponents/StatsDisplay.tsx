@@ -57,8 +57,10 @@ const StatsDisplay = () => {
               (sum, category) => sum + Number(movieRatings[category] / 2 || 0),
               0
             );
-            return total / 6;
+            return total / 12;
           });
+
+          console.log(averages);
 
           const mean = Number(
             (

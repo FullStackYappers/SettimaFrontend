@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import LoginModal from "../ForumPageComponents/LoginModal";
 import { useAuth } from "../../context/AuthContext.tsx";
+import ReviewTab from "./ReviewTab.tsx";
 
 interface Discussion {
   id: number;
@@ -16,11 +17,11 @@ const TabRight = () => {
   const [activeTab, setActiveTab] = useState<string>("tab1");
   const { movieId } = useParams();
   const [discussions, setDiscussions] = useState<Discussion[]>([]);
-  const [review, setReview] = useState("");
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const { isLoggedIn, user } = useAuth();
   const username = user?.username;
   const [isDiscussionModalOpen, setIsDiscussionModalOpen] = useState(false);
+
   const [discussion, setDiscussion] = useState("");
   const [title, setTitle] = useState("");
 
@@ -80,31 +81,7 @@ const TabRight = () => {
         console.error("Error fetching data:", error.message as Error);
       }
     };
-
-    const fetchReview = async () => {
-      try {
-        const response = await axios.get(`/api/user/ratings`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
-          },
-        });
-
-        const ratings = response.data.data;
-
-        const movieRatings = ratings.find(
-          (rating: any) => rating.movie_id === Number(movieId)
-        );
-
-        if (movieRatings.review) {
-          setReview(movieRatings.review);
-        }
-      } catch (error) {
-        console.error("Error fetching user ratings:", error);
-      }
-    };
-
     fetchDiscussion();
-    fetchReview();
   }, [movieId]);
 
   useEffect(() => {
@@ -350,28 +327,7 @@ const TabRight = () => {
         )}
         {activeTab === "tab4" && (
           <div id="tab4" className="tab-content block mb-4">
-            <div className="grid gap-4">
-              {review && (
-                <>
-                  <p className="text-2xl">Your Review</p>
-                  <div className="py-4 bg-base-100 mx-8 rounded-custom">
-                    <p>{review}</p>
-                  </div>
-                </>
-              )}
-              <div className="grid gap-4">
-                <p className="text-2xl">Other Reviews</p>
-                <div className="py-4 bg-base-100 mx-8 rounded-custom">
-                  <p>Review 1</p>
-                </div>
-                <div className="py-4 bg-base-100 mx-8 rounded-custom">
-                  <p>Review 2</p>
-                </div>
-                <div className="py-4 bg-base-100 mx-8 rounded-custom">
-                  <p>Review 3</p>
-                </div>
-              </div>
-            </div>
+            <ReviewTab />
           </div>
         )}
       </div>

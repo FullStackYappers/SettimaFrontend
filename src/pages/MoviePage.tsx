@@ -25,45 +25,52 @@ const MoviePage = () => {
   const [error, setError] = useState<string | null>(null);
   const [average, setAverage] = useState(0);
   const [review, setReview] = useState("");
+  const authToken = localStorage.getItem("auth_token");
 
   const fetchRatings = async () => {
     try {
-      const response = await axios.get(`/api/user/ratings`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
-        },
-      });
+      if (authToken) {
+        const response = await axios.get(`/api/user/ratings`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+          },
+        });
 
-      const ratings = response.data.data;
+        const ratings = response.data.data;
 
-      const movieRatings = ratings.find(
-        (rating: any) => rating.movie_id === Number(movieId)
-      );
-
-      if (movieRatings) {
-        const categories = [
-          "acting",
-          "plot",
-          "music",
-          "costume_design",
-          "cinematography",
-          "editing",
-        ];
-
-        const total = categories.reduce(
-          (sum, category) => sum + Number(movieRatings[category] || 0),
-          0
+        const movieRatings = ratings.find(
+          (rating: any) => rating.movie_id === Number(movieId)
         );
-        const avg = total / 6;
 
-        setAverage(Math.round((avg * 2) / 2));
+        if (movieRatings) {
+          const categories = [
+            "acting",
+            "plot",
+            "music",
+            "costume_design",
+            "cinematography",
+            "editing",
+          ];
 
-        if (movieRatings.review) {
-          setReview(movieRatings.review);
+          const total = categories.reduce(
+            (sum, category) => sum + Number(movieRatings[category] || 0),
+            0
+          );
+          const avg = total / 6;
+
+          if (!((avg * 10) % 5 == 0)) {
+            setAverage(Math.round(avg / 2));
+          } else {
+            setAverage(avg / 2);
+          }
+
+          if (movieRatings.review) {
+            setReview(movieRatings.review);
+          }
+        } else {
+          setAverage(0);
+          setReview("");
         }
-      } else {
-        setAverage(0);
-        setReview("");
       }
     } catch (error) {
       console.error("Error fetching user ratings:", error);
@@ -121,7 +128,7 @@ const MoviePage = () => {
         </div>
         <Genres />
         <div className="description m0 text-lg">{movie.description}</div>
-        <Boxes average={average} />
+        <Boxes average={average} movieId={movieId} />
         <WatchedLikedContainer
           movieId={movieId}
           handleAverage={fetchRatings}
