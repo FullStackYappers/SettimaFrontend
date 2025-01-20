@@ -1,3 +1,8 @@
+.html, body {
+    min-width: 1020px;
+}
+
+
 .register-grid-container {
     margin: 0;
     padding: 0;
@@ -8,7 +13,7 @@
     grid-template-columns: 1fr 2fr;
     grid-template-rows: auto;
     grid-template-areas:
-    "logo backgroundLogin"
+    "fullName backgroundLogin"
     "usernameInput backgroundLogin"
     "emailInput backgroundLogin"
     "passwordInput backgroundLogin"
@@ -20,8 +25,8 @@
     display: contents;
 }
 
-.logo {
-    grid-area: logo;
+.fullName {
+    grid-area: fullName;
 }
 
 .backgroundLogin {
