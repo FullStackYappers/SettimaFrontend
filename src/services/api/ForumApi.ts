@@ -19,7 +19,7 @@ export const fetchDiscussionDetails = async (discussionId: string) => {
     } catch (error) {
       console.error("Error fetching discussion details:", error);
     }
-  };
+};
 
   export const fetchDiscussionLoggedIn = async (discussionId: string) => {
     try {
@@ -39,4 +39,14 @@ export const fetchDiscussionDetails = async (discussionId: string) => {
     } catch (error) {
         console.error("Error fetching discussion details:", error);
     }
-  }
+};
+
+  export const searchTags = async (query: string) => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/tags?search=${encodeURIComponent(query)}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error searching tags:', error);
+        throw error;
+    }
+};

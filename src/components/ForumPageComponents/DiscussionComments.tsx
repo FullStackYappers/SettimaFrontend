@@ -332,7 +332,7 @@ const DiscussionComments = ({
 
                         <div className="flex justify-end">
                           <button
-                            className="btn btn-ghost bottom-3 right-3 absolute rounded-custom"
+                            className="btn btn-ghost bottom-3 right-3 absolute rounded-custom text-xl"
                             onClick={() => {
                               handleReplySubmission(comment.id);
                               window.location.reload();
@@ -364,7 +364,7 @@ const DiscussionComments = ({
   const getReplies = (replies: CommentReply[]): JSX.Element[] => {
     return replies.length > 0
       ? replies.map((reply: CommentReply) => (
-          <div className="flex py-4 text text-base w-[80%]">
+          <div className="flex py-4 text text-xl w-[80%]">
             <div key={reply.id} className="grow">
               <div className="comment-reply w-full bg-accent rounded-custom my-2 p-4">
                 <div className="flex flex-row">

@@ -159,7 +159,7 @@ const DiscussionMidSection = ({
 
             <div className="flex justify-end">
               <button
-                className="btn btn-ghost bottom-3 right-3 absolute rounded-custom"
+                className="btn btn-ghost bottom-3 right-3 absolute rounded-custom text-xl"
                 onClick={() => {
                   handleCommentSubmission();
                   window.location.reload();
