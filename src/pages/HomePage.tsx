@@ -4,10 +4,14 @@ import Navbar from "../components/Navbar/Navbar";
 import MovieCarousel from "../components/HomePageComponents/MovieCarousel";
 import GenreMovieCarousel from "../components/HomePageComponents/GenreMovieCarousel";
 import LatestMovieCarousel from "../components/HomePageComponents/LatestMovieCarousel";
+import LandingPage from "../components/HomePageComponents/LandingPage";
 
 import { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 const HomePage = () => {
+  const { user } = useAuth();
+
   const randGenre = [
     "Action",
     "Crime",
@@ -39,6 +43,7 @@ const HomePage = () => {
   return (
     <>
       <Navbar />
+      {!user && <LandingPage />}
       <div className="home-grid-container grid grid-auto-rows mx-4 mt-8 text-primary">
         <div className="whats-new">
           <h2 className="font-outfit text-3xl m-0 p-0">What's New</h2>

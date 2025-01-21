@@ -1,18 +1,13 @@
-.html, body {
-    min-width: 1020px;
-}
-
-
 .register-grid-container {
-    margin: 0;
-    padding: 0;
-    height: 90vh;
-    width: 95vw;
-    overflow-y: auto;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-rows: auto;
-    grid-template-areas:
+  margin: 0;
+  padding: 0;
+  height: 90vh;
+  width: 95vw;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto;
+  grid-template-areas:
     "fullName backgroundLogin"
     "usernameInput backgroundLogin"
     "emailInput backgroundLogin"
@@ -22,38 +17,38 @@
 }
 
 .register-form {
-    display: contents;
+  display: contents;
 }
 
 .fullName {
-    grid-area: fullName;
+  grid-area: fullName;
 }
 
 .backgroundLogin {
-    grid-area: backgroundLogin;
-    background-image: url("../../../src/assets/background.png");
-    background-color: rgba(0, 0, 0, 0.7);
-    background-blend-mode: darken;
-    background-size: cover;
-    background-position: center;
+  grid-area: backgroundLogin;
+  background-image: url("../../../src/assets/background.png");
+  background-color: rgba(0, 0, 0, 0.7);
+  background-blend-mode: darken;
+  background-size: cover;
+  background-position: center;
 }
 
 .usernameInput {
-    grid-area: usernameInput;
+  grid-area: usernameInput;
 }
 
 .emailInput {
-    grid-area: emailInput;
+  grid-area: emailInput;
 }
 
 .passwordInput {
-    grid-area: passwordInput;
+  grid-area: passwordInput;
 }
 
 .passwordConfirmInput {
-    grid-area: passwordConfirmInput;
+  grid-area: passwordConfirmInput;
 }
 
 .register {
-    grid-area: register;
+  grid-area: register;
 }
