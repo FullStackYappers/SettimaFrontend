@@ -72,3 +72,147 @@
 .text-small {
   font-size: 2vh;
 }
+
+@media (max-width: 1020px) {
+  .login-grid-container {
+    margin: auto;
+    padding: 10px;
+    width: 90%;
+    height: 90%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 90px auto;
+    grid-template-areas:
+      "logo"
+      "usernameInput"
+      "passwordInput"
+      "login";
+  }
+
+  .login-form {
+    display: contents;
+  }
+
+  .logo {
+    grid-area: logo;
+    width: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo img {
+    margin: 0;
+    margin-top: 32px;
+  }
+
+  .backgroundLogin {
+    display: none;
+  }
+
+  .usernameInput {
+    grid-area: usernameInput;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .passwordInput {
+    grid-area: passwordInput;
+  }
+
+  .login {
+    grid-area: login;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .input-field {
+    width: 100%;
+    height: 8vh;
+    margin: 0;
+  }
+
+  .text-giant {
+    font-size: 5vh;
+  }
+
+  .text-big {
+    font-size: 3vh;
+  }
+
+  .text-small {
+    font-size: 2vh;
+  }
+}
+
+@media (max-width: 430px) {
+  .login-grid-container {
+    margin: auto;
+    padding: 0;
+    width: 90%;
+    height: 90%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 90px auto;
+    grid-template-areas:
+      "logo"
+      "usernameInput"
+      "passwordInput"
+      "login";
+  }
+
+  .login-form {
+    display: contents;
+  }
+
+  .logo {
+    grid-area: logo;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo img {
+    width: 150px;
+  }
+
+  .backgroundLogin {
+    display: none;
+  }
+
+  .usernameInput {
+    grid-area: usernameInput;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 12px;
+  }
+
+  .passwordInput {
+    grid-area: passwordInput;
+    margin: 12px;
+  }
+
+  .login {
+    grid-area: login;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .input-field {
+    width: 100%;
+    height: 8vh;
+    padding: 0;
+    margin: 0;
+  }
+
+  .text-big {
+    font-size: 5vw;
+  }
+
+  .text-small {
+    font-size: 4vw;
+  }
+}
