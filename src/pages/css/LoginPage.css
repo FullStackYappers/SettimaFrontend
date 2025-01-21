@@ -6,7 +6,7 @@
   overflow-y: auto;
   display: grid;
   grid-template-columns: 1fr 2fr;
-  grid-template-rows: 10vh auto;
+  grid-template-rows: auto;
   grid-template-areas:
     "logo backgroundLogin"
     "usernameInput backgroundLogin"

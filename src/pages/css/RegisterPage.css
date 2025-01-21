@@ -52,3 +52,60 @@
 .register {
   grid-area: register;
 }
+
+@media (max-width: 1020px) {
+  .register-grid-container {
+    margin: auto;
+    padding: 10px;
+    width: 90%;
+    height: 90%;
+    display: grid;
+    overflow-x: hidden;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "fullName"
+      "usernameInput"
+      "emailInput"
+      "passwordInput"
+      "passwordConfirmInput"
+      "register";
+  }
+
+  .register-form {
+    display: contents;
+  }
+
+  .fullName {
+    grid-area: fullName;
+  }
+
+  .backgroundLogin {
+    grid-area: backgroundLogin;
+    background-image: url("../../../src/assets/background.png");
+    background-color: rgba(0, 0, 0, 0.7);
+    background-blend-mode: darken;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .usernameInput {
+    grid-area: usernameInput;
+  }
+
+  .emailInput {
+    grid-area: emailInput;
+  }
+
+  .passwordInput {
+    grid-area: passwordInput;
+  }
+
+  .passwordConfirmInput {
+    grid-area: passwordConfirmInput;
+  }
+
+  .register {
+    grid-area: register;
+  }
+}
