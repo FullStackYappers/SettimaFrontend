@@ -20,10 +20,6 @@
   display: contents;
 }
 
-.fullName {
-  grid-area: fullName;
-}
-
 .backgroundLogin {
   grid-area: backgroundLogin;
   background-image: url("../../../src/assets/background.png");
@@ -33,24 +29,34 @@
   background-position: center;
 }
 
+.fullName {
+  grid-area: fullName;
+  margin: 0% 5% 0% 5%;
+}
+
 .usernameInput {
   grid-area: usernameInput;
+  margin: 0% 5% 0% 5%;
 }
 
 .emailInput {
   grid-area: emailInput;
+  margin: 0% 5% 0% 5%;
 }
 
 .passwordInput {
   grid-area: passwordInput;
+  margin: 0% 5% 0% 5%;
 }
 
 .passwordConfirmInput {
   grid-area: passwordConfirmInput;
+  margin: 0% 5% 0% 5%;
 }
 
 .register {
   grid-area: register;
+  margin: 0% 5% 0% 5%;
 }
 
 @media (max-width: 1020px) {
@@ -76,10 +82,6 @@
     display: contents;
   }
 
-  .fullName {
-    grid-area: fullName;
-  }
-
   .backgroundLogin {
     grid-area: backgroundLogin;
     background-image: url("../../../src/assets/background.png");
@@ -87,6 +89,10 @@
     background-blend-mode: darken;
     background-size: cover;
     background-position: center;
+  }
+
+  .fullName {
+    grid-area: fullName;
   }
 
   .usernameInput {

@@ -57,7 +57,7 @@ const RegisterPage = () => {
 
                 <form onSubmit={handleSubmit} className="register-form">
                     <div className="fullName flex flex-col items-center">
-                        <h1 className="text-big text-primary font-bold font-outfit ml-20 w-full text-left mt-2">Name</h1>
+                        <h1 className="text-big text-primary font-bold font-outfit w-full text-left">Name</h1>
                         <input
                             type="text"
                             name="name"
@@ -66,7 +66,7 @@ const RegisterPage = () => {
                             className="input-field bg-bgcolor rounded-custom p-4 font-outfit text-big"/>
                     </div>
                     <div className="usernameInput flex flex-col items-center">
-                        <h1 className="text-big m0 font-outfit text-primary font-medium ml-20 w-full text-left">
+                        <h1 className="text-big m0 font-outfit text-primary font-medium w-full text-left">
                             Username *
                         </h1>
                         <input
@@ -79,7 +79,7 @@ const RegisterPage = () => {
                     </div>
 
                     <div className="emailInput flex flex-col items-center">
-                        <h1 className="text-big m0 font-outfit text-primary font-medium ml-20 w-full text-left">
+                        <h1 className="text-big m0 font-outfit text-primary font-medium w-full text-left">
                             Email *
                         </h1>
                         <input
@@ -92,7 +92,7 @@ const RegisterPage = () => {
                     </div>
 
                     <div className="passwordInput flex flex-col items-center">
-                        <h1 className="text-big m0 font-outfit text-primary font-medium ml-20 w-full text-left">
+                        <h1 className="text-big m0 font-outfit text-primary font-medium w-full text-left">
                             Password *
                         </h1>
                         <input
@@ -100,12 +100,12 @@ const RegisterPage = () => {
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
-                            className="input-field w-full h-[60px] bg-bgcolor rounded-custom p-4 font-outfit text-big"
+                            className="input-field bg-bgcolor rounded-custom p-4 font-outfit text-big"
                         />
                     </div>
 
                     <div className="passwordConfirmInput flex flex-col items-center">
-                        <h1 className="text-big m0 font-outfit text-primary font-medium ml-20 w-full text-left">
+                        <h1 className="text-big m0 font-outfit text-primary font-medium w-full text-left">
                             Confirm Password *
                         </h1>
                         <input
@@ -113,7 +113,7 @@ const RegisterPage = () => {
                             name="password_confirmation"
                             value={formData.password_confirmation}
                             onChange={handleChange}
-                            className="input-field w-full h-[60px] bg-bgcolor rounded-custom p-4 font-outfit text-big"
+                            className="input-field bg-bgcolor rounded-custom p-4 font-outfit text-big"
                         />
                     </div>
 
