@@ -2,10 +2,7 @@ import "./RatingTable.css";
 import StarRating from "../../StarRating/SelfStarRating";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { useAuth } from "../../../../context/AuthContext";
-import { fetchUserData } from "../../../../services/api/UserApi";
-import { loginUser } from "../../../../services/api/LoginApi";
 import LoginModal from "../../../ForumPageComponents/LoginModal";
 
 interface WatchedProps {
@@ -62,6 +59,19 @@ const RatingTable = ({
     }
   };
 
+  const handleRemoveFromList = async (movieId: string) => {
+    try {
+      const response = await axios.delete(`/api/movies/${movieId}/notwatched`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+        },
+      });
+      console.log("Movie removed from watched list:", response.data);
+    } catch (error) {
+      console.error("Error removing movie from watched list:", error);
+    }
+  };
+
   const submitReview = async (movieId: string, review: string) => {
     const authToken = localStorage.getItem("auth_token");
     if (!authToken) {
@@ -95,14 +105,10 @@ const RatingTable = ({
   };
 
   //Modal stuff
-  const { isLoggedIn, login } = useAuth();
+  const { isLoggedIn } = useAuth();
   const [modalState, setModalState] = useState<"none" | "login" | "main">(
     "none"
   );
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
   const [step, setStep] = useState(1);
   const nextStep = () => setStep(step + 1);
   const prevStep = () => setStep(step - 1);
@@ -112,26 +118,6 @@ const RatingTable = ({
       setModalState("main");
     } else {
       setModalState("login");
-    }
-  };
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const loginResponse = await loginUser({ email, password });
-      if (loginResponse.token) {
-        const userData = await fetchUserData(loginResponse.token);
-        login(userData, loginResponse.token);
-        setModalState("main");
-      } else {
-        throw new Error("Invalid login response");
-      }
-    } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Login failed. Please check your credentials."
-      );
     }
   };
 
@@ -250,6 +236,7 @@ const RatingTable = ({
                       category={category}
                       movieId={movieId}
                       resetStars={resetStars}
+                      setResetStars={setResetStars}
                       handleAverage={handleAverage}
                     />
                   </div>
@@ -259,16 +246,15 @@ const RatingTable = ({
                 <button
                   className="btn btn-ghost rounded-custom bottom-3 left-3 absolute"
                   onClick={() => {
-                    if (!watched) {
-                      resetRatings(movieId);
-                      handleAverage();
-                    } else {
+                    if (resetStars) {
+                      handleRemoveFromList(movieId);
+                    } else if (watched) {
                       resetRatings(movieId);
                       handleAverage();
                     }
                   }}
                 >
-                  {watched ? "Remove from list" : "Reset ratings"}
+                  {resetStars ? "Remove from list" : "Reset ratings"}
                 </button>
                 <button
                   className="btn btn-ghost rounded-custom bottom-3 right-3 absolute"
