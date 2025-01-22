@@ -16,6 +16,8 @@ const MovieGenrePage = () => {
   const [imagesLoaded, setImagesLoaded] = useState(0);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     const fetchMovies = async () => {
       try {
         if (genre) {

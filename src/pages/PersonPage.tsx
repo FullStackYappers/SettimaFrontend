@@ -104,17 +104,17 @@ const PersonPage = () => {
         <p className="personBio m-0 p-0">{person.biography}</p>
       </div>
       <div className="moviesList text-primary mx-4 mt-10">
-        <h2 className="title font-outfit text-[30px] min-[500px]:text-[50px] md:text-7xl">
+        <h2 className="title font-outfit text-[30px] min-[500px]:text-[50px] md:text-5xl">
           Movies They Were In
         </h2>
-        <div className="moviesContainer mt-4">
+        <div className="moviesContainer mt-4 mb-10">
           {person.movies.map((movie) => (
             <div className="movieContainer text-primary">
               <Link to={`/movie/${movie.id}`}>
                 <img src={`http://localhost:8000/${movie.poster_path}`} />
               </Link>
               <Link to={`/movie/${movie.id}`}>
-                <p className="mt-2 font-semibold">{movie.title}</p>
+                <p className="movie-title mt-2 font-semibold">{movie.title}</p>
               </Link>
             </div>
           ))}

@@ -218,36 +218,43 @@ const TabContent = () => {
                 </div>
               ) : (
                 <>
-                  {reviews.map((review, index) => (
-                    <div
-                      key={index}
-                      className="p-8 bg-secondary mx-8 rounded-custom"
-                    >
-                      <div className="flex flex-row">
-                        <img
-                          src={`http://localhost:8000/${review.movie.poster_path}`}
-                          alt={review.movie.title}
-                          className="h-[150px] rounded-[10px]"
-                          onClick={() => navigate(`/movie/${review.movie.id}`)}
-                        />
-                        <div className="mx-8">
-                          <Link to={`/movie/${review.movie.id}`}>
-                            <h2 className="m-0 font-semibold text-2xl text-accent2">
-                              {review.movie.title}
-                            </h2>
-                          </Link>
-                          <p className="py-4 text-base m-0 w-full">
-                            {review.review.split("\n").map((line, index) => (
-                              <React.Fragment key={index}>
-                                {line}
-                                <br />
-                              </React.Fragment>
-                            ))}
-                          </p>
+                  {reviews.map(
+                    (review, index) =>
+                      review.review && (
+                        <div
+                          key={index}
+                          className="p-8 bg-secondary mx-8 rounded-custom"
+                        >
+                          <div className="flex flex-row">
+                            <img
+                              src={`http://localhost:8000/${review.movie.poster_path}`}
+                              alt={review.movie.title}
+                              className="h-[150px] rounded-[10px]"
+                              onClick={() =>
+                                navigate(`/movie/${review.movie.id}`)
+                              }
+                            />
+                            <div className="mx-8">
+                              <Link to={`/movie/${review.movie.id}`}>
+                                <h2 className="m-0 font-semibold text-2xl text-accent2">
+                                  {review.movie.title}
+                                </h2>
+                              </Link>
+                              <p className="py-4 text-base m-0 w-full">
+                                {(review.review || "")
+                                  .split("\n")
+                                  .map((line, index) => (
+                                    <React.Fragment key={index}>
+                                      {line}
+                                      <br />
+                                    </React.Fragment>
+                                  ))}
+                              </p>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  ))}
+                      )
+                  )}
                 </>
               )}
             </div>
