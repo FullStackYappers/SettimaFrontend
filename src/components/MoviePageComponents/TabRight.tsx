@@ -90,17 +90,17 @@ const TabRight: React.FC<TabRightProps> = ({ average, movieAverage }) => {
           <>
             <div
               key={index}
-              className="discussion-item bg-base-100 p-4 gap-10 rounded-custom flex flex-row w-full items-center"
+              className="discussion-item bg-base-100 p-4 rounded-custom flex flex-col min-[425px]:flex-row w-full min-[425px]:items-center"
             >
               <div className="grow text hover:text-accent2">
                 <Link to={`/forum/${discussion.id}`}>
-                  <p className="text-xl font-semibold flex-1 m-0 pl-10">
+                  <p className="text-xl font-semibold flex-1 m-0 pl-5 min-[425px]:pl-10">
                     {discussion.title}
                   </p>
                 </Link>
               </div>
 
-              <div className="pr-20 flex flex-col gap-2 items-end">
+              <div className="pl-5 min-[425px]:pl-0 min-[425px]:pr-20 flex flex-row min-[425px]:flex-col gap-2 items-end">
                 <div className="flex items-center gap-1">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

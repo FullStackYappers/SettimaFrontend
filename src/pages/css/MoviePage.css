@@ -144,10 +144,6 @@
       "tabs-right tabs-right";
   }
 
-  .movie-grid-container > * {
-    outline: 1px solid red;
-  }
-
   .description {
     font-size: 15px;
   }
