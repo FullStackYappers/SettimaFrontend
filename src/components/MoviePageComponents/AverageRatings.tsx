@@ -1,57 +1,15 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-
 interface AverageRatingsProps {
   average: number;
+  movieAverage: number;
 }
 
-const AverageRatings: React.FC<AverageRatingsProps> = ({ average }) => {
-  const { movieId } = useParams();
+const AverageRatings: React.FC<AverageRatingsProps> = ({
+  average,
+  movieAverage,
+}) => {
   const authToken = localStorage.getItem("auth_token");
-  const [movieAverage, setMovieAverage] = useState(0);
 
-  useEffect(() => {
-    const fetchAverageRatings = async () => {
-      try {
-        const response = await axios.get(`/api/movies/${movieId}/ratings`);
-        const ratings = response.data.data;
-
-        const categories = [
-          "acting",
-          "plot",
-          "music",
-          "costume_design",
-          "cinematography",
-          "editing",
-        ];
-
-        const averages = ratings.map((movieRatings) => {
-          const total = categories.reduce(
-            (sum, category) => sum + Number(movieRatings[category] / 2 || 0),
-            0
-          );
-          return total / 6;
-        });
-
-        console.log(averages);
-
-        const mean = Number(
-          (
-            averages.reduce((sum: number, avg: number) => sum + avg, 0) /
-            averages.length
-          ).toFixed(2)
-        );
-
-        setMovieAverage(mean);
-      } catch (error) {
-        console.error("Error fetching watched status:", error);
-      }
-    };
-
-    fetchAverageRatings();
-  });
-
+  console.log(movieAverage);
   const ratings = [
     { label: "Average Rating", value: movieAverage, color: "#992434" },
     ...(authToken

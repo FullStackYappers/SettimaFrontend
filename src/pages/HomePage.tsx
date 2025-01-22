@@ -44,7 +44,7 @@ const HomePage = () => {
     <>
       <Navbar />
       {!user && <LandingPage />}
-      <div className="home-grid-container grid grid-auto-rows mx-4 mt-8 text-primary">
+      <div className="home-grid-container grid grid-auto-rows mx-4 mt-4 text-primary">
         <div className="whats-new">
           <h2 className="font-outfit text-3xl m-0 p-0">What's New</h2>
           <LatestMovieCarousel />

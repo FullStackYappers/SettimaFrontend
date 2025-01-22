@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   return (
-    <div className="flex flex-col items-center h-full w-full">
+    <div className="flex flex-col items-center h-full w-full mt-8">
       <div className="main-container relative flex justify-center w-90p bg-accent2 rounded-custom overflow-hidden group">
         <img
           src={nameWhite}

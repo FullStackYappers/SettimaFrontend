@@ -89,9 +89,17 @@ const TabContent = () => {
     }
   }, []);
 
+  const handleButtonClick = () => {
+    if (watchedMovies.length > 0) {
+      setActiveTab("tab2");
+    } else {
+      navigate("/");
+    }
+  };
+
   return (
     <div className="tab-section-left overflow-visible rounded-custom w-full">
-      <div className="flex justify-evenly w-full font-semibold">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-5 justify-evenly w-full font-semibold">
         <button
           className={`rounded-custom hover:text-accent2 text-2xl ${
             activeTab === "tab1" ? "text-accent2" : ""
@@ -149,7 +157,7 @@ const TabContent = () => {
         )}
         {activeTab === "tab2" && (
           <div id="tab2" className="tab-content block mb-4 flex justify-center">
-            <div className="container mt-4 grid grid-cols-6 gap-8">
+            <div className="container mt-4 grid grid-cols-3 md:grid-cols-6 gap-8">
               {watchedMovies.map((movie, index) => (
                 <div key={index} className="movieContainer text-primary">
                   <Link to={`/movie/${movie.movie.id}`}>
@@ -197,36 +205,51 @@ const TabContent = () => {
         {activeTab === "tab5" && (
           <div id="tab5" className="tab-content block mb-4">
             <div className="grid gap-4 mt-4">
-              {reviews.map((review, index) => (
-                <div
-                  key={index}
-                  className="p-8 bg-secondary mx-8 rounded-custom"
-                >
-                  <div className="flex flex-row">
-                    <img
-                      src={`http://localhost:8000/${review.movie.poster_path}`}
-                      alt={review.movie.title}
-                      className="h-[150px] rounded-[10px]"
-                      onClick={() => navigate(`/movie/${review.movie.id}`)}
-                    />
-                    <div className="mx-8">
-                      <Link to={`/movie/${review.movie.id}`}>
-                        <h2 className="m-0 font-semibold text-2xl text-accent2">
-                          {review.movie.title}
-                        </h2>
-                      </Link>
-                      <p className="py-4 text-base m-0 w-full">
-                        {review.review.split("\n").map((line, index) => (
-                          <React.Fragment key={index}>
-                            {line}
-                            <br />
-                          </React.Fragment>
-                        ))}
-                      </p>
-                    </div>
-                  </div>
+              {reviews.length === 0 ? (
+                <div className="w-full">
+                  <button
+                    onClick={handleButtonClick}
+                    className="btn btn-secondary w-full h-[200px] flex items-center justify-center rounded-custom"
+                  >
+                    <span className="font-semibold text-2xl">
+                      Review movies you've watched!
+                    </span>
+                  </button>
                 </div>
-              ))}
+              ) : (
+                <>
+                  {reviews.map((review, index) => (
+                    <div
+                      key={index}
+                      className="p-8 bg-secondary mx-8 rounded-custom"
+                    >
+                      <div className="flex flex-row">
+                        <img
+                          src={`http://localhost:8000/${review.movie.poster_path}`}
+                          alt={review.movie.title}
+                          className="h-[150px] rounded-[10px]"
+                          onClick={() => navigate(`/movie/${review.movie.id}`)}
+                        />
+                        <div className="mx-8">
+                          <Link to={`/movie/${review.movie.id}`}>
+                            <h2 className="m-0 font-semibold text-2xl text-accent2">
+                              {review.movie.title}
+                            </h2>
+                          </Link>
+                          <p className="py-4 text-base m-0 w-full">
+                            {review.review.split("\n").map((line, index) => (
+                              <React.Fragment key={index}>
+                                {line}
+                                <br />
+                              </React.Fragment>
+                            ))}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
           </div>
         )}

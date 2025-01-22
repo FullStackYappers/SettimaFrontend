@@ -84,9 +84,7 @@ const ProfilePage: React.FC = () => {
           )}
         </div>
         <div className="username font-semibold">{user.username}</div>
-        <div className="about text-base">
-          {user.about || "No bio available"}
-        </div>
+        <div className="about text-base">{user.about || ""}</div>
         <div className="profileDisplay">
           <ProfileDisplay />
         </div>

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 interface Movie {
-  id: number;
+  movie_id: number;
   title: string;
   poster_path: string;
 }
@@ -75,14 +75,14 @@ const ArtSortedPage = () => {
         <div className="moviesContainer mt-4">
           {movies.map((movie, index) => (
             <div key={index} className="movieContainer text-primary">
-              <Link to={`/movie/${movie.id}`}>
+              <Link to={`/movie/${movie.movie_id}`}>
                 <img
                   src={`http://localhost:8000/${movie.poster_path}`}
                   alt={movie.title}
                   onLoad={handleImageLoad}
                 />
               </Link>
-              <Link to={`/movie/${movie.id}`}>
+              <Link to={`/movie/${movie.movie_id}`}>
                 <p className="mt-2 font-semibold">{movie.title}</p>
               </Link>
             </div>

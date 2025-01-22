@@ -28,16 +28,16 @@ const WhereToWatch: React.FC<WhereToWatchProps> = ({ movieId }) => {
     <div className="wtw-item-container grid grid-cols-2 gap-4 mx-4 mt-4 cursor-pointer">
       {platforms.map((platform, index) => (
         <div
-          className="flex flex-row items-center gap-2"
+          className="second-container flex flex-row items-center gap-2"
           key={index}
           onClick={() => window.open(platform.website_url, "_blank")}
         >
           <img
             src={`http://localhost:8000/${platform.platform_image_path}`}
             alt={platform.name}
-            className="w-[50px] rounded-[10px]"
+            className="w-[20px] sm:w-[50px] rounded-[5px] sm:rounded-[10px]"
           />
-          <p className="text-sm  hover:text-accent2">{platform.name}</p>
+          <p className="text-sm hover:text-accent2">{platform.name}</p>
         </div>
       ))}
     </div>

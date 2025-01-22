@@ -27,7 +27,7 @@ const Genres = () => {
   }, [movieId]);
 
   return (
-    <div className="genres text-2xl font-semibold">
+    <div className="genres text-base sm:text-xl lg:text-2xl font-semibold">
       {genres[0] && (
         <div className="rounded-custom bg-secondary w-full h-full flex justify-center items-center mx-2">
           {genres[0]}

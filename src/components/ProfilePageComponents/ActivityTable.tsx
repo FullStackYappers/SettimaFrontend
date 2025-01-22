@@ -27,7 +27,7 @@ const ActivityTable: React.FC<ActivityTableProps> = ({ watchedMovies }) => {
       <div className="my-4">
         <span className="text-sm font-semibold">Activity</span>
       </div>
-      <div className="grid grid-cols-3 xl:grid-cols-4 gap-8 w-full">
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8 w-full">
         {watchedMovies.length > 0 ? (
           watchedMovies.map((history) => (
             <div className="bg-accent rounded-[10px] relative">
@@ -38,7 +38,7 @@ const ActivityTable: React.FC<ActivityTableProps> = ({ watchedMovies }) => {
                     alt={`http://localhost:8000/${history.movie.title}`}
                     className="h-[100px] rounded-[10px]"
                   />
-                  <span className="text-base text-center flex-1">
+                  <span className="text-sm md:text-base text-center flex-1">
                     Watched{" "}
                     <span className="font-semibold">{history.movie.title}</span>
                   </span>

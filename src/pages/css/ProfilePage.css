@@ -36,3 +36,25 @@
 .profileDisplay {
   grid-area: profileDisplay;
 }
+
+@media (max-width: 500px) {
+  .profile-grid-container {
+    margin: 0;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: auto 1fr 1fr;
+    grid-template-rows: auto;
+    width: 100%;
+    gap: 20px;
+    font-size: 3vh;
+    grid-template-areas:
+      "profilepic username username"
+      "profilepic about about"
+      "profileDisplay profileDisplay profileDisplay";
+  }
+
+  .about {
+    justify-content: flex-start;
+    margin-right: 20px;
+  }
+}
