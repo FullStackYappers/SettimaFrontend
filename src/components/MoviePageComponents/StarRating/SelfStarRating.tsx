@@ -8,6 +8,7 @@ interface StarRatingProps {
   movieId: string;
   resetStars: boolean;
   handleAverage: () => void;
+  setResetStars: (value: boolean) => void;
 }
 
 const StarRating: React.FC<StarRatingProps> = ({
@@ -16,6 +17,7 @@ const StarRating: React.FC<StarRatingProps> = ({
   movieId,
   resetStars,
   handleAverage,
+  setResetStars,
 }) => {
   const [rating, setRating] = useState(0);
   const [checked, setChecked] = useState(true);
@@ -68,6 +70,7 @@ const StarRating: React.FC<StarRatingProps> = ({
       );
       setRating(starValue / 2);
       setChecked(false);
+      setResetStars(false);
       console.log(`Rating for ${category} saved successfully:`, response.data);
     } catch (error) {
       console.error("Error fetching data:", error);

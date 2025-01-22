@@ -24,6 +24,7 @@ const MoviePage = () => {
   const [movie, setMovie] = useState<MoviePageFields>({} as MoviePageFields);
   const [error, setError] = useState<string | null>(null);
   const [average, setAverage] = useState(0);
+  const [notRoundedAverage, setNotRoundedAverage] = useState(0);
   const [review, setReview] = useState("");
   const authToken = localStorage.getItem("auth_token");
 
@@ -63,6 +64,8 @@ const MoviePage = () => {
           } else {
             setAverage(avg / 2);
           }
+
+          setNotRoundedAverage(Number((avg / 2).toFixed(2)));
 
           if (movieRatings.review) {
             setReview(movieRatings.review);
@@ -136,7 +139,7 @@ const MoviePage = () => {
           setReview={setReview}
         />
         <TabLeft />
-        <TabRight />
+        <TabRight average={notRoundedAverage} />
         <KeyStaff />
       </div>
     </>

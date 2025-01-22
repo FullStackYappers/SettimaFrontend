@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -6,6 +5,7 @@ import LoginModal from "../ForumPageComponents/LoginModal";
 import { useAuth } from "../../context/AuthContext.tsx";
 import ReviewTab from "./ReviewTab.tsx";
 import DiscussionModal from "../ForumPageComponents/DiscussionModal.tsx";
+import AverageRatings from "./AverageRatings.tsx";
 
 interface Discussion {
   id: number;
@@ -14,7 +14,11 @@ interface Discussion {
   comments_count: number;
 }
 
-const TabRight = () => {
+interface TabRightProps {
+  average: number;
+}
+
+const TabRight: React.FC<TabRightProps> = ({ average }) => {
   const [activeTab, setActiveTab] = useState<string>("tab1");
   const { movieId } = useParams();
   const [discussions, setDiscussions] = useState<Discussion[]>([]);
@@ -183,9 +187,7 @@ const TabRight = () => {
       <div className="mt-4 font-semibold ">
         {activeTab === "tab1" && (
           <div id="tab1" className="tab-content block mb-4">
-            <p>Actor 1</p>
-            <p>Actor 2</p>
-            <p>Actor 3</p>
+            <AverageRatings average={average} />
           </div>
         )}
         {activeTab === "tab2" && (
