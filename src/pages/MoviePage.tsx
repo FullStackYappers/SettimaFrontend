@@ -26,6 +26,7 @@ const MoviePage = () => {
   const [average, setAverage] = useState(0);
   const [notRoundedAverage, setNotRoundedAverage] = useState(0);
   const [review, setReview] = useState("");
+  const [movieAverage, setMovieAverage] = useState(0);
   const authToken = localStorage.getItem("auth_token");
 
   const fetchRatings = async () => {
@@ -93,6 +94,42 @@ const MoviePage = () => {
       }
     };
 
+    const fetchAverageRatings = async () => {
+      try {
+        const response = await axios.get(`/api/movies/${movieId}/ratings`);
+        const ratings = response.data.data;
+
+        const categories = [
+          "acting",
+          "plot",
+          "music",
+          "costume_design",
+          "cinematography",
+          "editing",
+        ];
+
+        const averages = ratings.map((movieRatings) => {
+          const total = categories.reduce(
+            (sum, category) => sum + Number(movieRatings[category] / 2 || 0),
+            0
+          );
+          return total / 6;
+        });
+
+        const mean = Number(
+          (
+            averages.reduce((sum: number, avg: number) => sum + avg, 0) /
+            averages.length
+          ).toFixed(2)
+        );
+
+        setMovieAverage(mean);
+      } catch (error) {
+        console.error("Error fetching watched status:", error);
+      }
+    };
+
+    fetchAverageRatings();
     getMovieDetails();
     fetchRatings();
   }, [movieId]);
@@ -100,6 +137,8 @@ const MoviePage = () => {
   if (error) {
     return <div className="error-message">{error}</div>;
   }
+
+  console.log(window.innerWidth);
 
   if (!movie || !movieId) {
     return (
@@ -124,8 +163,8 @@ const MoviePage = () => {
             alt={movie.title}
           />
         </div>
-        <div className="title heading-font">
-          <h1 className="m0 font-outfit text-7xl font-semibold">
+        <div className="title">
+          <h1 className="m0 font-outfit text-[30px] min-[500px]:text-[50px] md:text-7xl font-semibold">
             {movie.title}
           </h1>
         </div>
@@ -139,7 +178,7 @@ const MoviePage = () => {
           setReview={setReview}
         />
         <TabLeft />
-        <TabRight average={notRoundedAverage} />
+        <TabRight average={notRoundedAverage} movieAverage={movieAverage} />
         <KeyStaff />
       </div>
     </>

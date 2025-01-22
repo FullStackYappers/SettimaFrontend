@@ -1,6 +1,6 @@
 import Search from "./Search";
 import { useState } from "react";
-import logoName from "../../assets/nameWhite.svg";
+import logoName from "../../assets/nameLogo.png";
 import { useSticky } from "../../context/Sticky";
 import { Link } from "react-router-dom";
 import DropdownGenre from "./DropdownGenre.tsx";
@@ -75,10 +75,15 @@ const Navbar = () => {
                   aria-label="close sidebar"
                   className="drawer-overlay"
                 ></label>
-                <ul className="menu bg-base-100 text-primary rounded-r-custom min-h-full w-80 p-4">
+                <ul className="menu bg-base-100 text-primary rounded-r-custom min-h-full min-[330px]:w-80 w-60 p-4">
                   <div className="flex-none mx-auto">
                     <Link to="/">
-                      <img src={logoName} width={150} alt="Settima" />
+                      <img
+                        src={logoName}
+                        width={150}
+                        alt="Settima"
+                        className="my-6"
+                      />
                     </Link>
                   </div>
                   <div className="divider divider-accent"></div>
@@ -86,7 +91,7 @@ const Navbar = () => {
                   <DropdownArts />
                   {authToken && <DropdownFavorites />}
                 </ul>
-                <div className="fixed w-80 bottom-0 bg-gradient-to-t from-base-100 via-base-100 to-white-0 px-4">
+                <div className="fixed min-[330px]:w-80 w-60 bottom-0 bg-gradient-to-t from-base-100 via-base-100 to-white-0 px-4">
                   <div className="mb-4 relative">
                     <Link to="/login">
                       <button className="text-xl bottom-4 h-navbar-height font-bold text-accent2 btn rounded-custom hover:bg-primary h-full w-full">
@@ -100,7 +105,11 @@ const Navbar = () => {
           </div>
           <div className="flex-1 pl-4">
             <Link to="/">
-              <img src={logoName} width={150} alt="Settima" />
+              <img
+                src={logoName}
+                alt="Settima"
+                className="min-[320px]:w-[120px] w-[90px]"
+              />
             </Link>
           </div>
           <div className="profilebtn flex-end mr-4">

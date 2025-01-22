@@ -25,11 +25,11 @@ const Personalized: React.FC<PersonalizedProps> = ({
   likedMovies,
 }) => {
   return (
-    <div className="personal-container flex items-center justify-between gap-20">
-      <div className="w-1/2 flex-grow">
+    <div className="personal-container flex flex-col md:flex-row items-center justify-between gap-10 md:gap-20">
+      <div className="w-full mt-4 md:mt-0 md:w-1/2 flex-grow">
         <StatsDisplay />
       </div>
-      <div className="w-1/2 flex-grow">
+      <div className="w-full md:w-1/2 flex-grow">
         <FavDisplay
           setActiveTab={setActiveTab}
           watchedMoviesLength={watchedMoviesLength}

@@ -96,13 +96,17 @@ const PersonPage = () => {
           />
         </div>
         <div className="personName font-outfit">
-          <h2 className="text-5xl">{person.name}</h2>
+          <h2 className="text-[30px] min-[500px]:text-[50px] md:text-7xl">
+            {person.name}
+          </h2>
           <p className="ml-1">{person.dob}</p>
         </div>
         <p className="personBio m-0 p-0">{person.biography}</p>
       </div>
       <div className="moviesList text-primary mx-4 mt-10">
-        <h2 className="title font-outfit text-4xl">Movies They Were In</h2>
+        <h2 className="title font-outfit text-[30px] min-[500px]:text-[50px] md:text-7xl">
+          Movies They Were In
+        </h2>
         <div className="moviesContainer mt-4">
           {person.movies.map((movie) => (
             <div className="movieContainer text-primary">

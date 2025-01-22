@@ -49,7 +49,7 @@ const KeyStaff = () => {
   };
 
   return (
-    <div className="specificCast text-lg font-semibold flex flex-col justify-between gap-4">
+    <div className="specificCast text-base sm:text-sm xl:text-lg font-semibold flex flex-col justify-between gap-4">
       <div className="rounded-custom bg-secondary w-full flex flex-col flex-1 justify-center items-center">
         <span className="block">Directed by:</span>
         {getCrewByDepartment("Director")}

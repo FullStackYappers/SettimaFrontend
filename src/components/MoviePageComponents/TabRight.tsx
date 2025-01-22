@@ -16,9 +16,10 @@ interface Discussion {
 
 interface TabRightProps {
   average: number;
+  movieAverage: number;
 }
 
-const TabRight: React.FC<TabRightProps> = ({ average }) => {
+const TabRight: React.FC<TabRightProps> = ({ average, movieAverage }) => {
   const [activeTab, setActiveTab] = useState<string>("tab1");
   const { movieId } = useParams();
   const [discussions, setDiscussions] = useState<Discussion[]>([]);
@@ -187,14 +188,12 @@ const TabRight: React.FC<TabRightProps> = ({ average }) => {
       <div className="mt-4 font-semibold ">
         {activeTab === "tab1" && (
           <div id="tab1" className="tab-content block mb-4">
-            <AverageRatings average={average} />
+            <AverageRatings average={average} movieAverage={movieAverage} />
           </div>
         )}
         {activeTab === "tab2" && (
           <div id="tab2" className="tab-content block mb-4">
-            <p>Crew Member 1</p>
-            <p>Crew Member 2</p>
-            <p>Crew Member 3</p>
+            <p>Soon...</p>
           </div>
         )}
         {activeTab === "tab3" && (
