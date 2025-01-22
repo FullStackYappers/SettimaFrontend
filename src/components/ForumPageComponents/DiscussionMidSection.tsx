@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext.tsx";
 import LoginModal from "./LoginModal.tsx";
 import axios from "axios";
@@ -92,12 +92,10 @@ const DiscussionMidSection = ({
 
   return (
     <div className="forum-mid-container w-full flex px-8">
-      {/* forum-mid-container w-full flex justify-left px-8 */}
       <div className="discussion-mid-section w-full">
-        {/*discussion-mid-section w-[90%]*/}
         <div className="add-comment-button flex justify-center">
           <button
-            className="btn btn-ghost rounded-custom bottom-3 text-lg mb-4"
+            className="btn btn-ghost rounded-custom bottom-3 text-sm min-[425px]:text-lg mb-4"
             onClick={handleModal}
           >
             <svg
@@ -106,7 +104,7 @@ const DiscussionMidSection = ({
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              className="size-6"
+              className="size-5 min-[425px]:size-6"
             >
               <path
                 stroke-linecap="round"
@@ -144,13 +142,13 @@ const DiscussionMidSection = ({
             </div>
           </form>
           <div className="flex flex-col h-full">
-            <h2 className="text-4xl font-semibold font-outfit ml-4 mb-4">
+            <h2 className="text-xl min-[425px]:text-2xl md:text-4xl font-semibold font-outfit ml-1 min-[425px]:ml-4 mb-4">
               Add Comment as {username}
             </h2>
 
-            <div className="flex-grow mb-4 mx-4">
+            <div className="flex-grow mb-1 min[425px]:mb-4 mx-1 min-[425px]:mx-4">
               <textarea
-                className="textarea placeholder-primary placeholder-opacity-50 bg-secondary w-full h-[90%] text-xl overflow-auto resize-none"
+                className="textarea placeholder-primary placeholder-opacity-50 bg-secondary w-full h-[90%] text-base min-[425px]:text-xl overflow-auto resize-none"
                 placeholder="Write your comment here..."
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
@@ -159,7 +157,7 @@ const DiscussionMidSection = ({
 
             <div className="flex justify-end">
               <button
-                className="btn btn-ghost bottom-3 right-3 absolute rounded-custom text-xl"
+                className="btn btn-ghost bottom-3 right-3 absolute rounded-custom text-base min-[425px]:text-xl"
                 onClick={() => {
                   handleCommentSubmission();
                   window.location.reload();

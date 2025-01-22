@@ -5,7 +5,6 @@ import { loginUser } from "../../services/api/LoginApi.ts";
 import { fetchUserData } from "../../services/api/UserApi.ts";
 import { Link } from "react-router-dom";
 import logoName from "../../assets/nameLogo.png";
-import logoWhite from "../../../public/logoWhite.svg";
 
 const LoginModal = ({
   isOpen,
@@ -40,9 +39,9 @@ const LoginModal = ({
 
   return (
     <dialog open={isOpen} className="modal">
-      <div className="modal-box w-[30vw] max-w-none h-[75vh] max-h-none bg-base-100 relative rounded-custom">
+      <div className="modal-box w-full max-w-[500px] h-full max-h-[60vh] bg-base-100 relative rounded-custom p-6">
         <button
-          className="btn btn-sm btn-circle btn-ghost absolute right-6 top-6"
+          className="btn btn-sm btn-circle btn-ghost absolute right-4 top-4"
           onClick={onClose}
         >
           <svg
@@ -64,7 +63,7 @@ const LoginModal = ({
           <div>
             <img className="mb-8" src={logoName} width={150} alt="Settima" />
           </div>
-          <h2 className="text-2xl font-semibold font-outfit mb-4">
+          <h2 className="text-2xl font-semibold font-outfit mb-4 text-center">
             Login to {context}
           </h2>
           <form className="w-full px-4" onSubmit={handleLogin}>

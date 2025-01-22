@@ -61,7 +61,7 @@ const Discussion = ({ discussionDetails }: { discussionDetails: any }) => {
       ? discussionDetails.tags.map((tag: Tags, index: number) => (
           <div
             key={index}
-            className="tag text-base mx-4 rounded-custom bg-accent2 p-2 w-[12%] flex justify-center align-center"
+            className="tag text-sm md:text-base mx-4 rounded-custom bg-accent2 p-2 w-[10vw] min-w-[60px] flex justify-center align-center"
           >
             {tag.name}
           </div>
@@ -73,7 +73,7 @@ const Discussion = ({ discussionDetails }: { discussionDetails: any }) => {
     <div className="forum-discussion-container">
       <div className="back-button">
         <button
-          className="btn btn-ghost rounded-custom bottom-3 text-lg mb-4"
+          className="btn btn-ghost rounded-custom bottom-3 text-sm min-[425px]:text-lg min-[425px]:mb-4"
           onClick={handleClick}
         >
           <svg
@@ -81,7 +81,7 @@ const Discussion = ({ discussionDetails }: { discussionDetails: any }) => {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            className="inline-block h-6 w-6 stroke-current text-primary"
+            className="inline-block h-5 min-[425px]:h-6 w-5 min-[425px]:w-6 stroke-current text-primary"
           >
             <path
               stroke-linecap="round"
@@ -90,21 +90,21 @@ const Discussion = ({ discussionDetails }: { discussionDetails: any }) => {
               d="M15.75 19.5 8.25 12l7.5-7.5"
             />
           </svg>
-          Back to Movie
+          <span className="">Back to Movie</span>
         </button>
       </div>
 
       <div className="discussion-main-section pt-4">
-        <div className="flex pt-4 pb-4">
+        <div className="flex flex-col min-[425px]:flex-row min-[425px]:pt-4 pb-4">
           <div className="title flex-grow">
-            <h2 className="text-4xl font-semibold flex-1 m-0 pl-10">
+            <h2 className="text-xl min-[425px]:text-2xl md:text-4xl font-semibold flex-1 m-0 mb-4 min-[425px]:mb-0 pl-10">
               {discussionDetails.title}
             </h2>
           </div>
 
           <div className="Views and Comments flex items-center pr-10">
-            <div className="flex flex-row gap-2 items-end text-xl">
-              <div className="flex items-center gap-1 mr-10">
+            <div className="flex flex-row min-[425px]:flex-col sm:flex-row gap-2 items-end text-xl pl-10 min-[425px]:pl-0">
+              <div className="flex items-center gap-1 md:mr-10">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -147,15 +147,15 @@ const Discussion = ({ discussionDetails }: { discussionDetails: any }) => {
           </div>
         </div>
 
-        <div className="discussion-post-content w-full flex justify-left p-8">
-          <div className="box bg-base-100 rounded-custom p-4 w-[90%]">
+        <div className="discussion-post-content w-full flex justify-left p-4 md:p-8">
+          <div className="box bg-base-100 rounded-custom p-2 md:p-4 w-full md:w-[90%]">
             <div className="flex flex-row">
               <div className="user-name grow">
-                <div className="name text-xl ml-10 h-full flex items-center">
+                <div className="name text-base md:text-xl ml-10 h-full flex items-center">
                   {discussionDetails.user.username}
                 </div>
               </div>
-              <div className="like-button mr-4">
+              <div className="hidden min-[425px]:block like-button mr-2 md:mr-4">
                 <button
                   onClick={() => handleLikeToggle()}
                   className={`btn btn-secondary rounded-custom likedbtn ${
@@ -175,17 +175,42 @@ const Discussion = ({ discussionDetails }: { discussionDetails: any }) => {
                       d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
                     />
                   </svg>
-                  <span className="block">{likesCount}</span>
+                  <span>{likesCount}</span>
                 </button>
               </div>
             </div>
             <div className="discussion-content ml-10 mt-4">
-              <div className="content-text text-xl w-[85%] py-3">
+              <div className="content-text text-base md:text-xl w-[85%] py-3">
                 {discussionDetails.content}
               </div>
             </div>
-            <div className="tags flex flex-row justify-end mt-4">
-              {getTags()}
+            <div className="flex flex-row">
+              <div className="block min-[425px]:hidden like-button ml-10">
+                <button
+                  onClick={() => handleLikeToggle()}
+                  className={`btn btn-secondary rounded-custom likedbtn ${
+                    liked ? "text-accent2" : "text-primary"
+                  }`}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill={liked ? "currentColor" : "none"}
+                    viewBox="0 0 24 24"
+                    className="inline-block h-3 w-3 stroke-current"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2.5"
+                      d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+                    />
+                  </svg>
+                  <span>{likesCount}</span>
+                </button>
+              </div>
+              <div className="tags flex flex-row grow justify-end mt-2 min-[425px]:mt-4 mb-2 min-[425px]:mb-0">
+                {getTags()}
+              </div>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext.tsx";
 import { likeItem, unlikeItem } from "../../services/api/LikeApi.ts";
 import axios from "axios";
@@ -181,20 +181,18 @@ const DiscussionComments = ({
 
   useEffect(() => {
     if (discussionDetails?.comments) {
-      const replyModals = discussionDetails.comments.map(
-        (comment: DiscussionComment) => {
-          const replyModal = document.getElementById(
-            `reply_modal_${comment.id}`
-          ) as HTMLDialogElement;
-          if (replyModal) {
-            if (isReplyModalOpen[comment.id]) {
-              replyModal.showModal();
-            } else {
-              replyModal.close();
-            }
+      discussionDetails.comments.map((comment: DiscussionComment) => {
+        const replyModal = document.getElementById(
+          `reply_modal_${comment.id}`
+        ) as HTMLDialogElement;
+        if (replyModal) {
+          if (isReplyModalOpen[comment.id]) {
+            replyModal.showModal();
+          } else {
+            replyModal.close();
           }
         }
-      );
+      });
 
       const loginModal = document.getElementById(
         "login_modal_reply"
@@ -214,15 +212,15 @@ const DiscussionComments = ({
     return discussionDetails.comments_count > 0
       ? discussionDetails.comments.map((comment: DiscussionComment) => (
           <div key={comment.id}>
-            <div className="discussion-post-content w-full flex justify-left px-8 p-4">
-              <div className="box bg-base-100 rounded-custom w-[90%] p-4">
+            <div className="discussion-comments-replies w-full flex justify-left px-4 md:px-8 p-2 md:p-4">
+              <div className="box bg-base-100 rounded-custom w-full md:w-[90%] p-4">
                 <div className="flex flex-row">
                   <div className="user-name grow">
-                    <div className="name text-xl ml-10 h-full flex items-center">
+                    <div className="name text-base md:text-xl ml-10 h-full flex items-center">
                       {comment.user.username}
                     </div>
                   </div>
-                  <div className="like-button mr-4">
+                  <div className="hidden min-[425px]:block like-button mr-4">
                     <button
                       onClick={() => handleLikeToggleComment(comment.id)}
                       className={`btn btn-secondary rounded-custom likedbtn ${
@@ -246,22 +244,49 @@ const DiscussionComments = ({
                           d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
                         />
                       </svg>
-                      <span className="block">
-                        {likedCommentCount[comment.id]}
-                      </span>
+                      <span>{likedCommentCount[comment.id]}</span>
                     </button>
                   </div>
                 </div>
                 <div className="discussion-content ml-10 mt-4">
-                  <div className="content-text text-xl w-[85%] py-3">
+                  <div className="content-text text-base md:text-xl w-[85%] py-3">
                     {comment.content}
                   </div>
                 </div>
                 <div className="comment-mid-container w-full flex ml-10 mt-4">
                   <div className="comment-mid-section w-[90%]">
-                    <div className="reply-button flex justify-start">
+                    <div className="reply-button flex min-[425px]:justify-start">
+                      <div className="like-button block min-[425px]:hidden like-button mr-2">
+                        <button
+                          onClick={() => handleLikeToggleComment(comment.id)}
+                          className={`btn btn-secondary rounded-custom likedbtn ${
+                            likedComment[comment.id]
+                              ? "text-accent2"
+                              : "text-primary"
+                          }`}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill={
+                              likedComment[comment.id] ? "currentColor" : "none"
+                            }
+                            viewBox="0 0 24 24"
+                            className="inline-block h-3 w-3 stroke-current"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2.5"
+                              d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+                            />
+                          </svg>
+                          <span className="text-sm">
+                            {likedCommentCount[comment.id]}
+                          </span>
+                        </button>
+                      </div>
                       <button
-                        className="btn btn-secondary rounded-custom text-base"
+                        className="btn btn-secondary rounded-custom text-xs md:text-base"
                         onClick={() => handleReplyModal(comment.id)}
                       >
                         <svg
@@ -270,7 +295,7 @@ const DiscussionComments = ({
                           viewBox="0 0 24 24"
                           stroke-width="1.5"
                           stroke="currentColor"
-                          className="size-6"
+                          className="size-3 min-[425px]:size-6"
                         >
                           <path
                             stroke-linecap="round"
@@ -278,7 +303,7 @@ const DiscussionComments = ({
                             d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
                           />
                         </svg>
-                        Reply
+                        <span className="text-sm">Reply</span>
                       </button>
                     </div>
                   </div>
@@ -312,13 +337,13 @@ const DiscussionComments = ({
                         </div>
                       </form>
                       <div className="flex flex-col h-full">
-                        <h2 className="text-4xl font-semibold font-outfit ml-4 mb-4">
+                        <h2 className="text-xl min-[425px]:text-2xl md:text-4xl font-semibold font-outfit ml-1 min-[425px]:ml-4 mb-4">
                           Reply as {username}
                         </h2>
 
-                        <div className="flex-grow mb-4 mx-4">
+                        <div className="flex-grow mb-1 min[425px]:mb-4 mx-1 min-[425px]:mx-4">
                           <textarea
-                            className="textarea placeholder-primary placeholder-opacity-50 bg-secondary w-full h-[90%] text-xl overflow-auto resize-none"
+                            className="textarea placeholder-primary placeholder-opacity-50 bg-secondary w-full h-[90%] text-base min-[425px]:text-xl overflow-auto resize-none"
                             placeholder="Write your reply here..."
                             value={replies[comment.id] || ""}
                             onChange={(e) =>
@@ -332,7 +357,7 @@ const DiscussionComments = ({
 
                         <div className="flex justify-end">
                           <button
-                            className="btn btn-ghost bottom-3 right-3 absolute rounded-custom text-xl"
+                            className="btn btn-ghost bottom-3 right-3 absolute rounded-custom text-base min-[425px]:text-xl"
                             onClick={() => {
                               handleReplySubmission(comment.id);
                               window.location.reload();
@@ -351,7 +376,7 @@ const DiscussionComments = ({
                     context={context}
                   />
                 </div>
-                <div className="replies flex flex-col w-full ml-20 pl-2">
+                <div className="replies flex flex-col w-full ml-5 min-[425px]:ml-10 md:ml-20 pl-2">
                   {getReplies(comment.replies)}
                 </div>
               </div>
@@ -364,16 +389,16 @@ const DiscussionComments = ({
   const getReplies = (replies: CommentReply[]): JSX.Element[] => {
     return replies.length > 0
       ? replies.map((reply: CommentReply) => (
-          <div className="flex py-4 text text-xl w-[80%]">
+          <div className="flex py-4 text text-base md:text-xl w-[90%] md:w-[80%]">
             <div key={reply.id} className="grow">
-              <div className="comment-reply w-full bg-accent rounded-custom my-2 p-4">
+              <div className="comment-reply w-full bg-accent rounded-custom my-1 min-[425px]:my-2 p-2 min-[425px]:p-4">
                 <div className="flex flex-row">
                   <div className="user-name grow">
-                    <div className="name text-xl ml-5 h-full flex items-center">
+                    <div className="name ml-5 py-2 h-full flex items-center">
                       {reply.user.username}
                     </div>
                   </div>
-                  <div className="like-button mr-4">
+                  <div className="hidden min-[425px]:block like-button mr-4">
                     <button
                       onClick={() => handleLikeToggleReply(reply.id)}
                       className={`btn btn-base-100 rounded-custom likedbtn ${
@@ -393,12 +418,35 @@ const DiscussionComments = ({
                           d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
                         />
                       </svg>
-                      <span className="block">{likedReplyCount[reply.id]}</span>
+                      <span>{likedReplyCount[reply.id]}</span>
                     </button>
                   </div>
                 </div>
-                <div className="reply-content py-3 w-[83%] ml-5 mt-2">
+                <div className="reply-content py-2 w-[83%] ml-5 mt-2">
                   {reply.content}
+                </div>
+                <div className="block min-[425px]:hidden like-button ml-5 mt-2">
+                  <button
+                    onClick={() => handleLikeToggleReply(reply.id)}
+                    className={`btn btn-base-100 rounded-custom likedbtn ${
+                      likedReply[reply.id] ? "text-accent2" : "text-primary"
+                    }`}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill={likedReply[reply.id] ? "currentColor" : "none"}
+                      viewBox="0 0 24 24"
+                      className="inline-block h-3 w-3 stroke-current"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2.5"
+                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+                      />
+                    </svg>
+                    <span className="text-sm">{likedReplyCount[reply.id]}</span>
+                  </button>
                 </div>
               </div>
             </div>
