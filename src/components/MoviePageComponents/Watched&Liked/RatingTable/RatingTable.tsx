@@ -248,6 +248,7 @@ const RatingTable = ({
                   onClick={() => {
                     if (resetStars) {
                       handleRemoveFromList(movieId);
+                      window.location.reload();
                     } else if (watched) {
                       resetRatings(movieId);
                       handleAverage();

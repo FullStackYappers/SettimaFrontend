@@ -83,7 +83,7 @@ const ReviewPage = () => {
         </button>
       </div>
       <div className="grid gap-4 text-primary">
-        {userId && (
+        {userId && userReview?.review && (
           <>
             <p className="text-2xl font-semibold">
               Your Review of{" "}
@@ -93,7 +93,7 @@ const ReviewPage = () => {
             </p>
             <div className="py-4 bg-secondary mx-8 rounded-custom">
               <p className="py-4">
-                {userReview?.review.split("\n").map((line, index) => (
+                {userReview.review.split("\n").map((line, index) => (
                   <React.Fragment key={index}>
                     {line}
                     <br />

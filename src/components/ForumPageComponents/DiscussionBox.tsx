@@ -61,9 +61,9 @@ const Discussion = ({ discussionDetails }: { discussionDetails: any }) => {
       ? discussionDetails.tags.map((tag: Tags, index: number) => (
           <div
             key={index}
-            className="tag text-sm md:text-base mx-4 rounded-custom bg-accent2 p-2 w-[10vw] min-w-[60px] flex justify-center align-center"
+            className="tag text-sm md:text-base mx-4 rounded-custom bg-accent2 p-2 w-[10vw] min-w-[60px] min-[425px]:grow-0 flex text-center justify-center align-center"
           >
-            {tag.name}
+            <span>{tag.name}</span>
           </div>
         ))
       : [<div className="no-tags"></div>];
