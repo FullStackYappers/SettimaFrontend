@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useAuth } from "../../context/AuthContext.tsx";
 import { searchTags } from "../../services/api/ForumApi.ts";
 
 interface DiscussionModalProps {
@@ -8,7 +7,6 @@ interface DiscussionModalProps {
   onClose: () => void;
   movieId: string | undefined;
   username: string | undefined;
-  //handleDiscussionSubmission: (selectedTags: string[]) => void;
 }
 
 const DiscussionModal: React.FC<DiscussionModalProps> = ({
@@ -125,29 +123,29 @@ const DiscussionModal: React.FC<DiscussionModalProps> = ({
           </div>
         </form>
         <div className="flex flex-col h-full">
-          <h2 className="text-4xl font-semibold font-outfit ml-4 mb-4">
+          <h2 className="text-xl min-[425px]:text-2xl md:text-4xl font-semibold font-outfit ml-1 min-[425px]:ml-4 mb-4">
             Add Discussion as {username}
           </h2>
-          <div className="add-title-textarea mx-4 mt-4">
-            <span className="text-xl"> Title </span>
+          <div className="add-title-textarea mx-1 min[425px]:mx-4 mt-1 min[425px]:mt-4">
+            <span className="text-base min-[425px]:text-xl"> Title </span>
             <textarea
-              className="textarea placeholder-primary placeholder-opacity-50 bg-secondary w-full h-[10%] text-xl overflow-auto resize-none mt-2"
+              className="textarea placeholder-primary placeholder-opacity-50 bg-secondary w-full h-[10%] text-base min-[425px]:text-xl overflow-auto resize-none mt-2"
               placeholder="Write your discussion title here..."
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
-          <div className="h-[40%] mb-8 mx-4">
-            <span className="text-xl">Content</span>
+          <div className="h-[40%] mb-8 min[425px]:mb-8 mx-1 min[425px]:mx-4">
+            <span className="text-base min-[425px]:text-xl">Content</span>
             <textarea
-              className="textarea placeholder-primary placeholder-opacity-50 bg-secondary w-full h-full text-xl overflow-auto resize-none mt-2"
+              className="textarea placeholder-primary placeholder-opacity-50 bg-secondary w-full h-full text-base min-[425px]:text-xl overflow-auto resize-none mt-2"
               placeholder="Write your discussion content here..."
               value={content}
               onChange={(e) => setContent(e.target.value)}
             />
           </div>
-          <div className="add-tags flex-grow mt-4 mx-4">
-            <span className="text-xl"> Tags </span>
+          <div className="add-tags flex-grow mt-4 mx-1 min[425px]:mx-4">
+            <span className="text-base min-[425px]:text-xl"> Tags </span>
             <div className="flex flex-wrap mt-2">
               {selectedTags.map((tag) => (
                 <div className="tag text-base mx-4 rounded-custom bg-accent2 p-2 px-4 flex justify-center align-center">
@@ -174,7 +172,7 @@ const DiscussionModal: React.FC<DiscussionModalProps> = ({
               }}
             />
             {tagInput.trim() !== "" && tagSuggestions.length > 0 && (
-              <div className="bg-secondary mt-2 rounded p-2 max-h-40 overflow-y-auto">
+              <div className="bg-secondary mt-2 rounded p-2 max-h-40 overflow-y-auto text-base min-[425px]:text-xl">
                 <div className="flex flex-wrap">
                   {tagSuggestions.map((tag) => (
                     <div

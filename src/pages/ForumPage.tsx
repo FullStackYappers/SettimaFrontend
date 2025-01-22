@@ -8,7 +8,6 @@ import DiscussionMidSection from "../components/ForumPageComponents/DiscussionMi
 import DiscussionComments from "../components/ForumPageComponents/DiscussionComments";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import { getAuthToken } from "../services/api/ForumApi.ts";
 
 import { DiscussionDetails } from "../types/Forum";
@@ -53,7 +52,7 @@ const ForumPage = () => {
     <>
       <Navbar />
       <div className="forum-container w-full flex justify-center">
-        <div className="forum-box w-[90%] h-max-none bg-accent p-8 rounded-custom text-primary">
+        <div className="forum-box w-[98%] md:w-[90%] h-max-none bg-accent p-4 md:p-8 rounded-custom text-primary">
           <Discussion discussionDetails={discussion} />
           <DiscussionMidSection discussionDetails={discussion} />
           <DiscussionComments discussionDetails={discussion} />
