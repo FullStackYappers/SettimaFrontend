@@ -4,6 +4,7 @@ import { useAuth } from "../../context/AuthContext.tsx";
 import { Tags } from "../../types/Forum";
 import LoginModal from "./LoginModal.tsx";
 import { likeItem, unlikeItem } from "../../services/api/LikeApi.ts";
+import React from "react";
 
 const Discussion = ({ discussionDetails }: { discussionDetails: any }) => {
   const [liked, setLiked] = useState(false);
@@ -181,7 +182,14 @@ const Discussion = ({ discussionDetails }: { discussionDetails: any }) => {
             </div>
             <div className="discussion-content ml-10 mt-4">
               <div className="content-text text-base md:text-xl w-[85%] py-3">
-                {discussionDetails.content}
+                {discussionDetails.content
+                  .split("\n")
+                  .map((line: string, index: number) => (
+                    <React.Fragment key={index}>
+                      {line}
+                      <br />
+                    </React.Fragment>
+                  ))}
               </div>
             </div>
             <div className="flex flex-row">
