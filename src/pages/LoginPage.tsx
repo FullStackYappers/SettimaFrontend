@@ -74,19 +74,30 @@ const LoginPage: React.FC = () => {
             </h1>
           </div>
 
-          <div className="login mx-7 flex flex-col items-center bottom-2">
+          <div className="login mx-7 flex flex-row items-center bottom-2">
             <button
-              type="submit"
-              className="text-big input-field w-full h-[60px] btn btn-accent rounded-custom text-primary font-outfit font-bold text-2xl"
+                type="submit"
+                className="text-big input-field w-full h-[60px] btn btn-accent rounded-custom text-primary font-outfit font-bold text-2xl"
             >
               Login
             </button>
+            <div className="flex items-center gap-2">
+              <Link to={"/landing"}>
+                <button
+                    type="submit"
+                    className="text-big bg-accent w-[60px] h-[30px] btn rounded-custom text-primary font-outfit font-bold text-2xl">
+                  X
+                </button>
+            </Link>
+
             <Link to={"/register"}>
               <h1 className="text-small m0 font-outfit text-accent2 font-medium p-2">
                 Not registered? Create an account
-              </h1>
-            </Link>
+                </h1>
+              </Link>
+            </div>
           </div>
+
         </form>
 
         {error && <p className="text-red-500 text-center mt-4">{error}</p>}

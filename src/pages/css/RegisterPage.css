@@ -32,31 +32,49 @@
 .fullName {
   grid-area: fullName;
   margin: 0% 5% 0% 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .usernameInput {
   grid-area: usernameInput;
   margin: 0% 5% 0% 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .emailInput {
   grid-area: emailInput;
   margin: 0% 5% 0% 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .passwordInput {
   grid-area: passwordInput;
   margin: 0% 5% 0% 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .passwordConfirmInput {
   grid-area: passwordConfirmInput;
   margin: 0% 5% 0% 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .register {
   grid-area: register;
   margin: 0% 5% 0% 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @media (max-width: 1020px) {
