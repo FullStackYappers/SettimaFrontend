@@ -37,7 +37,28 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="flex justify-center items-center w-screen h-screen">
-      <div className="login-grid-container rounded-custom bg-accent">
+      <div className="login-grid-container rounded-custom bg-accent relative">
+        <div className="back-button absolute top-2 right-2">
+          <button
+            onClick={() => navigate("/")}
+            className="btn btn-ghost rounded-custom bottom-3 text-sm min-[425px]:text-lg min-[425px]:mb-4"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 text-primary search-close"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.5"
+                d="M6 18 18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
         <div className="logo">
           <img
             src={nameWhite}
@@ -76,28 +97,19 @@ const LoginPage: React.FC = () => {
 
           <div className="login mx-7 flex flex-row items-center bottom-2">
             <button
-                type="submit"
-                className="text-big input-field w-full h-[60px] btn btn-accent rounded-custom text-primary font-outfit font-bold text-2xl"
+              type="submit"
+              className="text-big input-field w-full h-[60px] btn btn-accent rounded-custom text-primary font-outfit font-bold text-2xl"
             >
               Login
             </button>
             <div className="flex items-center gap-2">
-              <Link to={"/landing"}>
-                <button
-                    type="submit"
-                    className="text-big bg-accent w-[60px] h-[30px] btn rounded-custom text-primary font-outfit font-bold text-2xl">
-                  X
-                </button>
-            </Link>
-
-            <Link to={"/register"}>
-              <h1 className="text-small m0 font-outfit text-accent2 font-medium p-2">
-                Not registered? Create an account
+              <Link to={"/register"}>
+                <h1 className="text-small m0 font-outfit text-accent2 font-medium p-2">
+                  Not registered? Create an account
                 </h1>
               </Link>
             </div>
           </div>
-
         </form>
 
         {error && <p className="text-red-500 text-center mt-4">{error}</p>}
