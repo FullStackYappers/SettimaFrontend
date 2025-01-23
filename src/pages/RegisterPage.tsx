@@ -124,7 +124,7 @@ const RegisterPage = () => {
                         </button>
                         <div className="flex items-center gap-2">
                             <Link to={"/landing"}>
-                                <button
+                                <button //this is what you have to change to an Icon
                                     type="submit"
                                     className="text-big bg-accent w-[60px] h-[30px] btn rounded-custom text-primary font-outfit font-bold text-2xl">
                                     X
@@ -132,7 +132,7 @@ const RegisterPage = () => {
                             </Link>
                             <Link to={"/login"}>
                                 <h1 className="text-small m0 font-outfit text-accent2 font-medium p-2">
-                                    Already registered? Click here to sign in
+                                    Already registered? Click here
                                 </h1>
                             </Link>
                         </div>
