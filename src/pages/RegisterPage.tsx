@@ -57,59 +57,62 @@ const RegisterPage = () => {
 
                 <form onSubmit={handleSubmit} className="register-form">
                     <div className="fullName flex flex-col items-center">
-
+                        <h1 className="text-big text-primary font-bold font-outfit w-full text-left">Name</h1>
                         <input
                             type="text"
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
-                            placeholder="Name"
                             className="input-field bg-bgcolor rounded-custom p-4 font-outfit text-big"/>
                     </div>
                     <div className="usernameInput flex flex-col items-center">
-
+                        <h1 className="text-big m0 font-outfit text-primary font-medium w-full text-left">
+                            Username *
+                        </h1>
                         <input
                             type="text"
                             name="username"
                             value={formData.username}
                             onChange={handleChange}
-                            placeholder="Username"
                             className="input-field bg-bgcolor rounded-custom p-4 font-outfit text-big"
                         />
                     </div>
 
                     <div className="emailInput flex flex-col items-center">
-
+                        <h1 className="text-big m0 font-outfit text-primary font-medium w-full text-left">
+                            Email *
+                        </h1>
                         <input
                             type="email"
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
-                            placeholder="email"
                             className="input-field bg-bgcolor rounded-custom p-4 font-outfit text-big"
                         />
                     </div>
 
                     <div className="passwordInput flex flex-col items-center">
-
+                        <h1 className="text-big m0 font-outfit text-primary font-medium w-full text-left">
+                            Password *
+                        </h1>
                         <input
                             type="password"
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
-                            placeholder="password"
                             className="input-field bg-bgcolor rounded-custom p-4 font-outfit text-big"
                         />
                     </div>
 
                     <div className="passwordConfirmInput flex flex-col items-center">
-
+                        <h1 className="text-big m0 font-outfit text-primary font-medium w-full text-left">
+                            Confirm Password *
+                        </h1>
                         <input
                             type="password"
                             name="password_confirmation"
                             value={formData.password_confirmation}
                             onChange={handleChange}
-                            placeholder="Password confirmation"
                             className="input-field bg-bgcolor rounded-custom p-4 font-outfit text-big"
                         />
                     </div>
