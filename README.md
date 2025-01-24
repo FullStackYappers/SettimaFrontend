@@ -55,7 +55,7 @@ Start the development server with the command:
 npm run dev
 ```
 
-The frontend should now be running on [http://localhost:5173](http://localhost:5173) (or another port if 5173 is in use).
+The frontend should now be running on [http://localhost:5173](http://localhost:5173) (or another port if 5173 is in use). In case, the website shows a black screen after the preloader, please clear the browser cookies for the website (Issue related to authorization).
 
 ---
 
@@ -78,6 +78,11 @@ The following movies have seeded discussions:
 - IF
 - Coco
 - John Wick
+
+## Incomplete Implementations
+
+- The Your Favorites section in the navbar menu is not implemented.
+- Settings option under Profile is not implemented.
 
 ---
 ## Project Structure
