@@ -31,10 +31,6 @@
   grid-area: title;
 }
 
-.title h1 {
-  margin: 0;
-}
-
 .genres {
   grid-area: genres;
   display: flex;
@@ -132,12 +128,13 @@
   .movie-grid-container {
     margin: 16px;
     padding: 0;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "trailerbtn trailerbtn"
-      "movieImg title"
-      "movieImg genres"
-      "movieImg description"
+      "movieImg movieImg"
+      "title title"
+      "genres genres"
+      "description description"
       "watchedbtn averagestar"
       "likebtn wtw"
       "tabs-left tabs-left"
@@ -146,6 +143,26 @@
 
   .description {
     font-size: 15px;
+  }
+
+  .movieImg {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .genres .genre-box {
+    padding: 10px;
+  }
+
+  .movieImg img {
+    width: 50%;
   }
 
   .watched {

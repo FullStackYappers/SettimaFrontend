@@ -164,7 +164,7 @@ const MoviePage = () => {
           />
         </div>
         <div className="title">
-          <h1 className="m0 font-outfit text-[30px] min-[500px]:text-[50px] md:text-7xl font-semibold">
+          <h1 className="font-outfit text-[30px] min-[500px]:text-[50px] min-[500px]:leading-none md:text-7xl font-semibold">
             {movie.title}
           </h1>
         </div>
