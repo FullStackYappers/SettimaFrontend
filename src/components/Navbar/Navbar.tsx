@@ -30,7 +30,7 @@ const Navbar = () => {
           className={
             sticky
               ? "navbar stuck top-0 fixed bg-accent h-navbar-height w-full z-10"
-              : "navbar not-stuck relative bg-accent rounded-custom my-4 w-90p h-navbar-height mx-auto"
+              : "navbar not-stuck relative bg-accent rounded-custom my-4 w-[95%] md:w-[97%] xl:w-90p h-navbar-height mx-auto"
           }
         >
           <div
