@@ -41,21 +41,7 @@ npm install dayjs
 ```
 npm install axios
 ```
-```
-npm install tailwindcss @tailwindcss/vite
-```
 
-```
-npm i -D daisyui@latest
-```
-
-```
-npm install dayjs
-```
-
-```
-npm install axios
-```
 
 ### 3. Configure Environment Variables
 
