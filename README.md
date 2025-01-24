@@ -23,11 +23,7 @@ npm install
 ```
 
 ```
-npm install tailwindcss
-```
-
-```
-npm install @tailwindcss/vite
+npm install tailwindcss @tailwindcss/vite
 ```
 
 ```
