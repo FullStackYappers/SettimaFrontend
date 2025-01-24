@@ -59,6 +59,27 @@ The frontend should now be running on [http://localhost:5173](http://localhost:5
 
 ---
 
+## Sample Users
+
+E-Mail: jane.smith@yahoo.com\
+Password: Secure@2025
+
+E-Mail: rachel.carter@fastmail.com\
+Password: Rachel@789
+
+## Information Regarding Forums
+
+The following movies have seeded discussions:
+- Oppenheimer
+- Harry Potter and the Prisoner of Azkaban
+- Home Alone
+- The Truman Show
+- Avatar
+- IF
+- Coco
+- John Wick
+
+---
 ## Project Structure
 
 The Settima frontend project follows a structured organization:
