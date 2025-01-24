@@ -29,12 +29,12 @@ const Genres = () => {
   return (
     <div className="genres text-base sm:text-xl lg:text-2xl font-semibold">
       {genres[0] && (
-        <div className="rounded-custom bg-secondary w-full h-full flex justify-center items-center mx-2">
+        <div className="genre-box rounded-custom bg-secondary w-full h-full flex justify-center items-center mx-2">
           {genres[0]}
         </div>
       )}
       {genres[1] && (
-        <div className="rounded-custom bg-secondary w-full h-full flex justify-center items-center mx-2">
+        <div className="genre-box rounded-custom bg-secondary w-full h-full flex justify-center items-center mx-2">
           {genres[1]}
         </div>
       )}
