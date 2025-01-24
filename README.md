@@ -11,9 +11,19 @@ This repository contains the frontend part of the Settima web platform project, 
 2. Install dependencies:
 	```bash 
 	npm install
+
+  npm install tailwindcss @tailwindcss/vite
+
+  npm i -D daisyui@latest
+
+  npm install dayjs
+
+  npm install axios
+
 3. Make sure .env file has a correct root which is:
 	```bash
 	VITE_API_BASE_URL=http://localhost:8000/api
+
 
 4. Start the development server:
 	```bash
