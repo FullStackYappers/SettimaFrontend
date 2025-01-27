@@ -1,6 +1,6 @@
 # Settima Frontend
 
-This repository contains the frontend part of the Settima web platform project, built with React. Before setting up the frontend, ensure the backend is fully set up and the server is running. Refer to the backend setup instructions in the README: [Settima Backend Repository](https://gitlab.hof-university.de/settima/settimabackend).
+This repository contains the frontend part of the Settima web platform project, built with React. Before setting up the frontend, ensure the backend is fully set up and the server is running. Refer to the backend setup instructions in the README: [Settima Backend Repository](https://github.com/FullStackYappers/SettimaBackend).
 
 ---
 
